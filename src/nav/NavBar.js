@@ -53,14 +53,13 @@ class NavBar extends Component {
         return (
             <Navbar>
                 <NavbarBrand>
-                    <NavbarItem>Game</NavbarItem>
+                    <NavbarItem>GameApp</NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
                 <NavbarMenu isActive={this.state.isActive}>
-                    <NavbarItem id="nav__home" onClick={this.onClickNav}>Home</NavbarItem>
-                    <NavbarItem hasDropdown isHoverable>
-                    </NavbarItem>
-                    <NavbarItem id="nav__profile" onClick={this.onClickNav}>Profile</NavbarItem>
+                    <NavbarItem id="nav__profile" onClick={this.onClickNav}>My Profile</NavbarItem>
+                    <NavbarItem id="nav__profile" onClick={this.onClickNav}>Add Games</NavbarItem>
+                    <NavbarItem id="nav__profile" onClick={this.onClickNav}>Suggest Games</NavbarItem>
                     <NavbarItem id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
                 </NavbarMenu>
             </Navbar>
