@@ -71,7 +71,7 @@ class App extends Component {
 
     showView = () => {
 
-        return <ProfileView info={this.state.userInformation}/>
+        return <ProfileView info={this.state.userInformation} activeUser={this.state.activeUser}/>
     }
 
 
