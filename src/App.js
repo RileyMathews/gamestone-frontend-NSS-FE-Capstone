@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
-import { Button } from 'bloomer'
 import NavBar from './nav/NavBar'
 import './App.css';
 
 class App extends Component {
   state = {
     currentView: "",
-    searchValue: "",
     searchType: "all",
-    activeUser: "",
-    searchDisplay: "All",
-    likeNotifications: [],
-    friendRequestNotifications: [],
-    eventNotifications: [],
-    notificationsLength: 0
+    activeUser: "1",
   }
 
-  setActiveUser = function (val) {
-    // if (val) {
-    //   localStorage.setItem("userId", val)
-    // } else {
-    //   localStorage.removeItem("userId")
-    // }
-    this.setState({
-      activeUser: val
-    })
-  }.bind(this)
 
   setView = function (e) {
     let view = null
@@ -62,45 +45,10 @@ class App extends Component {
   }.bind(this)
 
   componentDidMount() {
-    this.setState({
-      activeUser: sessionStorage.getItem("userId")
-    })
+  
   }
 
-  // set code to run when the currently logged in user changes
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.activeUser !== this.state.activeUser) {
-      this.updateNotifications()
-    }
-  }
-
-  // function to get the notifications of the current logged in user
-  updateNotifications = function () {
-    fetch(`http://localhost:8088/likeNotifications?receiverId=${this.state.activeUser}&_expand=user&_expand=post`)
-      .then(r => r.json())
-      .then(response => {
-        this.setState({
-          likeNotifications: response
-        })
-        return fetch(`http://localhost:8088/friendRequestsNotifications?receiverId=${this.state.activeUser}&_expand=user`)
-      })
-      .then(r => r.json())
-      .then(response => {
-        this.setState({
-          friendRequestNotifications: response
-        })
-        return fetch(`http://localhost:8088/eventsNotifications?receiverId=${this.state.activeUser}&_expand=user&_expand=event`)
-      })
-      .then(r => r.json())
-      .then(response => {
-        this.setState({
-          eventNotifications: response,
-        })
-        this.setState({
-          notificationsLength: this.state.eventNotifications.length + this.state.likeNotifications.length + this.state.friendRequestNotifications.length
-        })
-      })
-  }
+  
 
   // showView = () => {
 

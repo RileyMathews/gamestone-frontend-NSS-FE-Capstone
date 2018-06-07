@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Navbar, NavbarItem, Input, NavbarBurger, NavbarBrand, NavbarMenu, NavbarLink, NavbarDropdown } from "bloomer";
+import { Navbar, NavbarItem, NavbarBurger, NavbarBrand, NavbarMenu } from "bloomer";
+import './NavBar.css'
 
 class NavBar extends Component {
 
@@ -50,7 +51,7 @@ class NavBar extends Component {
 
     render() {
         return (
-            <Navbar isColor="primary">
+            <Navbar>
                 <NavbarBrand>
                     <NavbarItem>Game</NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
