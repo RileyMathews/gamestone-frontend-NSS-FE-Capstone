@@ -46,14 +46,6 @@ class App extends Component {
 
     }.bind(this)
 
-    deleteActiveUser = function () {
-        localStorage.clear()
-        sessionStorage.clear()
-        this.setState({
-            activeUser: ""
-        })
-    }.bind(this)
-
     componentDidMount() {
         this.getUserInformation()
     }

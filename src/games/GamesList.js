@@ -9,7 +9,7 @@ class GamesList extends Component {
         return (
             <div>
                 {this.props.games.map(game => (
-                    <Game info={game.game} key={game.id}/>
+                    <Game info={game} key={game.id}/>
                 ))}
             </div>
         )

@@ -9,16 +9,17 @@ class Game extends Component {
         return (
             <Media>
                 <MediaLeft>
-                    <Image src={this.props.info.image.icon_url} />
+                    <Image src={this.props.info.game.image.icon_url} />
                 </MediaLeft>
                 <MediaContent>
                     <Content>
                         <p>
-                            <strong>{this.props.info.name}</strong>
+                            <strong>{this.props.info.game.name}</strong>
                             <br />
-                            {this.props.info.deck}
+                            {this.props.info.game.deck}
                         </p>
                     </Content>
+                    
                     <Level>
                         <LevelLeft>
                             <LevelItem>test genre</LevelItem>
@@ -27,6 +28,7 @@ class Game extends Component {
                             <LevelItem>test genre</LevelItem>
                         </LevelLeft>
                         <LevelRight>
+                            <p><strong>Status: {this.props.info.progress}, Favorite: {this.props.info.isFavorited}</strong></p>
                             <Button disabled="true">Add Game</Button>
                             <Button disabled="true">Favorite Game</Button>
                         </LevelRight>
