@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import NavBar from './nav/NavBar'
 import ProfileView from './profile/ProfileView'
 import './App.css';
+import SearchView from './search/SearchView';
 
 class App extends Component {
     state = {
         // information to drive view and functionality of app
         currentView: "profile",
         activeUser: "1",
+        userGamesIds: [],
 
         // information from user object in api
         userInformation: {
@@ -62,8 +64,13 @@ class App extends Component {
 
 
     showView = () => {
-
-        return <ProfileView info={this.state.userInformation} activeUser={this.state.activeUser}/>
+        switch (this.state.currentView) {
+            case "search":
+                return <SearchView />
+            case "profile":
+            default:
+                return <ProfileView info={this.state.userInformation} activeUser={this.state.activeUser} />
+        }
     }
 
 

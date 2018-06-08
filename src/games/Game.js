@@ -23,14 +23,14 @@ class Game extends Component {
         return (
             <Media>
                 <MediaLeft>
-                    <Image src={this.props.info.game.image.icon_url} />
+                    <Image src={this.props.info.image.icon_url} />
                 </MediaLeft>
                 <MediaContent>
                     <Content>
                         <p>
-                            <strong>{this.props.info.game.name}</strong>
+                            <strong>{this.props.info.name}</strong>
                             <br />
-                            {this.props.info.game.deck}
+                            {this.props.info.deck}
                         </p>
                     </Content>
 

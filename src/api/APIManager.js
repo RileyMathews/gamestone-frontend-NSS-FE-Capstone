@@ -4,6 +4,11 @@
 */
 
 const APIManager = Object.create(null, {
+    searchGames: {
+        value: function (searchString) {
+            return fetch(`http://localhost:8088/games?name_like=${encodeURI(searchString)}`)
+        }
+    },
     post: {
         value: function (collection, data) {
             return fetch(`http://localhost:8088/${collection}`, {
