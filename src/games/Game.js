@@ -9,7 +9,7 @@ class Game extends Component {
     editGame = function (event) {
         const gameId = event.target.id.split("__")[3]
         const editField = $(`#game__change__progress__container__${gameId}`)
-        editField.show()
+        editField.toggle()
     }
 
     componentDidMount() {
@@ -44,7 +44,8 @@ class Game extends Component {
                         <LevelRight>
                             <p>Status: {this.props.info.progress}</p>
                             <div id={"game__change__progress__container__" + this.props.info.id}>
-                                <Select id={"game__change__progress__"+this.props.info.id} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress}>
+                                <Select id={"game__change__progress__"+this.props.info.id} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
+                                    <option disabled="true" value="default">Select a Status</option>
                                     <option value="Backlog">Backlog</option>
                                     <option value="To Be Played">To Be Played</option>
                                     <option value="Playing">Playing</option>
