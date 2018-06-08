@@ -11,16 +11,10 @@ class App extends Component {
         currentView: "profile",
         activeUser: sessionStorage.getItem("userId"),
         userGamesIds: [],
-
-        // information from user object in api
-        userInformation: {
-            id: null,
-            name: {
-                first: "",
-                last: "",
-            },
-            gamertag: "",
-        }
+        userId: null,
+        userFirstName: "",
+        userLastName: "",
+        userGamertag: ""
     }
 
     setView = function (e) {
@@ -50,15 +44,21 @@ class App extends Component {
     }.bind(this)
 
     componentDidMount() {
-        this.getUserInformation()
+        if (this.state.activeUser !== null) {
+            this.getUserInformation()
+        }
     }
 
     getUserInformation = () => {
         fetch(`http://localhost:8088/users?id=${this.state.activeUser}`)
             .then(r => r.json())
             .then(response => {
+                const user = response[0]
                 this.setState({
-                    userInformation: response[0]
+                    userId: user.id,
+                    userFirstName: user.name.first,
+                    userLastName: user.name.last,
+                    userGamertag: user.gamertag
                 })
             })
     }
@@ -77,7 +77,7 @@ class App extends Component {
                     return <SearchView />
                 case "profile":
                 default:
-                    return <ProfileView info={this.state.userInformation} activeUser={this.state.activeUser} />
+                    return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamerTag={this.state.userGamertag} activeUser={this.state.activeUser} />
             }            
         }
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Title, Container, Field, Label, Control, Input, Button } from 'bloomer'
+import { Title, Container, Field, Label, Control, Input, Button, Checkbox } from 'bloomer'
 import $ from 'jquery'
 
 
@@ -13,9 +13,8 @@ class LoginView extends Component {
             .then(r => r.json())
             .then(users => {
                 const user = users[0]
-                console.log(user)
                 if (user === undefined || user.password !== password) {
-                    alert(this.state.errorMessage)
+                    alert("Username or Password not found")
 
                 } else if (password === user.password) {
                     // const remember = document.getElementById("checkbox")
@@ -52,6 +51,8 @@ class LoginView extends Component {
                     </Control>
                 </Field>
                 <Button isColor="primary" id="login__submit" onClick={this.login}>Login</Button>
+                <Checkbox id="checkbox">Remember Me</Checkbox>
+
 
             </Container>
         )
