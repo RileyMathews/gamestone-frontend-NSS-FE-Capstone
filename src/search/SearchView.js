@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Container, Input, Button } from 'bloomer';
-import Game from '../games/Game';
 import $ from 'jquery'
 import APIManager from '../api/APIManager';
+import GamesList from '../games/GamesList';
+import Result from './Result';
 
 
 class SearchView extends Component {
@@ -31,7 +32,9 @@ class SearchView extends Component {
             <Container>
                 <Input id="search__input" onChange={this.handleSearchInputChanage} value={this.state.searchString} />
                 <Button id="search__submit" isColor="primary" onClick={this.handleSearchSubmit}>Search</Button>
-                { this.state.results.map(game => <Game info={game} key={game.id} />) }
+                {this.state.results.map(result => (
+                    <Result info={result} key={result.id}/>
+                ))}
             </Container >
         )
     }

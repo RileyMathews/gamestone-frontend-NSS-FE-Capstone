@@ -18,6 +18,14 @@ class Game extends Component {
         editField.hide()
     }
 
+    gameOwned = function (owned) {
+        if (owned) {
+            return "owned"
+        } else {
+            return "not owned"
+        }
+    }
+
 
     render() {
         return (
@@ -28,7 +36,7 @@ class Game extends Component {
                 <MediaContent>
                     <Content>
                         <p>
-                            <strong>{this.props.gameInfo.name}</strong>
+                            <strong>{this.props.gameInfo.name} {this.gameOwned(this.props.userOwnsGame)}</strong>
                             <br />
                             {this.props.gameInfo.deck}
                         </p>
@@ -54,7 +62,8 @@ class Game extends Component {
                             </div>
                             <i className="material-icons" id={"game__edit__progress__" + this.props.info.id} onClick={this.editGame}>edit</i>,
                             <p>Favorite: {this.props.info.isFavorited}</p>
-                            <Button disabled="true">Add Game</Button>
+                            {this.props.userOwnsGame ? <Button disabled="true">Remove Game</Button> : <Button disabled="true">Add Game</Button> }
+                            
                             <Button disabled="true">Favorite Game</Button>
                         </LevelRight>
                     </Level>
