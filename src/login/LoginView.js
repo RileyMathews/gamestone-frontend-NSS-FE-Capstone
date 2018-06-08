@@ -50,8 +50,16 @@ class LoginView extends Component {
                         <Input type="text" id="login__password" placeholder='password' />
                     </Control>
                 </Field>
-                <Button isColor="primary" id="login__submit" onClick={this.login}>Login</Button>
-                <Checkbox id="checkbox">Remember Me</Checkbox>
+                <Field>
+                    <Control>
+                        <Checkbox id="checkbox"> Remember Me </Checkbox>
+                    </Control>
+                </Field>
+                <Field>
+                    <Control>
+                        <Button isColor="primary" id="login__submit" onClick={this.login}>Login</Button>
+                    </Control>
+                </Field>
 
 
             </Container>

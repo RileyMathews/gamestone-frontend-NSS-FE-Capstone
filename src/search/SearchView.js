@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Container, Input, Button } from 'bloomer';
 import $ from 'jquery'
 import APIManager from '../api/APIManager';
-import GamesList from '../games/GamesList';
 import Result from './Result';
 
 

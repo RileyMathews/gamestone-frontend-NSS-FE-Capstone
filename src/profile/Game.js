@@ -36,7 +36,7 @@ class Game extends Component {
                 <MediaContent>
                     <Content>
                         <p>
-                            <strong>{this.props.gameInfo.name} {this.gameOwned(this.props.userOwnsGame)}</strong>
+                            <strong>{this.props.gameInfo.name}</strong>
                             <br />
                             {this.props.gameInfo.deck}
                         </p>

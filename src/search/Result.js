@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelItem, LevelRight, Button, Select } from 'bloomer';
+import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelItem, LevelRight, Button, } from 'bloomer';
 
 
 class Result extends Component {
