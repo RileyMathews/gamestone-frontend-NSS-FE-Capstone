@@ -36,7 +36,6 @@ class App extends Component {
 
         // If user clicked logout in nav, empty local storage and update activeUser state
         if (view === "logout") {
-            this.setActiveUser(null)
             localStorage.clear()
             sessionStorage.clear()
         }
