@@ -77,7 +77,7 @@ class App extends Component {
                     return <SearchView />
                 case "profile":
                 default:
-                    return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamerTag={this.state.userGamertag} activeUser={this.state.activeUser} />
+                    return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} />
             }            
         }
     }

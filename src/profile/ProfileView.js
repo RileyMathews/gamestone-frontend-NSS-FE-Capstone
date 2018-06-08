@@ -62,7 +62,7 @@ class ProfileView extends Component {
     render() {
         return (
             <Container>
-                <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA {this.propsgamertag}</Title>
+            <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA "{this.props.gamertag}"</Title>
                 <Title isSize={4}>Games</Title>
                 <GamesList games={this.state.games} changeGameProgress={this.changeGameProgress}/>
             </Container>
