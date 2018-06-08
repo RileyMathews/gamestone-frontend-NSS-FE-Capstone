@@ -3,12 +3,13 @@ import NavBar from './nav/NavBar'
 import ProfileView from './profile/ProfileView'
 import './App.css';
 import SearchView from './search/SearchView';
+import LoginView from './login/LoginView';
 
 class App extends Component {
     state = {
         // information to drive view and functionality of app
         currentView: "profile",
-        activeUser: "1",
+        activeUser: sessionStorage.getItem("userId"),
         userGamesIds: [],
 
         // information from user object in api
@@ -36,6 +37,7 @@ class App extends Component {
 
         // If user clicked logout in nav, empty local storage and update activeUser state
         if (view === "logout") {
+            this.setActiveUser(null)
             localStorage.clear()
             sessionStorage.clear()
         }
@@ -61,14 +63,22 @@ class App extends Component {
             })
     }
 
+    setActiveUser = function (userId) {
+        this.setState({activeUser: userId})
+    }.bind(this)
+
 
     showView = () => {
-        switch (this.state.currentView) {
-            case "search":
-                return <SearchView />
-            case "profile":
-            default:
-                return <ProfileView info={this.state.userInformation} activeUser={this.state.activeUser} />
+        if(sessionStorage.getItem("userId") === null) {
+            return <LoginView setActiveUser={this.setActiveUser} setView={this.setView} getUserInformation={this.getUserInformation}/>
+        } else {
+            switch (this.state.currentView) {
+                case "search":
+                    return <SearchView />
+                case "profile":
+                default:
+                    return <ProfileView info={this.state.userInformation} activeUser={this.state.activeUser} />
+            }            
         }
     }
 
