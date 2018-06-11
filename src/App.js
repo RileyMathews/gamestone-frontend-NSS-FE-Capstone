@@ -155,6 +155,31 @@ class App extends Component {
             })
     }.bind(this)
 
+    // function to remove a game from the collection
+    removeGameFromCollection = function (id) {
+        // get index of game to be removed
+        const indexOfGameToRemove = this.state.userGames.findIndex(game => game.gameId === id)
+        // get id of userGame object
+        const userGameId = this.state.userGames[indexOfGameToRemove].id
+        APIManager.delete("usersGames", userGameId)
+            .then(r => r.json())
+            .then(response => {
+                // get current state of app
+                const games = this.state.userGames
+                // remove game by index
+                games.splice(indexOfGameToRemove, 1)
+                // set new state
+                this.setState({userGames: games})
+
+                // remove game from ids collection
+                const indexOfId = this.state.userGamesIds.findIndex(idFromArray => idFromArray === id)
+                const newIds = this.state.userGamesIds
+                newIds.splice(indexOfId, 1)
+                this.setState({userGamesIds: newIds})
+            })
+
+    }.bind(this)
+
     // function to set active user based on info passed to it
     setActiveUser = function (userId) {
         this.setState({ activeUser: userId })
@@ -168,10 +193,10 @@ class App extends Component {
         } else {
             switch (this.state.currentView) {
                 case "search":
-                    return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection}/>
+                    return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGame={this.removeGameFromCollection}/>
                 case "profile":
                 default:
-                    return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} />
+                    return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} removeGame={this.removeGameFromCollection}/>
             }
         }
     }

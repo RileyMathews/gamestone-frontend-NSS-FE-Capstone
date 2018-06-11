@@ -20,7 +20,7 @@ class Result extends Component {
 
     isGameOwnedButton = function () {
         if (this.isGameOwned()) {
-            return <Button disabled="true">Remove Game</Button>
+            return <Button onClick={this.removeGameById}>Remove Game</Button>
         } else {
             return <Button onClick={this.addGame}>Add Game</Button>
         }
@@ -28,6 +28,10 @@ class Result extends Component {
 
     addGame = function () {
         this.props.addGameToCollection(this.props.info, false) 
+    }.bind(this)
+
+    removeGameById = function () {
+        this.props.removeGame(this.props.info.id)
     }.bind(this)
 
 

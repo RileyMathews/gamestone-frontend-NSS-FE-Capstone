@@ -26,6 +26,10 @@ class Game extends Component {
         }
     }
 
+    removeGameById = function () {
+        this.props.removeGame(this.props.info.gameId)
+    }.bind(this)
+
 
     render() {
         return (
@@ -62,7 +66,7 @@ class Game extends Component {
                             </div>
                             <i className="material-icons" id={"game__edit__progress__" + this.props.info.id} onClick={this.editGame}>edit</i>,
                             <p>Favorite: {this.props.info.isFavorited}</p>
-                            {this.props.userOwnsGame ? <Button disabled="true">Remove Game</Button> : <Button disabled="true">Add Game</Button> }
+                            <Button onClick={this.removeGameById}>Remove Game</Button>
                             
                             <Button disabled="true">Favorite Game</Button>
                         </LevelRight>

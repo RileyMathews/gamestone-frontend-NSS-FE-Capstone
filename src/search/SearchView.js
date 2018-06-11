@@ -32,7 +32,7 @@ class SearchView extends Component {
                 <Input id="search__input" onChange={this.handleSearchInputChanage} value={this.state.searchString} />
                 <Button id="search__submit" isColor="primary" onClick={this.handleSearchSubmit}>Search</Button>
                 {this.state.results.map(result => (
-                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection}/>
+                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame}/>
                 ))}
             </Container >
         )

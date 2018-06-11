@@ -31,6 +31,13 @@ const APIManager = Object.create(null, {
                 body: JSON.stringify(data)
             })
         }
+    },
+    delete: {
+        value: function (collection, id) {
+            return fetch(`http://localhost:8088/${collection}/${id}`, {
+                method: "DELETE"
+            })
+        }
     }
 })
 
