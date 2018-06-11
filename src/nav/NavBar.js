@@ -8,8 +8,6 @@ class NavBar extends Component {
     state = {
         isActive: false,
         firstName: "",
-        image: "",
-        searchValue: "",
         searchType: "All"
     }
 
@@ -41,11 +39,6 @@ class NavBar extends Component {
     onClickSearch = function (e) {
         //fire function to close navbar
         this.onClickNav(e)
-
-        /*
-            add code here
-            to fire search functionality
-        */
     }.bind(this)
 
 
