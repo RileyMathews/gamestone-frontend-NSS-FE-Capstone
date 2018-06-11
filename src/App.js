@@ -121,6 +121,40 @@ class App extends Component {
         APIManager.put("usersGames", dataToSend, gameId)
     }.bind(this) // end of change game progress function
 
+    // function to add a game to users collection
+    addGameToCollection = function (game, favorite) {
+        // build up data to post to database
+        const dataToPost = {
+            "userId": this.state.activeUser,
+            "gameId": game.id,
+            "isFavorited": favorite,
+            "progress": "To Be Played"
+        }
+
+        // add game id to users collection of games ids
+        const oldIds = this.state.userGamesIds
+        const newIds = [game.id]
+        const newStateOfIds = oldIds.concat(newIds)
+        this.setState({userGamesIds: newStateOfIds})
+        // post that data to database
+        APIManager.post("usersGames", dataToPost)
+            .then(r => r.json())
+            .then(response => {
+                // build up object representing full data needed for state
+                const gameToAddToState = {
+                    "id": response.id,
+                    "gameId": response.gameId,
+                    "isFavorited": response.isFavorited,
+                    "progress": response.progress,
+                    "game": game
+                }
+                // build up array of new app state for user games
+                const oldState = this.state.userGames
+                const newState = oldState.concat([gameToAddToState])
+                this.setState({userGames: newState})
+            })
+    }.bind(this)
+
     // function to set active user based on info passed to it
     setActiveUser = function (userId) {
         this.setState({ activeUser: userId })
@@ -134,7 +168,7 @@ class App extends Component {
         } else {
             switch (this.state.currentView) {
                 case "search":
-                    return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} />
+                    return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection}/>
                 case "profile":
                 default:
                     return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} />
