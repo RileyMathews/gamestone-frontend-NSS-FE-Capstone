@@ -2,10 +2,22 @@ import React, { Component } from 'react'
 import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, LevelRight, Button, Select } from 'bloomer';
 import './Game.css'
 import GenreList from '../genres/GenreList';
-const $ = require('jquery')
+import $ from 'jquery'
+import APIManager from '../api/APIManager'
+
 
 
 class Game extends Component {
+
+    state = {
+        gbId: "",
+        userGameId: "",
+        image: "",
+        deck: "",
+        genres: [],
+        name: ""
+    }
+    
 
     editGame = function (event) {
         const gameId = event.target.id.split("__")[3]
@@ -17,6 +29,17 @@ class Game extends Component {
         const gameId = this.props.info.id
         const editField = $(`#game__change__progress__container__${gameId}`)
         editField.hide()
+        console.log(this.props.gbId)
+        // APIManager.getGbGame(this.props.gbId)
+        //     .then(response => {
+        //         this.setState({
+        //             gbId: response.results.id,
+        //             image: response.results.image.icon_url,
+        //             deck: response.results.deck,
+        //             genres: response.results.genres,
+        //             name: response.results.name
+        //         })
+        //     })
     }
 
     gameOwned = function (owned) {
@@ -36,20 +59,20 @@ class Game extends Component {
         return (
             <Media>
                 <MediaLeft>
-                    <Image src={this.props.gameInfo.image.icon_url} />
+                    <Image src={this.state.image} />
                 </MediaLeft>
                 <MediaContent>
                     <Content>
                         <p>
-                            <strong>{this.props.gameInfo.name}</strong>
+                            <strong>{this.state.name}</strong>
                             <br />
-                            {this.props.gameInfo.deck}
+                            {this.state.deck}
                         </p>
                     </Content>
 
                     <Level>
                         <LevelLeft>
-                            <GenreList genres={this.props.gameInfo.genres}/>
+                            <GenreList genres={this.state.genres}/>
                         </LevelLeft>
                         <LevelRight>
                             <p>Status: {this.props.info.progress}</p>

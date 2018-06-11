@@ -3,6 +3,8 @@
     Authors: Riley Mathews
 */
 
+import $ from 'jquery'
+
 const APIManager = Object.create(null, {
     getSingleGame: {
         value: function (gameId) {
@@ -43,6 +45,17 @@ const APIManager = Object.create(null, {
                 method: "DELETE"
             })
         }
+    },
+    getGbGame: {
+        value: function (gbId) {
+            return $.ajax({
+                type: "GET",
+                dataType: "jsonp",
+                crossDomain: true,
+                jsonp: "json_callback",
+                url: `http://www.giantbomb.com/api/game/3030-${gbId}/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&field_list=name,genres,developers,franchises,image,similar_games,deck,guid,id,platforms`
+            })
+        }
     }
 })
 
@@ -52,6 +65,6 @@ export default APIManager
 /* 
 
     Giantbomb api search string templates
-    
+    http://www.giantbomb.com/api/game/3030-39775/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=json&field_list=name,genres,developers,franchises,image,similar_games,deck,guid,id,platforms
 
 */
