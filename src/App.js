@@ -6,6 +6,7 @@ import SearchView from './search/SearchView';
 import LoginView from './login/LoginView';
 import $ from 'jquery'
 import APIManager from './api/APIManager'
+import SuggestView from './suggestGame/SuggestView';
 
 class App extends Component {
     // define initial state of application
@@ -194,6 +195,8 @@ class App extends Component {
             switch (this.state.currentView) {
                 case "search":
                     return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGame={this.removeGameFromCollection}/>
+                case "suggest":
+                    return <SuggestView userGamesIds={this.state.userGamesIds} addGameToCollectio={this.addGameToCollection} removeGameFromCollection={this.removeGameFromCollection} userGames={this.state.userGames}/>
                 case "profile":
                 default:
                     return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} removeGame={this.removeGameFromCollection}/>

@@ -59,7 +59,7 @@ class NavBar extends Component {
                 <NavbarMenu isActive={this.state.isActive}>
                     <NavbarItem id="nav__profile" onClick={this.onClickNav}>My Profile</NavbarItem>
                     <NavbarItem id="nav__search" onClick={this.onClickNav}>Add Games</NavbarItem>
-                    <NavbarItem id="nav__profile" onClick={this.onClickNav}>Suggest Games</NavbarItem>
+                    <NavbarItem id="nav__suggest" onClick={this.onClickNav}>Suggest Games</NavbarItem>
                     <NavbarItem id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
                 </NavbarMenu>
             </Navbar>
