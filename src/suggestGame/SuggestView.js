@@ -20,7 +20,7 @@ class SuggestView extends Component {
             if (selectedUserGame.game.similar_games.length > 0) {
                 const suggestedGame = ArrayManager.getRandomItem(selectedUserGame.game.similar_games)
                 this.setState({result: suggestedGame})
-                this.setState({resultBasis: `This game was selected because it is similar to: ${selectedUserGame.game.name}`})
+                this.setState({resultBasis: `This game was selected because it is similar to this game in your collection: ${selectedUserGame.game.name}`})
                 gameNotFound = false
                 APIManager.getSingleGame(suggestedGame.id)
                     .then(r => r.json())
