@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Title, Container, Field, Label, Control, Input, Button, Checkbox } from 'bloomer'
+import { Title, Container, Field, Label, Control, Input, Button } from 'bloomer'
 import $ from 'jquery'
 
 
@@ -42,11 +42,6 @@ class LoginView extends Component {
                     <Label>Password</Label>
                     <Control>
                         <Input type="text" id="login__password" placeholder='password' />
-                    </Control>
-                </Field>
-                <Field>
-                    <Control>
-                        <Checkbox id="checkbox"> Remember Me </Checkbox>
                     </Control>
                 </Field>
                 <Field>

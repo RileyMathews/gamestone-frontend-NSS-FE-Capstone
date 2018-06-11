@@ -47,3 +47,11 @@ const APIManager = Object.create(null, {
 })
 
 export default APIManager
+
+
+/* 
+
+    Giantbomb api search string templates
+    
+
+*/

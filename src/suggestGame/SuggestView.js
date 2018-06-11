@@ -31,11 +31,6 @@ class SuggestView extends Component {
         }
     }.bind(this)
 
-    checkForGameResult = function () {
-        if (this.state.result !== {}) {
-            return <Result info={this.state.result} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame}/>
-        }
-    }
 
     render() {
         return (
@@ -46,7 +41,7 @@ class SuggestView extends Component {
                 <Button disabled="true">By Developer</Button>
                 <p>{this.state.resultBasis}</p>
                 {this.state.results.map(result => (
-                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame}/>
+                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection}/>
                 ))}
             </Container>
         )

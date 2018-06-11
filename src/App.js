@@ -196,7 +196,7 @@ class App extends Component {
                 case "search":
                     return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGame={this.removeGameFromCollection}/>
                 case "suggest":
-                    return <SuggestView userGamesIds={this.state.userGamesIds} addGameToCollectio={this.addGameToCollection} removeGameFromCollection={this.removeGameFromCollection} userGames={this.state.userGames}/>
+                    return <SuggestView userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGameFromCollection={this.removeGameFromCollection} userGames={this.state.userGames}/>
                 case "profile":
                 default:
                     return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} removeGame={this.removeGameFromCollection}/>
