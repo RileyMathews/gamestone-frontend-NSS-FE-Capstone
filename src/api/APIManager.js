@@ -11,6 +11,11 @@ const APIManager = Object.create(null, {
             return fetch(`http://localhost:8088/games?id=${gameId}`)
         }
     },
+    getUsersGames: {
+        value: function (user) {
+            return fetch(`http://localhost:8088/usersGames?userId=${user}`)
+        }
+    },
     searchGames: {
         value: function (searchString) {
             return fetch(`http://localhost:8088/games?name_like=${encodeURI(searchString)}`)
@@ -56,6 +61,17 @@ const APIManager = Object.create(null, {
                 url: `http://www.giantbomb.com/api/game/3030-${gbId}/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&field_list=name,genres,developers,franchises,image,similar_games,deck,guid,id,platforms`
             })
         }
+    },
+    searchGbGames: {
+        value: function (searchString) {
+            return $.ajax({
+                type: "GET",
+                dataType: "jsonp",
+                crossDomain: true,
+                jsonp: "json_callback",
+                url: `http://www.giantbomb.com/api/search?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&query=${searchString}&resources=game`
+            })
+        }
     }
 })
 
@@ -66,5 +82,8 @@ export default APIManager
 
     Giantbomb api search string templates
     http://www.giantbomb.com/api/game/3030-39775/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=json&field_list=name,genres,developers,franchises,image,similar_games,deck,guid,id,platforms
+
+    search
+    http://www.giantbomb.com/api/search?api_key=817e4ec0b4026b38424f3c98970b14d273226692&query=mario&resources=game
 
 */

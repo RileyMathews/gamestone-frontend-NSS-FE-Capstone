@@ -54,7 +54,6 @@ class Result extends Component {
 
                     <Level>
                         <LevelLeft>
-                            <GenreList genres={this.props.info.genres}/>
                         </LevelLeft>
                         <LevelRight>
                             {this.isGameOwnedButton()}

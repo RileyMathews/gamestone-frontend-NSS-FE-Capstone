@@ -30,16 +30,16 @@ class Game extends Component {
         const editField = $(`#game__change__progress__container__${gameId}`)
         editField.hide()
         console.log(this.props.gbId)
-        // APIManager.getGbGame(this.props.gbId)
-        //     .then(response => {
-        //         this.setState({
-        //             gbId: response.results.id,
-        //             image: response.results.image.icon_url,
-        //             deck: response.results.deck,
-        //             genres: response.results.genres,
-        //             name: response.results.name
-        //         })
-        //     })
+        APIManager.getGbGame(this.props.gbId)
+            .then(response => {
+                this.setState({
+                    gbId: response.results.id,
+                    image: response.results.image.icon_url,
+                    deck: response.results.deck,
+                    genres: response.results.genres,
+                    name: response.results.name
+                })
+            })
     }
 
     gameOwned = function (owned) {

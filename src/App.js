@@ -7,6 +7,7 @@ import LoginView from './login/LoginView';
 import $ from 'jquery'
 import APIManager from './api/APIManager'
 import SuggestView from './suggestGame/SuggestView';
+import { Title } from 'bloomer/lib/elements/Title';
 
 class App extends Component {
     // define initial state of application
@@ -14,11 +15,12 @@ class App extends Component {
         // information to drive view and functionality of app
         currentView: "profile",
         activeUser: sessionStorage.getItem("userId"),
-        userGamesIds: [],
         userId: null,
         userFirstName: "",
         userLastName: "",
         userGamertag: "",
+        userGamesIds: [],
+        userGamesStats: [],
         userGames: []
     }
 
@@ -71,15 +73,32 @@ class App extends Component {
                 })
             })
         // fetches the users games collection
-        fetch(`http://localhost:8088/usersGames?userId=${this.state.activeUser}&_expand=game`)
+        APIManager.getUsersGames(this.state.activeUser)
             .then(r => r.json())
             .then(response => {
-                const arrayOfIds = response.map(game => game.game.id)
+                // map the giant bomb ids of each of those games into a seperate array
+                const arrayOfIds = response.map(game => game.gameId)
                 this.setState({
+                    userGamesStats: response,
                     userGamesIds: arrayOfIds,
-                    userGames: response
                 })
+                // use that array to build an array of fetch requests for each game
+                    let promises = []
+                    arrayOfIds.forEach(id =>{
+                        promises.push(APIManager.getGbGame(id))
+                    })
+    
+                // fire that array in a promise.all 
+                    Promise.all(promises)
+                        .then(response => {
+                            // with the response of that array, setstate of app
+                            const userGamesState = response.map(response => response.results)
+                            this.setState({userGames: userGamesState})
+                        })
             })
+
+
+                
     }
 
 
@@ -197,6 +216,8 @@ class App extends Component {
                     return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGame={this.removeGameFromCollection}/>
                 case "suggest":
                     return <SuggestView userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGameFromCollection={this.removeGameFromCollection} userGames={this.state.userGames}/>
+                case "dummy":
+                    return <Title>This is a dummy page to make sure I don't spam giant bomb's public api too much</Title>
                 case "profile":
                 default:
                     return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} removeGame={this.removeGameFromCollection}/>
