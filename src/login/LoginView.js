@@ -17,13 +17,7 @@ class LoginView extends Component {
                     alert("Username or Password not found")
 
                 } else if (password === user.password) {
-                    // const remember = document.getElementById("checkbox")
-
-                    // if (remember.checked === true) {
-                    //     localStorage.setItem("userId", user.id)
-                    // } else {
-                    //     localStorage.clear()
-                    // }
+    
 
                     sessionStorage.setItem("userId", user.id)
 

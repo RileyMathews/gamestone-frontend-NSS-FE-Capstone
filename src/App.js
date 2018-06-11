@@ -73,7 +73,7 @@ class App extends Component {
         fetch(`http://localhost:8088/usersGames?userId=${this.state.activeUser}&_expand=game`)
             .then(r => r.json())
             .then(response => {
-                const arrayOfIds = response.map(game => game.id)
+                const arrayOfIds = response.map(game => game.game.id)
                 this.setState({
                     userGamesIds: arrayOfIds,
                     userGames: response
@@ -134,7 +134,7 @@ class App extends Component {
         } else {
             switch (this.state.currentView) {
                 case "search":
-                    return <SearchView  activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} changeGameProgress={this.changeGameProgress}/>
+                    return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} />
                 case "profile":
                 default:
                     return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} games={this.state.userGames} changeGameProgress={this.changeGameProgress} />

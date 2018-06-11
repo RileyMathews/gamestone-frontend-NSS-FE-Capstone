@@ -4,6 +4,12 @@ import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, Level
 
 class Result extends Component {
 
+    isGameOwned = function () {
+        if (this.props.userGamesIds.includes(this.props.info.id)) {
+            return <i className="material-icons">check_circle</i>
+        }
+    }
+
 
     render() {
         return (
@@ -15,6 +21,7 @@ class Result extends Component {
                     <Content>
                         <p>
                             <strong>{this.props.info.name}</strong>
+                            {this.isGameOwned()}
                             <br />
                             {this.props.info.deck}
                         </p>
