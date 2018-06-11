@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, LevelItem, LevelRight, Button, Select } from 'bloomer';
+import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, LevelRight, Button, Select } from 'bloomer';
 import './Game.css'
+import GenreList from '../genres/GenreList';
 const $ = require('jquery')
 
 
@@ -48,10 +49,7 @@ class Game extends Component {
 
                     <Level>
                         <LevelLeft>
-                            <LevelItem>test genre</LevelItem>
-                            <LevelItem>test genre</LevelItem>
-                            <LevelItem>test genre</LevelItem>
-                            <LevelItem>test genre</LevelItem>
+                            <GenreList genres={this.props.gameInfo.genres}/>
                         </LevelLeft>
                         <LevelRight>
                             <p>Status: {this.props.info.progress}</p>

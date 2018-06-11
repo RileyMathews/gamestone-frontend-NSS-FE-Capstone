@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelItem, LevelRight, Button, } from 'bloomer';
+import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, } from 'bloomer';
+import GenreList from '../genres/GenreList';
 
 
 class Result extends Component {
@@ -53,10 +54,7 @@ class Result extends Component {
 
                     <Level>
                         <LevelLeft>
-                            <LevelItem>test genre</LevelItem>
-                            <LevelItem>test genre</LevelItem>
-                            <LevelItem>test genre</LevelItem>
-                            <LevelItem>test genre</LevelItem>
+                            <GenreList genres={this.props.info.genres}/>
                         </LevelLeft>
                         <LevelRight>
                             {this.isGameOwnedButton()}
