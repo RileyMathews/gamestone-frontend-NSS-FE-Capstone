@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Title, Container, Field, Label, Control, Input, Button } from 'bloomer'
-import $ from 'jquery'
 import APIManager from '../api/APIManager';
 
 

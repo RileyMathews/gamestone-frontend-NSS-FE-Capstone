@@ -57,14 +57,11 @@ class SuggestView extends Component {
             const selectedUserGame = this.props.userGames.find(game => game.id === selectedUserGamesStats.gbId)
             if (selectedUserGame.developers !== null &&(this.state.filterByFavorites === false || selectedUserGamesStats.isFavorited === true)) {
                 const developer = ArrayManager.getRandomItem(selectedUserGame.developers)
-                    console.log(developer)
                     gameNotFound = false
                     this.setState({resultBasis: `This game was selected becuase it was developed by ${developer.name}, who also worked on ${selectedUserGame.name}`})
                     APIManager.getGbCompany(developer.id)
                         .then(response => {
-                            console.log(response)
                             const developerGame = ArrayManager.getRandomItem(response.results.developed_games)
-                            console.log(developerGame)
                             return APIManager.getGbGame(developerGame.id)
                         })
                         .then(response => {
@@ -76,7 +73,6 @@ class SuggestView extends Component {
 
     componentDidMount() {
         const foundFavoriteGame = this.props.userGamesStats.find(game => game.isFavorited === true)
-        console.log(foundFavoriteGame)
         if (foundFavoriteGame !== undefined) {
             this.setState({ userHasFavorites: true })
         }
