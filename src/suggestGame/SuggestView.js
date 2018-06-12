@@ -50,26 +50,33 @@ class SuggestView extends Component {
 
     getGameByDeveloper = function () {
         // variable to check a valid game has been selected to suggest by
-        let gameNotFound = true
+        let developerNotFound = true
         // keep running check until game is found
-        while (gameNotFound) {
+        while (developerNotFound) {
+            // get a random game
             const selectedUserGamesStats = ArrayManager.getRandomItem(this.props.userGamesStats)
+            // get the game info for that game
             const selectedUserGame = this.props.userGames.find(game => game.id === selectedUserGamesStats.gbId)
-            if (selectedUserGame.developers !== null &&(this.state.filterByFavorites === false || selectedUserGamesStats.isFavorited === true)) {
+            // check to see if game will work for search terms
+            if (selectedUserGame.developers !== null && (this.state.filterByFavorites === false || selectedUserGamesStats.isFavorited === true)) {
+                // get a random developer from the game info
                 const developer = ArrayManager.getRandomItem(selectedUserGame.developers)
-                    gameNotFound = false
-                    this.setState({resultBasis: `This game was selected becuase it was developed by ${developer.name}, who also worked on ${selectedUserGame.name}`})
-                    APIManager.getGbCompany(developer.id)
-                        .then(response => {
-                            const developerGame = ArrayManager.getRandomItem(response.results.developed_games)
-                            return APIManager.getGbGame(developerGame.id)
-                        })
-                        .then(response => {
-                            this.setState({results: [response.results]})
-                        })
-                }
+                developerNotFound = false
+                // set the result basis
+                this.setState({ resultBasis: `This game was selected becuase it was developed by ${developer.name}, who also worked on ${selectedUserGame.name}` })
+                // get that companys info
+                APIManager.getGbCompany(developer.id)
+                    .then(response => {
+                        // get a random game they worked on
+                        const developerGame = ArrayManager.getRandomItem(response.results.developed_games)
+                        return APIManager.getGbGame(developerGame.id)
+                    })
+                    .then(response => {
+                        this.setState({ results: [response.results] })
+                    })
             }
-        }.bind(this)
+        }
+    }.bind(this)
 
     componentDidMount() {
         const foundFavoriteGame = this.props.userGamesStats.find(game => game.isFavorited === true)
