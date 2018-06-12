@@ -30,6 +30,10 @@ class Result extends Component {
         this.props.addGameToCollection(this.props.info, false) 
     }.bind(this)
 
+    addGameFavorite = function () {
+        this.props.addGameToCollection(this.props.info, true)
+    }.bind(this)
+
     removeGameById = function () {
         this.props.removeGame(this.props.info.id)
     }.bind(this)
@@ -57,7 +61,7 @@ class Result extends Component {
                         </LevelLeft>
                         <LevelRight>
                             {this.isGameOwnedButton()}
-                            <Button disabled="true">Favorite Game</Button>
+                            {this.isGameOwned() ? null : <Button onClick={this.addGameFavorite}>Add Game as Favorite</Button>}
                         </LevelRight>
                     </Level>
                 </MediaContent>
