@@ -237,7 +237,7 @@ class App extends Component {
                 return game
             }
         })
-        this.setState({userGamesStats: newState})
+        this.setState({ userGamesStats: newState })
         APIManager.put("usersGames", dataToChange, userGameId)
     }.bind(this)
 
@@ -251,7 +251,13 @@ class App extends Component {
                 case "search":
                     return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGame={this.removeGameFromCollection} />
                 case "suggest":
-                    return <SuggestView userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGameFromCollection={this.removeGameFromCollection} userGames={this.state.userGames} />
+                    return <SuggestView
+                        userGamesIds={this.state.userGamesIds}
+                        addGameToCollection={this.addGameToCollection}
+                        removeGameFromCollection={this.removeGameFromCollection}
+                        userGames={this.state.userGames}
+                        userGamesStats={this.state.userGamesStats}
+                    />
                 case "dummy":
                     return <Title>This is a dummy page to make sure I don't spam giant bomb's public api too much</Title>
                 case "profile":

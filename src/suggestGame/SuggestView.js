@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Title, Container, Button } from 'bloomer'
+import { Title, Container, Button, Checkbox } from 'bloomer'
 import ArrayManager from '../functions/ArrayManager'
 import APIManager from '../api/APIManager';
 import Result from '../search/Result';
@@ -10,8 +10,15 @@ class SuggestView extends Component {
     state = {
         resultBasis: "",
         results: [],
-        userGamesLength: this.props.userGames.length
+        userGamesLength: this.props.userGames.length,
+        filterByFavorites: false,
+        userHasFavorites: false
     }
+
+    setFavoriteFilter = function (event) {
+        const value = document.querySelector("#favoriteFilter").checked
+        this.setState({ filterByFavorites: value })
+    }.bind(this)
 
     getGameBySimilarity = function () {
         // variable to check if a valid suggested game has been found
@@ -19,9 +26,11 @@ class SuggestView extends Component {
         // while a good game has still not been found, keep running checks
         while (gameNotFound) {
             // get a random game from the users collection
-            const selectedUserGame = ArrayManager.getRandomItem(this.props.userGames)
+            const selectedUserGameStats = ArrayManager.getRandomItem(this.props.userGamesStats)
+            // get the related game information
+            const selectedUserGame = this.props.userGames.find(game => game.id === selectedUserGameStats.gbId)
             // if the game has similar games listed
-            if (selectedUserGame.similar_games !== null) {
+            if (selectedUserGame.similar_games !== null && (this.state.filterByFavorites === false || selectedUserGameStats.isFavorited === true)) {
 
                 // get a random game from that similar games array and set state of this component accordingly
                 const suggestedGame = ArrayManager.getRandomItem(selectedUserGame.similar_games)
@@ -39,27 +48,41 @@ class SuggestView extends Component {
         }
     }.bind(this)
 
-    doesUserHaveGames = function () {
-        if (this.props.userGames.length === 0) {
-            return <Title>Plase add games before using this feature!</Title>
-        } else {
-            return <Container>
-                <Title>Suggest Games</Title>
-                <Button disabled="true">By Genre</Button>
-                <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
-                <Button disabled="true">By Developer</Button>
-                <p>{this.state.resultBasis}</p>
-                {this.state.results.map(result => (
-                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />
-                ))}
-            </Container>
+    componentDidMount() {
+        const foundFavoriteGame = this.props.userGamesStats.find(game => game.isFavorited === true)
+        console.log(foundFavoriteGame)
+        if (foundFavoriteGame !== undefined) {
+            this.setState({ userHasFavorites: true })
         }
     }
+
+    doesUserHaveGames = function () {
+        if (this.state.filterByFavorites === true && this.state.userHasFavorites === false) {
+            return <Title>You have no favorite games to filter by</Title>
+        } else {
+            if (this.state.userGamesLength === 0) {
+                return <Title>You have no games</Title>
+            } else {
+                return <Container>
+                    <Title>Suggest Games</Title>
+                    <Button disabled="true">By Genre</Button>
+                    <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
+                    <Button disabled="true">By Developer</Button>
+                    <p>{this.state.resultBasis}</p>
+                    {this.state.results.map(result => (
+                        <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />
+                    ))}
+                </Container>
+            }
+        }
+
+    }.bind(this)
 
 
     render() {
         return (
             <div>
+                <Checkbox onChange={this.setFavoriteFilter} id="favoriteFilter"> Filter By Favorites </Checkbox>
                 {this.doesUserHaveGames()}
             </div>
         )
@@ -67,3 +90,5 @@ class SuggestView extends Component {
 }
 
 export default SuggestView
+
+
