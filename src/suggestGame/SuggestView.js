@@ -48,6 +48,32 @@ class SuggestView extends Component {
         }
     }.bind(this)
 
+    getGameByDeveloper = function () {
+        // variable to check a valid game has been selected to suggest by
+        let gameNotFound = true
+        // keep running check until game is found
+        while (gameNotFound) {
+            const selectedUserGamesStats = ArrayManager.getRandomItem(this.props.userGamesStats)
+            const selectedUserGame = this.props.userGames.find(game => game.id === selectedUserGamesStats.gbId)
+            if (selectedUserGame.developers !== null &&(this.state.filterByFavorites === false || selectedUserGamesStats.isFavorited === true)) {
+                const developer = ArrayManager.getRandomItem(selectedUserGame.developers)
+                    console.log(developer)
+                    gameNotFound = false
+                    this.setState({resultBasis: `This game was selected becuase it was developed by ${developer.name}, who also worked on ${selectedUserGame.name}`})
+                    APIManager.getGbCompany(developer.id)
+                        .then(response => {
+                            console.log(response)
+                            const developerGame = ArrayManager.getRandomItem(response.results.developed_games)
+                            console.log(developerGame)
+                            return APIManager.getGbGame(developerGame.id)
+                        })
+                        .then(response => {
+                            this.setState({results: [response.results]})
+                        })
+                }
+            }
+        }.bind(this)
+
     componentDidMount() {
         const foundFavoriteGame = this.props.userGamesStats.find(game => game.isFavorited === true)
         console.log(foundFavoriteGame)
@@ -67,7 +93,7 @@ class SuggestView extends Component {
                     <Title>Suggest Games</Title>
                     <Button disabled="true">By Genre</Button>
                     <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
-                    <Button disabled="true">By Developer</Button>
+                    <Button onClick={this.getGameByDeveloper}>By Developer</Button>
                     <p>{this.state.resultBasis}</p>
                     {this.state.results.map(result => (
                         <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />

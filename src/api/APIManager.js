@@ -78,6 +78,17 @@ const APIManager = Object.create(null, {
                 url: `http://www.giantbomb.com/api/search?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&query=${searchString}&resources=game`
             })
         }
+    },
+    getGbCompany: {
+        value: function (id) {
+            return $.ajax({
+                type: "GET",
+                dataType: "jsonp",
+                crossDomain: true,
+                jsonp: "json_callback",
+                url: `https://www.giantbomb.com/api/company/3010-${id}/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&field_list=developed_games`
+            })
+        }
     }
 })
 

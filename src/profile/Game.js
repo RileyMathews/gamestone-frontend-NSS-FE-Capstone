@@ -24,17 +24,23 @@ class Game extends Component {
 
     getGameProgress = function () {
         const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
-        return <p>Status: {thisGamesStats.progress}</p>
+        if (thisGamesStats !== undefined) {
+            return <p>Status: {thisGamesStats.progress}</p>
+        }
     }.bind(this)
 
     getGameUserId = function () {
         const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
-        return thisGamesStats.id
+        if (thisGamesStats !== undefined) {
+            return thisGamesStats.id
+        }
     }.bind(this)
 
     getGameFavorited = function () {
         const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
-        return thisGamesStats.isFavorited
+        if (thisGamesStats !== undefined) {
+            return thisGamesStats.isFavorited
+        }
     }
 
 
