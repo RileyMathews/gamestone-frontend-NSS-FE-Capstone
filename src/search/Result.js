@@ -48,6 +48,7 @@ class Result extends Component {
                             {this.isGameOwnedCheckMark()}
                             <br />
                             {this.props.info.deck}
+                            <a href={this.props.info.site_detail_url} target="_blank">  learn more</a>
                         </p>
                     </Content>
 

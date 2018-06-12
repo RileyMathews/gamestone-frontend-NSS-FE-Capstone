@@ -110,7 +110,7 @@ class App extends Component {
         $(`#game__change__progress__container__${gameId}`).hide()
 
         // set state of corresponding game
-        const oldGamesArray = this.state.userGames
+        const oldGamesArray = this.state.userGamesStats
 
         // declare variable for data that will be changed
         let dataToChange
@@ -127,7 +127,7 @@ class App extends Component {
         })
 
         // set state of games array
-        this.setState({ userGames: newGamesArray })
+        this.setState({ userGamesStats: newGamesArray })
 
         // remove data that was embeded in original state
         const dataToSend = {

@@ -59,7 +59,7 @@ const APIManager = Object.create(null, {
                 dataType: "jsonp",
                 crossDomain: true,
                 jsonp: "json_callback",
-                url: `http://www.giantbomb.com/api/game/3030-${gbId}/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&field_list=name,genres,developers,franchises,image,similar_games,deck,guid,id,platforms`
+                url: `http://www.giantbomb.com/api/game/3030-${gbId}/?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&field_list=name,genres,developers,franchises,image,similar_games,deck,guid,id,platforms,site_detail_url`
             })
         }
     },
