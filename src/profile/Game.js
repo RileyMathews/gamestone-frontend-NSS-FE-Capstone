@@ -21,17 +21,16 @@ class Game extends Component {
         editField.toggle()
     }
 
-    componentDidMount() {
+
+    getGameProgress = function () {
         const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
-        this.setState({
-            userGameId: thisGamesStats.id,
-            progress: thisGamesStats.progress,
-            isFavorited: thisGamesStats.isFavorited
-        })
-        const gameId = thisGamesStats.id
-        const editField = $(`#game__change__progress__container__${gameId}`)
-        editField.hide()
-    }
+        return <p>Status: {thisGamesStats.progress}</p>
+    }.bind(this)
+
+    getGameUserId = function () {
+        const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
+        return thisGamesStats.id
+    }.bind(this)
 
 
 
@@ -68,9 +67,9 @@ class Game extends Component {
                             <GenreList genres={this.props.game.genres}/>
                         </LevelLeft>
                         <LevelRight>
-                            <p>Status: {this.state.progress}</p>
-                            <div id={"game__change__progress__container__" + this.state.userGameId} style={{display: 'none'}}>
-                                <Select id={"game__change__progress__"+this.state.userGameId} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
+                            {this.getGameProgress()}
+                            <div id={"game__change__progress__container__" + this.getGameUserId()} style={{display: 'none'}}>
+                                <Select id={"game__change__progress__"+this.getGameUserId()} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
                                     <option disabled="true" value="default">Select a Status</option>
                                     <option value="Backlog">Backlog</option>
                                     <option value="To Be Played">To Be Played</option>
@@ -78,7 +77,7 @@ class Game extends Component {
                                     <option value="Finished">Finished</option>
                                 </Select>
                             </div>
-                            <i className="material-icons" id={"game__edit__progress__" + this.state.userGameId} onClick={this.editGame}>edit</i>,
+                            <i className="material-icons" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame}>edit</i>,
                             <p>Favorite: {this.state.isFavorited}</p>
                             <Button onClick={this.removeGameById}>Remove Game</Button>
                             
