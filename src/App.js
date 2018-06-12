@@ -223,6 +223,27 @@ class App extends Component {
     }.bind(this)
 
 
+    toggleGameFavorite = function (event) {
+        const userGameId = event.target.id.split("__")[3]
+        // cycle through games stats
+        const userGamesStats = this.state.userGamesStats
+        let dataToChange
+        const newState = userGamesStats.map(game => {
+            if (parseInt(userGameId, 10) === parseInt(game.id, 10)) {
+                game.isFavorited = game.isFavorited ? false : true;
+                dataToChange = game
+                return game
+            } else {
+                return game
+            }
+        })
+        console.log(newState) 
+        this.setState({userGamesStats: newState})
+        console.log(dataToChange)
+        APIManager.put("usersGames", dataToChange, userGameId)
+    }.bind(this)
+
+
     // function to return different components based on applications view state
     showView = () => {
         if (sessionStorage.getItem("userId") === null) {
@@ -237,7 +258,16 @@ class App extends Component {
                     return <Title>This is a dummy page to make sure I don't spam giant bomb's public api too much</Title>
                 case "profile":
                 default:
-                    return <ProfileView firstName={this.state.userFirstName} lastName={this.state.userLastName} gamertag={this.state.userGamertag} activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} userGamesStats={this.state.userGamesStats} games={this.state.userGames} changeGameProgress={this.changeGameProgress} removeGame={this.removeGameFromCollection} />
+                    return <ProfileView
+                        firstName={this.state.userFirstName}
+                        lastName={this.state.userLastName}
+                        gamertag={this.state.userGamertag}
+                        activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds}
+                        userGamesStats={this.state.userGamesStats} games={this.state.userGames}
+                        toggleGameFavorite={this.toggleGameFavorite}
+                        changeGameProgress={this.changeGameProgress}
+                        removeGame={this.removeGameFromCollection}
+                    />
             }
         }
     }

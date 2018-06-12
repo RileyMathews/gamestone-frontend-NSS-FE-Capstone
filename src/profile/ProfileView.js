@@ -9,9 +9,16 @@ class ProfileView extends Component {
     render() {
         return (
             <Container>
-            <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA "{this.props.gamertag}"</Title>
+                <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA "{this.props.gamertag}"</Title>
                 <Title isSize={4}>Games</Title>
-                <GamesList removeGame={this.props.removeGame} games={this.props.games} changeGameProgress={this.props.changeGameProgress} userGamesIds={this.props.userGamesIds} userGamesStats={this.props.userGamesStats}/>
+                <GamesList
+                    removeGame={this.props.removeGame}
+                    games={this.props.games}
+                    changeGameProgress={this.props.changeGameProgress}
+                    userGamesIds={this.props.userGamesIds}
+                    userGamesStats={this.props.userGamesStats}
+                    toggleGameFavorite={this.props.toggleGameFavorite}
+                />
             </Container>
         )
     }

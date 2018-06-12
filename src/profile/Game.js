@@ -81,7 +81,7 @@ class Game extends Component {
                             <p>Favorite: {this.state.isFavorited}</p>
                             <Button onClick={this.removeGameById}>Remove Game</Button>
                             
-                            <Button disabled="true">Favorite Game</Button>
+                            <Button onClick={this.props.toggleGameFavorite} id={"game__toggle__favorite__" + this.getGameUserId()}>Favorite Game</Button>
                         </LevelRight>
                     </Level>
                 </MediaContent>
