@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, } from 'bloomer';
-import GenreList from '../genres/GenreList';
 
 
 class Result extends Component {

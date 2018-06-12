@@ -17,7 +17,7 @@ class GamesList extends Component {
         return (
             <div>
                 {this.props.games.map(game => (
-                    <Game removeGame={this.props.removeGame} gameInfo={game.game} info={game} key={game.id} changeGameProgress={this.props.changeGameProgress} userOwnsGame={this.userOwnsGame(game)} gbId={game.id}/>
+                    <Game removeGame={this.props.removeGame} gameInfo={game.game} userGamesStats={this.props.userGamesStats} game={game} key={game.id} changeGameProgress={this.props.changeGameProgress} userOwnsGame={this.userOwnsGame(game)} gbId={game.id}/>
                 ))}
             </div>
         )
