@@ -32,6 +32,11 @@ class Game extends Component {
         return thisGamesStats.id
     }.bind(this)
 
+    getGameFavorited = function () {
+        const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
+        return <p>Favorite: {thisGamesStats.isFavorited ? "Yes" : "No"}</p>
+    }
+
 
 
     gameOwned = function (owned) {
@@ -78,7 +83,7 @@ class Game extends Component {
                                 </Select>
                             </div>
                             <i className="material-icons" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame}>edit</i>,
-                            <p>Favorite: {this.state.isFavorited}</p>
+                            {this.getGameFavorited()}
                             <Button onClick={this.removeGameById}>Remove Game</Button>
                             
                             <Button onClick={this.props.toggleGameFavorite} id={"game__toggle__favorite__" + this.getGameUserId()}>Favorite Game</Button>
