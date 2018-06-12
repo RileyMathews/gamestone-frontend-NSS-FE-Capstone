@@ -237,9 +237,7 @@ class App extends Component {
                 return game
             }
         })
-        console.log(newState) 
         this.setState({userGamesStats: newState})
-        console.log(dataToChange)
         APIManager.put("usersGames", dataToChange, userGameId)
     }.bind(this)
 

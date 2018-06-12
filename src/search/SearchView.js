@@ -20,7 +20,6 @@ class SearchView extends Component {
     handleSearchSubmit = function () {
         APIManager.searchGbGames(this.state.searchString)
             .then(response => {
-                console.log(response)
                 this.setState({ results: response.results })
             })
         this.setState({ searchString: "" })

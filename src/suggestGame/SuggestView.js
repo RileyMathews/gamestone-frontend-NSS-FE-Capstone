@@ -28,7 +28,6 @@ class SuggestView extends Component {
                 // check to see if user already has game in collection
                 if (!this.props.userGamesIds.includes(suggestedGame.id)) {
                     this.setState({ result: suggestedGame })
-                    console.log(suggestedGame.id)
                     this.setState({ resultBasis: `This game was selected because it is similar to this game in your collection: ${selectedUserGame.name}` })
                     gameNotFound = false
                     APIManager.getGbGame(suggestedGame.id)
