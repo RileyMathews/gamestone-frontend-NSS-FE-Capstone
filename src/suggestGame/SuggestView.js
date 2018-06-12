@@ -27,32 +27,42 @@ class SuggestView extends Component {
                 const suggestedGame = ArrayManager.getRandomItem(selectedUserGame.similar_games)
                 // check to see if user already has game in collection
                 if (!this.props.userGamesIds.includes(suggestedGame.id)) {
-                    this.setState({result: suggestedGame})
+                    this.setState({ result: suggestedGame })
                     console.log(suggestedGame.id)
-                    this.setState({resultBasis: `This game was selected because it is similar to this game in your collection: ${selectedUserGame.name}`})
+                    this.setState({ resultBasis: `This game was selected because it is similar to this game in your collection: ${selectedUserGame.name}` })
                     gameNotFound = false
                     APIManager.getGbGame(suggestedGame.id)
                         .then(response => {
-                            this.setState({results: [response.results]})
+                            this.setState({ results: [response.results] })
                         })
                 }
             }
         }
     }.bind(this)
 
-
-    render() {
-        return (
-            <Container>
+    doesUserHaveGames = function () {
+        if (this.props.userGames.length === 0) {
+            return <Title>Plase add games before using this feature!</Title>
+        } else {
+            return <Container>
                 <Title>Suggest Games</Title>
                 <Button disabled="true">By Genre</Button>
                 <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
                 <Button disabled="true">By Developer</Button>
                 <p>{this.state.resultBasis}</p>
                 {this.state.results.map(result => (
-                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection}/>
+                    <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />
                 ))}
             </Container>
+        }
+    }
+
+
+    render() {
+        return (
+            <div>
+                {this.doesUserHaveGames()}
+            </div>
         )
     }
 }
