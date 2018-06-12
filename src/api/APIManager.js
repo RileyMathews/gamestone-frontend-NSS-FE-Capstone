@@ -46,8 +46,8 @@ const APIManager = Object.create(null, {
     },
     delete: {
         value: function (collection, id) {
-            console.log(`deleted ${id} from ${collection}`)
-            return fetch(`http://localhost:8088/${collection}/${id}`, {
+            return $.ajax({
+                url: `http://localhost:8088/${collection}/${id}`,
                 method: "DELETE"
             })
         }

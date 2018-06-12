@@ -22,7 +22,7 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        const thisGamesStats = this.props.userGamesStats.find(game => game.gameId === this.props.game.id)
+        const thisGamesStats = this.props.userGamesStats.find(game => game.gbId === this.props.game.id)
         this.setState({
             userGameId: thisGamesStats.id,
             progress: thisGamesStats.progress,

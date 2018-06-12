@@ -77,7 +77,7 @@ class App extends Component {
             .then(r => r.json())
             .then(response => {
                 // map the giant bomb ids of each of those games into a seperate array
-                const arrayOfIds = response.map(game => game.gameId)
+                const arrayOfIds = response.map(game => game.gbId)
                 this.setState({
                     userGamesStats: response,
                     userGamesIds: arrayOfIds,
@@ -133,7 +133,7 @@ class App extends Component {
         const dataToSend = {
             "id": dataToChange.id,
             "userId": dataToChange.userId,
-            "gameId": dataToChange.gameId,
+            "gbId": dataToChange.gbId,
             "isFavorited": dataToChange.isFavorited,
             "progress": dataToChange.progress
         }
@@ -146,7 +146,7 @@ class App extends Component {
         // build up data to post to database
         const dataToPost = {
             "userId": this.state.activeUser,
-            "gameId": game.id,
+            "gbId": game.id,
             "isFavorited": favorite,
             "progress": "To Be Played"
         }
@@ -173,7 +173,7 @@ class App extends Component {
                 // build up object representing full data needed for state
                 const gameToAddToState = {
                     "id": response.id,
-                    "gameId": response.gameId,
+                    "gbId": response.gbId,
                     "isFavorited": response.isFavorited,
                     "progress": response.progress,
                 }
@@ -189,7 +189,7 @@ class App extends Component {
         // get index of game to be removed
         const indexOfGameToRemove = this.state.userGames.findIndex(game => game.id === id)
         // get user game id for deletion
-        const userGameId = this.state.userGames[indexOfGameToRemove].id
+        const userGameId = this.state.userGamesStats[indexOfGameToRemove].id
         // get current state of userGames
         const newGamesState = this.state.userGames
         // remove game by index
@@ -201,12 +201,11 @@ class App extends Component {
         newIdsState.splice(indexOfId, 1)
 
         // remove the game from stats collection
-        const indexOfStats = this.state.userGamesStats.findIndex(game => game.gameId === id)
+        const indexOfStats = this.state.userGamesStats.findIndex(game => game.gbId === id)
         const newStatsState = this.state.userGamesStats
         newStatsState.splice(indexOfStats, 1)
 
         // set state from values of above splices
-        debugger
         this.setState({
             userGamesStats: newStatsState,
             userGames: newGamesState,
