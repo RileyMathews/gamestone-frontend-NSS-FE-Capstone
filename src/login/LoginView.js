@@ -47,7 +47,6 @@ class LoginView extends Component {
             APIManager.searchUsers(this.state.register__gamertag)
                 .then(r => r.json())
                 .then(response => {
-                    console.log(response)
                     if (response.length === 0) {
                         const userData = {
                             name: {

@@ -271,6 +271,7 @@ class App extends Component {
                         toggleGameFavorite={this.toggleGameFavorite}
                         changeGameProgress={this.changeGameProgress}
                         removeGame={this.removeGameFromCollection}
+                        setView={this.setView}
                     />
             }
         }
