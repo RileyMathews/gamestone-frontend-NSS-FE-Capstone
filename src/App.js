@@ -111,7 +111,7 @@ class App extends Component {
     // function to get platforms information
     getPlatforms = function () {
         // get all platforms
-        fetch(`http://localhost:8088/platforms`)
+        APIManager.getAllOfCollection("platforms")
             .then(r => r.json())
             // set state of corresponding array
             .then(response => {

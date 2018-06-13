@@ -6,6 +6,11 @@
 import $ from 'jquery'
 
 const APIManager = Object.create(null, {
+    getAllOfCollection: {
+        value: function (collection) {
+            return fetch(`http://localhost:8088/${collection}`)
+        }
+    },
     getSingleGame: {
         value: function (gameId) {
             return fetch(`http://localhost:8088/games?id=${gameId}`)
