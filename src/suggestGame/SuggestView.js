@@ -12,6 +12,7 @@ class SuggestView extends Component {
         results: [],
         userGamesLength: this.props.userGames.length,
         filterByFavorites: false,
+        filterByConsoles: false,
         userHasFavorites: false
     }
 
