@@ -8,7 +8,7 @@ import $ from 'jquery'
 import APIManager from './api/APIManager'
 import SuggestView from './suggestGame/SuggestView';
 import { Title } from 'bloomer/lib/elements/Title';
-import ArrayManager from './functions/ArrayManager';
+import ArrayManager from './methods/ArrayManager';
 
 class App extends Component {
     // define initial state of application

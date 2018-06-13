@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Title, Container, Button, Checkbox } from 'bloomer'
-import ArrayManager from '../functions/ArrayManager'
+import ArrayManager from '../methods/ArrayManager'
 import APIManager from '../api/APIManager';
 import Result from '../search/Result';
 
