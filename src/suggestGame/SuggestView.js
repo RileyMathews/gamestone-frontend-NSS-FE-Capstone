@@ -68,11 +68,15 @@ class SuggestView extends Component {
                 APIManager.getGbCompany(developer.id)
                     .then(response => {
                         // get a random game they worked on
-                        const developerGame = ArrayManager.getRandomItem(response.results.developed_games)
-                        return APIManager.getGbGame(developerGame.id)
-                    })
-                    .then(response => {
-                        this.setState({ results: [response.results] })
+                        const developerGame = ArrayManager.getRandomUnownedGame(response.results.developed_games, this.props.userGamesIds)
+                        if (developerGame !== false) {
+                            APIManager.getGbGame(developerGame.id)
+                                .then(response => {
+                                    this.setState({ results: [response.results] })
+                                })
+                        } else {
+                            this.setState({ resultBasis: `We were going to show you a game by ${developer.name}, but it seems you already have every game they have worked on.`})
+                        }
                     })
             }
         }
