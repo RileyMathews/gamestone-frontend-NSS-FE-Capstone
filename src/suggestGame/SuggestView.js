@@ -98,7 +98,6 @@ class SuggestView extends Component {
             } else {
                 return <Container>
                     <Title>Suggest Games</Title>
-                    <Button disabled="true">By Genre</Button>
                     <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
                     <Button onClick={this.getGameByDeveloper}>By Developer</Button>
                     <p>{this.state.resultBasis}</p>
