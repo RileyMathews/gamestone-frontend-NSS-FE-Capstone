@@ -55,6 +55,10 @@ class ProfileView extends Component {
             case "platforms":
                 return <ProfilePlatformsView
                     userPlatforms={this.props.userPlatforms}
+                    allPlatforms={this.props.allPlatforms}
+                    userUnownedPlatforms={this.props.userUnownedPlatforms}
+                    addPlatform={this.props.addPlatform}
+                    removePlatform={this.props.removePlatform}
                 />
         }
     }

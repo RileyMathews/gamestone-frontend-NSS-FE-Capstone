@@ -22,6 +22,19 @@ const ArrayManager = Object.create(null, {
                 }
             }
         }
+    },
+    removeItemByProperty: {
+        value: function (array, property, propertyValue) {
+            const index = array.findIndex(item => item[property] === propertyValue)
+            const removedItem = array.splice(index, 1)
+            return { newArray: array, item: removedItem[0] }
+        }
+    },
+    addItem: {
+        value: function (array, item) {
+            array.push(item)
+            return array
+        }
     }
 })
 

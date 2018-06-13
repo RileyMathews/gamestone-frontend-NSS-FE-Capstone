@@ -8,6 +8,7 @@ import $ from 'jquery'
 import APIManager from './api/APIManager'
 import SuggestView from './suggestGame/SuggestView';
 import { Title } from 'bloomer/lib/elements/Title';
+import ArrayManager from './functions/ArrayManager';
 
 class App extends Component {
     // define initial state of application
@@ -23,7 +24,9 @@ class App extends Component {
         userGamesStats: [],
         userGames: [],
         userPlatforms: [],
-        userPlatformsIds: []
+        userPlatformsIds: [],
+        allPlatforms: [],
+        userUnownedPlatforms: []
     }
 
     // set view of the application state
@@ -58,7 +61,78 @@ class App extends Component {
         if (this.state.activeUser !== null) {
             this.getUserInformation()
         }
+        // get platforms information
+        this.getPlatforms()
     }
+
+    // functions to change platform information
+    addPlatform = function (evt) {
+        // get id of event
+        const platformId = parseInt(evt.target.id.split("__")[2], 10)
+        // split the item out of unowned platforms
+        const splitItem = ArrayManager.removeItemByProperty(this.state.userUnownedPlatforms, "id", platformId)
+        // seperate the response as needed
+        const newUnownedPlatforms = splitItem.newArray
+        const platformToMove = splitItem.item
+        // add the item to owned games
+        const newOwnedPlatforms = ArrayManager.addItem(this.state.userPlatforms, platformToMove)
+        // set state
+        this.setState({
+            userPlatforms: newOwnedPlatforms,
+            userUnownedPlatforms: newUnownedPlatforms
+        })
+        APIManager.post("usersPlatforms", {userId: parseInt(this.state.activeUser, 10), platformId: platformToMove.id})
+    }.bind(this)
+    removePlatform = function (evt) {
+        // get id of event
+        const platformId = parseInt(evt.target.id.split("__")[2], 10)
+        // split the item out of owned platforms
+        const splitItem = ArrayManager.removeItemByProperty(this.state.userPlatforms, "id", platformId)
+        // seperate response as needed
+        const newOwnedPlatforms = splitItem.newArray
+        const platformToMove = splitItem.item
+        // add item to unowned games
+        const newUnownedPlatforms = ArrayManager.addItem(this.state.userUnownedPlatforms, platformToMove)
+        // set state
+        this.setState({
+            userPlatforms: newOwnedPlatforms,
+            userUnownedPlatforms: newUnownedPlatforms
+        })
+        // find intersection item to remove
+        APIManager.getUsersPlatforms(this.state.activeUser)
+            .then(r => r.json())
+            .then(response => {
+                const intersectionToRemove = response.find(intersection => intersection.platformId === platformId)
+                const idToRemove = intersectionToRemove.id
+                APIManager.delete("usersPlatforms", idToRemove)
+            })
+    }.bind(this)
+
+    // function to get platforms information
+    getPlatforms = function () {
+        // get all platforms
+        fetch(`http://localhost:8088/platforms`)
+            .then(r => r.json())
+            // set state of corresponding array
+            .then(response => {
+                this.setState({ allPlatforms: response })
+                // get all the current users platforms
+                return APIManager.getUsersPlatforms(this.state.activeUser)
+            })
+            .then(r => r.json())
+            .then(response => {
+                const userPlatforms = response.map(platform => platform.platform)
+                const platformsIds = userPlatforms.map(platform => platform.id)
+                this.setState({
+                    userPlatforms: userPlatforms,
+                    userPlatformsIds: platformsIds
+                })
+            })
+            .then(() => {
+                const unownedPlatforms = this.state.allPlatforms.filter(platform => !this.state.userPlatformsIds.includes(platform.id))
+                this.setState({userUnownedPlatforms: unownedPlatforms})
+            })
+    }.bind(this)
 
     // function to get users information and udpate relevant items in state
     getUserInformation = () => {
@@ -98,19 +172,6 @@ class App extends Component {
                         this.setState({ userGames: userGamesState })
                     })
             })
-
-        APIManager.getUsersPlatforms(this.state.activeUser)
-            .then(r => r.json())
-            .then(response => {
-                const platforms = response.map(platform => platform.platform)
-                const platformsIds = platforms.map(platform => platform.id)
-                this.setState({
-                    userPlatforms: platforms,
-                    userPlatformsIds: platformsIds 
-                })
-            })
-
-
 
     }
 
@@ -286,6 +347,10 @@ class App extends Component {
                         removeGame={this.removeGameFromCollection}
                         setView={this.setView}
                         userPlatforms={this.state.userPlatforms}
+                        allPlatforms={this.state.allPlatforms}
+                        userUnownedPlatforms={this.state.userUnownedPlatforms}
+                        addPlatform={this.addPlatform}
+                        removePlatform={this.removePlatform}
                     />
             }
         }
