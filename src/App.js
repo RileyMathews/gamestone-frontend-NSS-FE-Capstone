@@ -21,7 +21,9 @@ class App extends Component {
         userGamertag: "",
         userGamesIds: [],
         userGamesStats: [],
-        userGames: []
+        userGames: [],
+        userPlatforms: [],
+        userPlatformsIds: []
     }
 
     // set view of the application state
@@ -95,6 +97,17 @@ class App extends Component {
                         const userGamesState = response.map(response => response.results)
                         this.setState({ userGames: userGamesState })
                     })
+            })
+
+        APIManager.getUsersPlatforms(this.state.activeUser)
+            .then(r => r.json())
+            .then(response => {
+                const platforms = response.map(platform => platform.platform)
+                const platformsIds = platforms.map(platform => platform.id)
+                this.setState({
+                    userPlatforms: platforms,
+                    userPlatformsIds: platformsIds 
+                })
             })
 
 
@@ -272,6 +285,7 @@ class App extends Component {
                         changeGameProgress={this.changeGameProgress}
                         removeGame={this.removeGameFromCollection}
                         setView={this.setView}
+                        userPlatforms={this.state.userPlatforms}
                     />
             }
         }
