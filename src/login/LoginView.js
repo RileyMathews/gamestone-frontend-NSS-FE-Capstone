@@ -12,10 +12,57 @@ class LoginView extends Component {
         register__lastName: "",
         register__gamertag: "",
         register__password: "",
-        register__passwordConfirm: ""
+        register__passwordConfirm: "",
+        firstNames: [
+            "Tony",
+            "Thor",
+            "Varian",
+            "Bruce",
+            "Donky",
+            "Peter",
+            "Mega",
+            "Iroquois",
+            "Luke",
+            "Luffy",
+            "God of War",
+        ],
+        lastNames: [
+            "Stark",
+            "Odinson",
+            "Wryn",
+            "Wayne",
+            "Kong",
+            "Parker",
+            "Man",
+            "Pliskin",
+            "Skywalker",
+            "Monkey",
+            "Kratos"
+        ],
+        nameIndex: 0,
+        gamerTags: [
+            "IronMan",
+            "God0fThunderz",
+            "LionOfStormwind",
+            "Batman",
+            "DK",
+            "Spiderman",
+            "Rockman",
+            "Snake",
+            "TheLastJedi",
+            "PirateKing",
+            "GhostOfSparta"
+        ]
     }
 
-    login = function () {
+    componentDidMount() {
+        const indexOfNames = Math.floor(Math.random() * this.state.firstNames.length) 
+        this.setState({nameIndex: indexOfNames})
+    }
+
+    login = function (evt) {
+        console.log(evt)
+        evt.preventDefault()
         const username = this.state.login__username
         const password = this.state.login__password
         this.setState({
@@ -31,7 +78,7 @@ class LoginView extends Component {
                     alert("Username or Password not found")
 
                 } else if (password === user.password) {
-    
+
 
                     sessionStorage.setItem("userId", user.id)
 
@@ -42,7 +89,8 @@ class LoginView extends Component {
             })
     }.bind(this)
 
-    register = function () {
+    register = function (evt) {
+        evt.preventDefault()
         if (this.state.register__password === this.state.register__passwordConfirm) {
             APIManager.searchUsers(this.state.register__gamertag)
                 .then(r => r.json())
@@ -67,7 +115,7 @@ class LoginView extends Component {
                             })
                     } else {
                         alert("username already taken")
-                        this.setState({register__gamertag: ""})
+                        this.setState({ register__gamertag: "" })
                     }
                 })
         } else {
@@ -80,63 +128,66 @@ class LoginView extends Component {
     }.bind(this)
 
     updateState = function (event) {
-        this.setState({[event.target.id]: event.target.value})
+        this.setState({ [event.target.id]: event.target.value })
     }.bind(this)
 
     render() {
         return (
             <Container>
-                <Title>Welcome to this app</Title>
-                <Field>
-                    <Label>Username</Label>
-                    <Control>
-                        <Input type="text" onChange={this.updateState} id="login__username" value={this.state.login__username} />
-                    </Control>
-                </Field>
-                <Field>
-                    <Label>Password</Label>
-                    <Control>
-                        <Input type="text" onChange={this.updateState} id="login__password" value={this.state.login__password} />
-                    </Control>
-                </Field>
-                <Field>
-                    <Control>
-                        <Button isColor="primary" id="login__submit" onClick={this.login}>Login</Button>
-                    </Control>
-                </Field>
-
+                <form id="login" onSubmit={this.login}>
+                    <Title>Welcome to this app</Title>
+                    <Field>
+                        <Label>Username</Label>
+                        <Control>
+                            <Input type="text" placeholder="username" onChange={this.updateState} id="login__username" value={this.state.login__username} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Label>Password</Label>
+                        <Control>
+                            <Input type="password" placeholder="password" onChange={this.updateState} id="login__password" value={this.state.login__password} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Control>
+                            <Button type="submit" isColor="primary" id="login__submit">Login</Button>
+                        </Control>
+                    </Field>
+                </form>
                 <Title>Or create a new account</Title>
-                <Field>
-                    <Label>First Name</Label>
-                    <Control>
-                        <Input type="text" onChange={this.updateState} id="register__firstName" value={this.state.register__firstName} />
-                    </Control>
-                    <Label>Last Name</Label>
-                    <Control>
-                        <Input type="text" onChange={this.updateState} id="register__lastName" value={this.state.register__lastName} />
-                    </Control>
-                </Field>
-                <Field>
-                    <Label>Gamertag</Label>
-                    <Control>
-                        <Input type="text" onChange={this.updateState} id="register__gamertag" value={this.state.register__gamertag} />
-                    </Control>
-                </Field>
-                <Field>
-                    <Label>Password</Label>
-                    <Control>
-                        <Input type="password" onChange={this.updateState} id="register__password" value={this.state.register__password} />
-                    </Control>
-                    <Label>Confirm Password</Label>
-                    <Control>
-                        <Input type="password" onChange={this.updateState} id="register__passwordConfirm" value={this.state.register__passwordConfirm} />
-                    </Control>
-                </Field>
-                <Field>
-                    <Control>
-                        <Button isColor="primary" id="register__submit" onClick={this.register}>Register</Button>
-                    </Control>
-                </Field>
+                <form id="register" onSubmit={this.register}>
+                    <Field>
+                        <Label>First Name</Label>
+                        <Control>
+                            <Input type="text" placeholder={this.state.firstNames[this.state.nameIndex]} onChange={this.updateState} id="register__firstName" value={this.state.register__firstName} />
+                        </Control>
+                        <Label>Last Name</Label>
+                        <Control>
+                            <Input type="text" placeholder={this.state.lastNames[this.state.nameIndex]} onChange={this.updateState} id="register__lastName" value={this.state.register__lastName} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Label>Gamertag</Label>
+                        <Control>
+                            <Input type="text" placeholder={this.state.gamerTags[this.state.nameIndex]} onChange={this.updateState} id="register__gamertag" value={this.state.register__gamertag} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Label>Password</Label>
+                        <Control>
+                            <Input type="password" placeholder="notpassword" onChange={this.updateState} id="register__password" value={this.state.register__password} />
+                        </Control>
+                        <Label>Confirm Password</Label>
+                        <Control>
+                            <Input type="password" placeholder="notpassword" onChange={this.updateState} id="register__passwordConfirm" value={this.state.register__passwordConfirm} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Control>
+                            <Button isColor="primary" id="register__submit" type="submit">Register</Button>
+                        </Control>
+                    </Field>
+                </form>
 
 
             </Container>
