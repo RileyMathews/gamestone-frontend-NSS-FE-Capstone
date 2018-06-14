@@ -24,7 +24,7 @@ class LoginView extends Component {
             "Iroquois",
             "Luke",
             "Luffy",
-            "God of War",
+            "Kratos",
         ],
         lastNames: [
             "Stark",
@@ -37,7 +37,7 @@ class LoginView extends Component {
             "Pliskin",
             "Skywalker",
             "Monkey",
-            "Kratos"
+            "God of War"
         ],
         nameIndex: 0,
         gamerTags: [
