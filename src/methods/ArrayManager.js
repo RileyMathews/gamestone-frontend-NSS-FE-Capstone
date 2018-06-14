@@ -11,13 +11,29 @@ const ArrayManager = Object.create(null, {
     },
     getRandomUnownedGame: {
         value: function (games, userGamesIds) {
-            while (games.length >= 0) {
-                const randomIndex = Math.floor(Math.random() * games.length)
-                const selectedGame = games.splice(randomIndex, 1)
+            const gamesForFunction = games.map(game => Object.assign({}, game))
+            while (gamesForFunction.length >= 0) {
+                const randomIndex = Math.floor(Math.random() * gamesForFunction.length)
+                const selectedGame = gamesForFunction.splice(randomIndex, 1)
                 if (!userGamesIds.includes(selectedGame[0].id)) {
                     return selectedGame[0]
                 }
-                if (games.length === 0) {
+                if (gamesForFunction.length === 0) {
+                    return false
+                }
+            }
+        }
+    },
+    getRandomFavoriteGame: {
+        value: function (usersGames) {
+            const array = usersGames.map(game => Object.assign({}, game))
+            while (array.length >= 0) {
+                const randomIndex = Math.floor(Math.random() * array.length)
+                const selectedGame = array.splice(randomIndex, 1)[0]
+                if (selectedGame.isFavorited === true) {
+                    return selectedGame
+                }
+                if (array.length === 0) {
                     return false
                 }
             }
@@ -38,9 +54,22 @@ const ArrayManager = Object.create(null, {
     },
     removeItem: {
         value: function (array, item) {
-            const index = array.findIndex(itemInArray => itemInArray === item)
-            array.splice(index, 1)
-            return array
+            const newArray = array.map(item => Object.assign({}, item))
+            const index = newArray.findIndex(itemInArray => itemInArray === item)
+            newArray.splice(index, 1)
+            return newArray
+        }
+    },
+    getRandomUserGame: {
+        value: function (games, gamesStats, filters) {
+            let selectedGame
+            if (filters.isFavorited) {
+                const gameStats = this.getRandomFavoriteGame(gamesStats)
+                selectedGame = games.find(game => game.id === gameStats.id)
+            } else {
+                selectedGame = this.getRandomItem(games)
+            }
+            return selectedGame
         }
     }
 })

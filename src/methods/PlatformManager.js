@@ -84,6 +84,19 @@ const PlatformManager = Object.create(null, {
                     APIManager.delete("usersPlatforms", idToRemove)
                 })
         }
+    }, 
+    canUserPlayGame: {
+        value: function (game, userPlatformsIds) {
+            let platformFound = false
+            userPlatformsIds.forEach(id => {
+                game.platforms.forEach(gamePlatform => {
+                    if (gamePlatform.id === id) {
+                        platformFound = true
+                    }
+                })
+            })
+            return platformFound
+        }
     }
 })
 

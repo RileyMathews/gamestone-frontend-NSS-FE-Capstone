@@ -52,6 +52,7 @@ const ViewManager = Object.create(null, {
                             removeGameFromCollection={this.removeGameFromCollection}
                             userGames={this.state.userGames}
                             userGamesStats={this.state.userGamesStats}
+                            userPlatformsIds={this.state.userPlatformsIds}
                         />
                     case "dummy":
                         return <Title>This is a dummy page to make sure I don't spam giant bomb's public api too much</Title>

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Title, Container, Button, Checkbox } from 'bloomer'
-import ArrayManager from '../methods/ArrayManager'
-import APIManager from '../api/APIManager';
 import Result from '../search/Result';
+import SuggestionManager from '../methods/SuggestionManager'
 
 
 class SuggestView extends Component {
@@ -13,80 +12,45 @@ class SuggestView extends Component {
         userGamesLength: this.props.userGames.length,
         filterByFavorites: false,
         filterByConsoles: false,
-        userHasFavorites: false
+        userHasFavorites: false,
+        userHasPlatforms: false
     }
 
-    setFavoriteFilter = function (event) {
-        const value = document.querySelector("#favoriteFilter").checked
-        this.setState({ filterByFavorites: value })
+    /* 
+        import functions
+    */
+    getCurrentFilters = SuggestionManager.getCurrentFilters.bind(this)
+    suggestGameBySimilarity = SuggestionManager.suggestGameBySimilarity.bind(this)
+    suggestGameByDeveloper = SuggestionManager.suggestGameByDeveloper.bind(this)
+
+
+    setFilters = function (event) {
+        const favoriteValue = document.querySelector("#favoriteFilter").checked
+        const consoleValue = document.querySelector("#consoleFilter").checked
+        this.setState({ 
+            filterByFavorites: favoriteValue,
+            filterByConsoles: consoleValue
+        })
     }.bind(this)
 
     getGameBySimilarity = function () {
-        // variable to check if a valid suggested game has been found
-        let gameNotFound = true
-        // while a good game has still not been found, keep running checks
-        while (gameNotFound) {
-            // get a random game from the users collection
-            const selectedUserGameStats = ArrayManager.getRandomItem(this.props.userGamesStats)
-            // get the related game information
-            const selectedUserGame = this.props.userGames.find(game => game.id === selectedUserGameStats.gbId)
-            // if the game has similar games listed
-            if (selectedUserGame.similar_games !== null && (this.state.filterByFavorites === false || selectedUserGameStats.isFavorited === true)) {
-
-                // get a random game from that similar games array and set state of this component accordingly
-                const suggestedGame = ArrayManager.getRandomItem(selectedUserGame.similar_games)
-                // check to see if user already has game in collection
-                if (!this.props.userGamesIds.includes(suggestedGame.id)) {
-                    this.setState({ result: suggestedGame })
-                    this.setState({ resultBasis: `This game was selected because it is similar to this game in your collection: ${selectedUserGame.name}` })
-                    gameNotFound = false
-                    APIManager.getGbGame(suggestedGame.id)
-                        .then(response => {
-                            this.setState({ results: [response.results] })
-                        })
-                }
-            }
-        }
+        const filters = this.getCurrentFilters()
+        this.suggestGameBySimilarity(filters)
     }.bind(this)
 
     getGameByDeveloper = function () {
-        // variable to check a valid game has been selected to suggest by
-        let developerNotFound = true
-        // keep running check until game is found
-        while (developerNotFound) {
-            // get a random game
-            const selectedUserGamesStats = ArrayManager.getRandomItem(this.props.userGamesStats)
-            // get the game info for that game
-            const selectedUserGame = this.props.userGames.find(game => game.id === selectedUserGamesStats.gbId)
-            // check to see if game will work for search terms
-            if (selectedUserGame.developers !== null && (this.state.filterByFavorites === false || selectedUserGamesStats.isFavorited === true)) {
-                // get a random developer from the game info
-                const developer = ArrayManager.getRandomItem(selectedUserGame.developers)
-                developerNotFound = false
-                // set the result basis
-                this.setState({ resultBasis: `This game was selected becuase it was developed by ${developer.name}, who also worked on ${selectedUserGame.name}` })
-                // get that companys info
-                APIManager.getGbCompany(developer.id)
-                    .then(response => {
-                        // get a random game they worked on
-                        const developerGame = ArrayManager.getRandomUnownedGame(response.results.developed_games, this.props.userGamesIds)
-                        if (developerGame !== false) {
-                            APIManager.getGbGame(developerGame.id)
-                                .then(response => {
-                                    this.setState({ results: [response.results] })
-                                })
-                        } else {
-                            this.setState({ resultBasis: `We were going to show you a game by ${developer.name}, but it seems you already have every game they have worked on.`})
-                        }
-                    })
-            }
-        }
+        const filters = this.getCurrentFilters()
+        this.suggestGameByDeveloper(filters)
     }.bind(this)
+
 
     componentDidMount() {
         const foundFavoriteGame = this.props.userGamesStats.find(game => game.isFavorited === true)
         if (foundFavoriteGame !== undefined) {
             this.setState({ userHasFavorites: true })
+        }
+        if (this.props.userPlatformsIds.length > 0) {
+            this.setState({ userHasPlatforms: true})
         }
     }
 
@@ -97,6 +61,9 @@ class SuggestView extends Component {
             if (this.state.userGamesLength === 0) {
                 return <Title>You have no games</Title>
             } else {
+                if (this.state.filterByConsoles === true && this.state.userHasPlatforms === false) {
+                    return <Title>You have no consoles to filter by</Title>
+                } else {
                 return <Container>
                     <Title>Suggest Games</Title>
                     <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
@@ -106,6 +73,7 @@ class SuggestView extends Component {
                         <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />
                     ))}
                 </Container>
+                }
             }
         }
 
@@ -115,7 +83,8 @@ class SuggestView extends Component {
     render() {
         return (
             <div>
-                <Checkbox onChange={this.setFavoriteFilter} id="favoriteFilter"> Filter By Favorites </Checkbox>
+                <Checkbox onChange={this.setFilters} id="favoriteFilter"> Filter By Favorites </Checkbox>
+                <Checkbox onChange={this.setFilters} id="consoleFilter"> Filter By Platforms <small>note, depending on the games and platforms you own, checking this filter may make finding games more difficult</small></Checkbox>
                 {this.doesUserHaveGames()}
             </div>
         )
