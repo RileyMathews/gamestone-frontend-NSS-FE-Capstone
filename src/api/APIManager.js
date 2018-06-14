@@ -31,6 +31,11 @@ const APIManager = Object.create(null, {
             return fetch(`${url}games?name_like=${encodeURI(searchString)}`)
         }
     },
+    getUser: {
+        value: function (id) {
+            return fetch (`${url}users/${id}`)
+        }
+    },
     searchUsers: {
         value: function (userName) {
             return fetch(`${url}users?gamertag=${userName}`)

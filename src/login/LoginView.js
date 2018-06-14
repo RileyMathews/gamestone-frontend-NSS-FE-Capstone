@@ -69,7 +69,7 @@ class LoginView extends Component {
             login__password: ""
         })
 
-        fetch(`http://localhost:8088/users?gamertag=${username}`)
+        APIManager.searchUsers(username)
             .then(r => r.json())
             .then(users => {
                 const user = users[0]

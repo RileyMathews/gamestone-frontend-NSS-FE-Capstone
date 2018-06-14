@@ -9,10 +9,10 @@ const UserManager = Object.create(null, {
     getUserInformation: {
         value: function () {
             // fetches the users account information
-            fetch(`http://localhost:8088/users?id=${this.state.activeUser}`)
+            APIManager.getUser(this.state.activeUser)
                 .then(r => r.json())
                 .then(response => {
-                    const user = response[0]
+                    const user = response
                     this.setState({
                         userId: user.id,
                         userFirstName: user.name.first,
