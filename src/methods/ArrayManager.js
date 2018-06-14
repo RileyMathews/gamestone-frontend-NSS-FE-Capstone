@@ -35,6 +35,13 @@ const ArrayManager = Object.create(null, {
             array.push(item)
             return array
         }
+    },
+    removeItem: {
+        value: function (array, item) {
+            const index = array.findIndex(itemInArray => itemInArray === item)
+            array.splice(index, 1)
+            return array
+        }
     }
 })
 

@@ -43,12 +43,15 @@ const PlatformManager = Object.create(null, {
             // seperate the response as needed
             const newUnownedPlatforms = splitItem.newArray
             const platformToMove = splitItem.item
+            // add id to array of ids
+            const newPlatformsIds = ArrayManager.addItem(this.state.userPlatformsIds, platformId)
             // add the item to owned games
             const newOwnedPlatforms = ArrayManager.addItem(this.state.userPlatforms, platformToMove)
             // set state
             this.setState({
                 userPlatforms: newOwnedPlatforms,
-                userUnownedPlatforms: newUnownedPlatforms
+                userUnownedPlatforms: newUnownedPlatforms,
+                userPlatformsIds: newPlatformsIds
             })
             APIManager.post("usersPlatforms", { userId: parseInt(this.state.activeUser, 10), platformId: platformToMove.id })
         }
@@ -62,12 +65,15 @@ const PlatformManager = Object.create(null, {
             // seperate response as needed
             const newOwnedPlatforms = splitItem.newArray
             const platformToMove = splitItem.item
+            // remove id from owned ids array
+            const newPlatformsIds = ArrayManager.removeItem(this.state.userPlatformsIds, platformId)
             // add item to unowned games
             const newUnownedPlatforms = ArrayManager.addItem(this.state.userUnownedPlatforms, platformToMove)
             // set state
             this.setState({
                 userPlatforms: newOwnedPlatforms,
-                userUnownedPlatforms: newUnownedPlatforms
+                userUnownedPlatforms: newUnownedPlatforms,
+                userPlatformsIds: newPlatformsIds
             })
             // find intersection item to remove
             APIManager.getUsersPlatforms(this.state.activeUser)
