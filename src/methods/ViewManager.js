@@ -13,38 +13,55 @@ const ViewManager = Object.create(null, {
     setView: {
         value: function (e) {
             let view = null
-    
+
             // Click event triggered switching view
             if (e.hasOwnProperty("target")) {
                 view = e.target.id.split("__")[1]
-    
+
                 // View switch manually triggered by passing in string
             } else {
                 view = e
             }
-    
+
             // If user clicked logout in nav, empty local storage and update activeUser state
             if (view === "logout") {
                 this.setActiveUser(null)
+                this.setState({
+                    userGamesIds: [],
+                    userGamesStats: [],
+                    userGames: [],
+                    userPlatforms: [],
+                    userPlatformsIds: [],
+                    allPlatforms: [],
+                    userUnownedPlatforms: []
+                })
                 localStorage.clear()
                 sessionStorage.clear()
             }
-    
+
             // Update state to correct view will be rendered
             this.setState({
                 currentView: view
             })
-    
+
         }
     },
     showView: {
         value: function () {
             if (sessionStorage.getItem("userId") === null) {
-                return <LoginView setActiveUser={this.setActiveUser} setView={this.setView} getUserInformation={this.getUserInformation} />
+                return <LoginView
+                    setActiveUser={this.setActiveUser}
+                    setView={this.setView}
+                    getUserInformation={this.getUserInformation}
+                    getPlatforms={this.getPlatforms} />
             } else {
                 switch (this.state.currentView) {
                     case "search":
-                        return <SearchView activeUser={this.state.activeUser} userGamesIds={this.state.userGamesIds} addGameToCollection={this.addGameToCollection} removeGame={this.removeGameFromCollection} />
+                        return <SearchView
+                            activeUser={this.state.activeUser}
+                            userGamesIds={this.state.userGamesIds}
+                            addGameToCollection={this.addGameToCollection}
+                            removeGame={this.removeGameFromCollection} />
                     case "suggest":
                         return <SuggestView
                             userGamesIds={this.state.userGamesIds}
