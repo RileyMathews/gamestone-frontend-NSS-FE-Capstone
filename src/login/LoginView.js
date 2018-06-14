@@ -61,7 +61,6 @@ class LoginView extends Component {
     }
 
     login = function (evt) {
-        console.log(evt)
         evt.preventDefault()
         const username = this.state.login__username
         const password = this.state.login__password
