@@ -68,11 +68,18 @@ const SuggestionManager = Object.create(null, {
                         APIManager.getGbGame(selectedGame.id)
                             .then(response => {
                                 const game = response.results
-                                this.setState({
-                                    results: [game],
-                                    resultBasis: `${selectedDeveloper.name}, who also worked on ${selectedUserGame.name}, had a hand in making this game.`
-                                })
+                        if (filters.console === false || (PlatformManager.canUserPlayGame(game, this.props.userPlatformsIds) && filters.console)) {
+                            this.setState({
+                                results: [game],
+                                resultBasis: `${selectedDeveloper.name} had a hand in making ${selectedUserGame.name}, they also worked on this game.`
                             })
+                        } else {
+                            this.setState({
+                                results: [],
+                                resultBasis: `Sorry the game we found was not available on any platforms you own, please try again`
+                            })
+                        }
+                    })
                     } else {
                         this.setState({
                             results: [],
