@@ -77,6 +77,7 @@ const GameManager = Object.create(null, {
                 .then(response => {
                     // build up object representing full data needed for state
                     const gameToAddToState = {
+                        "userId": response.userId,
                         "id": response.id,
                         "gbId": response.gbId,
                         "isFavorited": response.isFavorited,
