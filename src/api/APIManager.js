@@ -2,43 +2,43 @@
     module to provide functionality for working with api
     Authors: Riley Mathews
 */
-
+import url from './APISettings'
 import $ from 'jquery'
 
 const APIManager = Object.create(null, {
     getAllOfCollection: {
         value: function (collection) {
-            return fetch(`http://localhost:8088/${collection}`)
+            return fetch(`${url}${collection}`)
         }
     },
     getSingleGame: {
         value: function (gameId) {
-            return fetch(`http://localhost:8088/games?id=${gameId}`)
+            return fetch(`${url}games?id=${gameId}`)
         }
     },
     getUsersGames: {
         value: function (user) {
-            return fetch(`http://localhost:8088/usersGames?userId=${user}`)
+            return fetch(`${url}usersGames?userId=${user}`)
         }
     },
     getUsersPlatforms: {
         value: function (user) {
-            return fetch(`http://localhost:8088/usersPlatforms?userId=${user}&_expand=platform`)
+            return fetch(`${url}usersPlatforms?userId=${user}&_expand=platform`)
         }
     },
     searchGames: {
         value: function (searchString) {
-            return fetch(`http://localhost:8088/games?name_like=${encodeURI(searchString)}`)
+            return fetch(`${url}games?name_like=${encodeURI(searchString)}`)
         }
     },
     searchUsers: {
         value: function (userName) {
-            return fetch(`http://localhost:8088/users?gamertag=${userName}`)
+            return fetch(`${url}users?gamertag=${userName}`)
         }
     },
     post: {
         value: function (collection, data) {
-            return fetch(`http://localhost:8088/${collection}`, {
+            return fetch(`${url}${collection}`, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -49,7 +49,7 @@ const APIManager = Object.create(null, {
     },
     put: {
         value: function (collection, data, id) {
-            return fetch(`http://localhost:8088/${collection}/${id}`, {
+            return fetch(`${url}${collection}/${id}`, {
                 method: "put",
                 headers: {
                     "Accept": "application/json",
@@ -62,7 +62,7 @@ const APIManager = Object.create(null, {
     delete: {
         value: function (collection, id) {
             return $.ajax({
-                url: `http://localhost:8088/${collection}/${id}`,
+                url: `${url}${collection}/${id}`,
                 method: "DELETE"
             })
         }
