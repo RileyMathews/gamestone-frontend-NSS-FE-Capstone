@@ -84,6 +84,7 @@ class LoginView extends Component {
                     this.props.setActiveUser(user.id)
                     this.props.setView("home")
                     this.props.getUserInformation()
+                    this.props.getPlatforms()
                 }
             })
     }.bind(this)
@@ -111,6 +112,7 @@ class LoginView extends Component {
                                 this.props.setActiveUser(response.id)
                                 this.props.setView("home")
                                 this.props.getUserInformation()
+                                this.props.getPlatforms()
                             })
                     } else {
                         alert("username already taken")
