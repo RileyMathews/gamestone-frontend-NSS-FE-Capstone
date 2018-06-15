@@ -10,6 +10,7 @@ import ProfileView from '../profile/ProfileView';
 */
 
 const ViewManager = Object.create(null, {
+    // function to change the current view state off the app
     setView: {
         value: function (e) {
             let view = null
@@ -46,6 +47,9 @@ const ViewManager = Object.create(null, {
 
         }
     },
+    // function called every time app re renders
+    // and will display the view based on the current 
+    // property in state
     showView: {
         value: function () {
             if (sessionStorage.getItem("userId") === null) {

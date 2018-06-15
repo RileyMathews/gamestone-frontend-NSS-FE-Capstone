@@ -6,6 +6,7 @@ import APIManager from "../api/APIManager";
 */
 
 const UserManager = Object.create(null, {
+    // function to get user information from api and post it to state
     getUserInformation: {
         value: function () {
             // fetches the users account information
@@ -47,6 +48,7 @@ const UserManager = Object.create(null, {
 
         }
     },
+    // function to set the active user in state
     setActiveUser: {
         value: function (userId) {
             this.setState({ activeUser: userId })

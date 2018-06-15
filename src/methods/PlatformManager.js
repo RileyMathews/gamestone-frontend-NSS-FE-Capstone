@@ -8,6 +8,8 @@ import ArrayManager from "./ArrayManager";
 
 
 const PlatformManager = Object.create(null, {
+    // get all platforms from the database,
+    // and update owned and unowned platforms accordingly
     getPlatforms: {
         value: function () {
             // get all platforms
@@ -34,6 +36,7 @@ const PlatformManager = Object.create(null, {
                 })
         }
     },
+    // function to add a platform to users owned platforms
     addPlatform: {
         value: function (evt) {
             // get id of event
@@ -56,6 +59,7 @@ const PlatformManager = Object.create(null, {
             APIManager.post("usersPlatforms", { userId: parseInt(this.state.activeUser, 10), platformId: platformToMove.id })
         }
     },
+    // function to remove a platform from users owned platforms
     removePlatform: {
         value: function (evt) {
             // get id of event
@@ -85,6 +89,8 @@ const PlatformManager = Object.create(null, {
                 })
         }
     }, 
+    // function to check and make sure the user has a console
+    // the game passed to it is available on
     canUserPlayGame: {
         value: function (game, userPlatformsIds) {
             let platformFound = false

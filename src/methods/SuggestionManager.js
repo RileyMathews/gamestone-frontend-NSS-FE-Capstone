@@ -8,6 +8,8 @@ import PlatformManager from "./PlatformManager";
 */
 
 const SuggestionManager = Object.create(null, {
+    // function to get filters from apps state
+    // and wrap them in an object to be passed to subsequent search functions
     getCurrentFilters: {
         value: function () {
             const filters = {
@@ -17,6 +19,8 @@ const SuggestionManager = Object.create(null, {
             return filters
         }
     },
+    // function to suggest a game using the 'similar games'
+    // information in gb's api
     suggestGameBySimilarity: {
         value: function (filters) {
             // get a random game based on the favorite filter applied
@@ -49,7 +53,10 @@ const SuggestionManager = Object.create(null, {
                 })
             }
         }
-    }, 
+    },
+    // function to suggest a game that was developed
+    // in part by a developer who also worked
+    // on a game the user already owns
     suggestGameByDeveloper: {
         value: function (filters) {
             // get a random game

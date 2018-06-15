@@ -7,6 +7,7 @@ import APIManager from '../api/APIManager';
 */
 
 const GameManager = Object.create(null, {
+    // function to change the progress of a game
     changeGameProgress: {
         value: function (event) {
             // grab the usersGame id from the id of the event
@@ -46,6 +47,7 @@ const GameManager = Object.create(null, {
             APIManager.put("usersGames", dataToSend, gameId)
         }
     },
+    // function to add a game to users collection
     addGameToCollection: {
         value: function (game, favorite) {
             // build up data to post to database
@@ -90,6 +92,7 @@ const GameManager = Object.create(null, {
                 })
         }
     },
+    // function to remove a game from the users collection
     removeGameFromCollection: {
         value: function (id) {
             // get index of game to be removed
@@ -123,6 +126,7 @@ const GameManager = Object.create(null, {
 
         }
     },
+    // function to toggle the favorite status on a game
     toggleGameFavorite: {
         value: function (event) {
             const userGameId = event.target.id.split("__")[3]
