@@ -6,6 +6,10 @@ import ViewManager from './methods/ViewManager';
 import UserManager from './methods/UserManager';
 import GameManager from './methods/GameManager';
 
+/* 
+    module to handle top level data management and view displaying of the app
+    authors Riley Mathews
+*/
 class App extends Component {
     // define initial state of application
     state = {

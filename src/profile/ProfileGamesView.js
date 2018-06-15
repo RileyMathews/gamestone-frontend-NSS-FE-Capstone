@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Title, Button } from 'bloomer'
 import GamesList from './GamesList';
 
+/* 
+    module to handle displaying the games view of the user profile page
+    author Riley Mathews
+*/
 
 class ProfileGamesView extends Component {
 

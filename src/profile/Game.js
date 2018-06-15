@@ -4,7 +4,10 @@ import './Game.css'
 import GenreList from '../genres/GenreList';
 import $ from 'jquery'
 
-
+/* 
+    module to display information about a game passed to it
+    authors Riley Mathews
+*/
 
 class Game extends Component {
 

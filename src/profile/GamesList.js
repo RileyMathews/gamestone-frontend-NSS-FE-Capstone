@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Game from './Game';
 
+/* 
+    module to display information about a list of games passed to it
+    authors Riley Mathews
+*/
 
 class GamesList extends Component {
 

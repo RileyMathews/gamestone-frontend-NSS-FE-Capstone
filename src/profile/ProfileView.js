@@ -3,7 +3,10 @@ import { Title, Container, Button } from 'bloomer'
 import ProfileGamesView from './ProfileGamesView';
 import ProfilePlatformsView from './ProfilePlatformsView';
 
-
+/* 
+    module to handle displaying the users profile
+    authors Riley Mathews
+*/
 class ProfileView extends Component {
 
     state = {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
-
+/* 
+    module to display information about game platforms based on info passed to it
+    authors Riley Mathews
+*/
 class Platform extends Component {
 
 

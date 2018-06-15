@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Genre from './Genre';
 
-
+/* 
+    module to display a list of genres passed to it
+    authors Riley Mathews
+*/
 class GenreList extends Component {
 
     checkForString = function (genre) {

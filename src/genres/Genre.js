@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import './Genre.css'
 
+/* 
+    module to display a genre passed to it
+    author Riley Mathews
+*/
 class Genre extends Component {
 
 

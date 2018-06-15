@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, } from 'bloomer';
 
-
+/* 
+    module to display the results of searching giant bombs api of games
+    authors Riley Mathews
+*/
 class Result extends Component {
 
     isGameOwned = function () {

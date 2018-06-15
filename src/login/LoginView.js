@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Title, Container, Field, Label, Control, Input, Button } from 'bloomer'
 import APIManager from '../api/APIManager';
 
+/* 
+    module to handle login and registering of users
+    author Riley Mathews
+*/
 
 class LoginView extends Component {
 
@@ -34,7 +38,8 @@ class LoginView extends Component {
             "Samuel",
             "Han",
             "Jean-Luc",
-            "James"
+            "James",
+            "Leonard"
         ],
         lastNames: [
             "Stark",
@@ -57,7 +62,8 @@ class LoginView extends Component {
             "Oak",
             "Solo",
             "Picard",
-            "Kirk"
+            "Kirk",
+            "McCoy"
         ],
         nameIndex: 0,
         gamerTags: [
@@ -81,7 +87,8 @@ class LoginView extends Component {
             "TheProf",
             "IShotFirst",
             "Locutus",
-            "Jim"
+            "Jim",
+            "Bones"
         ]
     }
 

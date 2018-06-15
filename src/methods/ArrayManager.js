@@ -1,3 +1,8 @@
+/* 
+    module to hold methods for pulling and adding information from arrays
+    authors Riley Mathews
+*/
+
 const ArrayManager = Object.create(null, {
     getRandomItem: {
         value: function (array) {

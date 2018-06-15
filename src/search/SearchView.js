@@ -4,6 +4,10 @@ import $ from 'jquery'
 import APIManager from '../api/APIManager';
 import Result from './Result';
 
+/* 
+    module to display the search page for games
+    authors Riley Mathews
+*/
 
 class SearchView extends Component {
     state = {

@@ -6,41 +6,49 @@ import url from './APISettings'
 import $ from 'jquery'
 
 const APIManager = Object.create(null, {
+    // get an entire collection of items from apps api
     getAllOfCollection: {
         value: function (collection) {
             return fetch(`${url}${collection}`)
         }
     },
+    // get a single game from apps api
     getSingleGame: {
         value: function (gameId) {
             return fetch(`${url}games?id=${gameId}`)
         }
     },
+    // get all games from the intersection table with user id
     getUsersGames: {
         value: function (user) {
             return fetch(`${url}usersGames?userId=${user}`)
         }
     },
+    // get all platforms from one user and expand platform information
     getUsersPlatforms: {
         value: function (user) {
             return fetch(`${url}usersPlatforms?userId=${user}&_expand=platform`)
         }
     },
+    // search own api for games
     searchGames: {
         value: function (searchString) {
             return fetch(`${url}games?name_like=${encodeURI(searchString)}`)
         }
     },
+    // get single user information
     getUser: {
         value: function (id) {
             return fetch (`${url}users/${id}`)
         }
     },
+    // search users in api
     searchUsers: {
         value: function (userName) {
             return fetch(`${url}users?gamertag=${userName}`)
         }
     },
+    // post information to a collection
     post: {
         value: function (collection, data) {
             return fetch(`${url}${collection}`, {
@@ -52,6 +60,7 @@ const APIManager = Object.create(null, {
             })
         }
     },
+    // update information in a certain collection by id
     put: {
         value: function (collection, data, id) {
             return fetch(`${url}${collection}/${id}`, {
@@ -64,6 +73,7 @@ const APIManager = Object.create(null, {
             })
         }
     },
+    // delete information in a collection by id
     delete: {
         value: function (collection, id) {
             return $.ajax({
@@ -72,6 +82,7 @@ const APIManager = Object.create(null, {
             })
         }
     },
+    // get a game from the giantbomb api
     getGbGame: {
         value: function (gbId) {
             return $.ajax({
@@ -83,6 +94,7 @@ const APIManager = Object.create(null, {
             })
         }
     },
+    // search giantbombs database for games
     searchGbGames: {
         value: function (searchString) {
             return $.ajax({
@@ -94,6 +106,7 @@ const APIManager = Object.create(null, {
             })
         }
     },
+    // get information about a company, specifically developed games
     getGbCompany: {
         value: function (id) {
             return $.ajax({

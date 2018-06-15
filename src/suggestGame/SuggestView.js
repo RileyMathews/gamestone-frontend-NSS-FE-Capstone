@@ -3,7 +3,10 @@ import { Title, Container, Button, Checkbox } from 'bloomer'
 import Result from '../search/Result';
 import SuggestionManager from '../methods/SuggestionManager'
 
-
+/* 
+    module to handle displaying and calling logic for suggesting games to the user
+    authors Riley Mathews
+*/
 class SuggestView extends Component {
 
     state = {

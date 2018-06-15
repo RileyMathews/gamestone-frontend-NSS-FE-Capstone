@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { Navbar, NavbarItem, NavbarBurger, NavbarBrand, NavbarMenu } from "bloomer";
 import './NavBar.css'
 
+
+/* 
+    module to handle displaying and logic of using the navigation bar
+    authors Riley Mathews
+*/
 class NavBar extends Component {
 
     // Storing session storage as an object in state named currentUser
