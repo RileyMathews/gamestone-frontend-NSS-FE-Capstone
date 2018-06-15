@@ -20,10 +20,8 @@ class SearchView extends Component {
     }
 
     searchForGame = function () {
-        console.log("search fired")
         APIManager.searchGbGames(this.state.searchString, 1)
             .then(response => {
-                console.log(response)
                 this.setState({
                     totalPages: Math.ceil(response.number_of_total_results / 10),
                     results: response.results,
@@ -90,7 +88,6 @@ class SearchView extends Component {
                 </PageList>
             )
         } else if (this.state.currentPage > 3 && this.state.currentPage <= this.state.totalPages - 3) {
-            console.log("fired here")
             return (
                 <PageList>
                     {this.pageLinkDisplay(1)}
