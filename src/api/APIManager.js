@@ -96,13 +96,13 @@ const APIManager = Object.create(null, {
     },
     // search giantbombs database for games
     searchGbGames: {
-        value: function (searchString) {
+        value: function (searchString, page) {
             return $.ajax({
                 type: "GET",
                 dataType: "jsonp",
                 crossDomain: true,
                 jsonp: "json_callback",
-                url: `http://www.giantbomb.com/api/search?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&query=${searchString}&resources=game`
+                url: `http://www.giantbomb.com/api/search?api_key=817e4ec0b4026b38424f3c98970b14d273226692&format=jsonp&query=${searchString}&resources=game&page=${page}`
             })
         }
     },
