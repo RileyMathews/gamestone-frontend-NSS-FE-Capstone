@@ -23,9 +23,9 @@ class Result extends Component {
 
     isGameOwnedButton = function () {
         if (this.isGameOwned()) {
-            return <Button onClick={this.removeGameById}>Remove Game</Button>
+            return <Button isColor="primary" onClick={this.removeGameById}>Remove Game</Button>
         } else {
-            return <Button onClick={this.addGame}>Add Game</Button>
+            return <Button isColor="primary" onClick={this.addGame}>Add Game</Button>
         }
     }.bind(this)
 
@@ -64,7 +64,7 @@ class Result extends Component {
                         </LevelLeft>
                         <LevelRight>
                             {this.isGameOwnedButton()}
-                            {this.isGameOwned() ? null : <Button onClick={this.addGameFavorite}>Add Game as Favorite</Button>}
+                            {this.isGameOwned() ? null : <Button isColor="primary" onClick={this.addGameFavorite}>Add Game as Favorite</Button>}
                         </LevelRight>
                     </Level>
                 </MediaContent>

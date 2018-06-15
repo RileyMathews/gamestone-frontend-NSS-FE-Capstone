@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Title, Container, Button, Checkbox } from 'bloomer'
+import { Title, Container, Button, Checkbox, Columns, Column, Field, Box } from 'bloomer'
 import Result from '../search/Result';
 import SuggestionManager from '../methods/SuggestionManager'
 
@@ -30,7 +30,7 @@ class SuggestView extends Component {
     setFilters = function (event) {
         const favoriteValue = document.querySelector("#favoriteFilter").checked
         const consoleValue = document.querySelector("#consoleFilter").checked
-        this.setState({ 
+        this.setState({
             filterByFavorites: favoriteValue,
             filterByConsoles: consoleValue
         })
@@ -53,7 +53,7 @@ class SuggestView extends Component {
             this.setState({ userHasFavorites: true })
         }
         if (this.props.userPlatformsIds.length > 0) {
-            this.setState({ userHasPlatforms: true})
+            this.setState({ userHasPlatforms: true })
         }
     }
 
@@ -67,15 +67,15 @@ class SuggestView extends Component {
                 if (this.state.filterByConsoles === true && this.state.userHasPlatforms === false) {
                     return <Title>You have no consoles to filter by</Title>
                 } else {
-                return <Container>
-                    <Title>Suggest Games</Title>
-                    <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
-                    <Button onClick={this.getGameByDeveloper}>By Developer</Button>
-                    <p>{this.state.resultBasis}</p>
-                    {this.state.results.map(result => (
-                        <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />
-                    ))}
-                </Container>
+                    return <div>
+                        <Title>Suggest Games</Title>
+                        <Button onClick={this.getGameBySimilarity}>By Similar Games</Button>
+                        <Button onClick={this.getGameByDeveloper}>By Developer</Button>
+                        <p>{this.state.resultBasis}</p>
+                        {this.state.results.map(result => (
+                            <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGameFromCollection} />
+                        ))}
+                    </div>
                 }
             }
         }
@@ -85,11 +85,25 @@ class SuggestView extends Component {
 
     render() {
         return (
-            <div>
-                <Checkbox onChange={this.setFilters} id="favoriteFilter"> Filter By Favorites </Checkbox>
-                <Checkbox onChange={this.setFilters} id="consoleFilter"> Filter By Platforms <small>note, depending on the games and platforms you own, checking this filter may make finding games more difficult</small></Checkbox>
-                {this.doesUserHaveGames()}
-            </div>
+            <Container>
+                <Columns>
+                    <Column isSize={3}>
+                        <Box>
+                            <Title tag="h4" isSize={3}>Filters</Title>
+                            <Field>
+                                <Checkbox onChange={this.setFilters} id="favoriteFilter">  Favorites </Checkbox>
+                            </Field>
+                            <Field>
+                                <Checkbox onChange={this.setFilters} id="consoleFilter">  Platforms </Checkbox>
+                            </Field>
+                            <small>note, depending on the games and platforms you own, checking too many filters may make finding games more difficult. If no game is found, try again after a second. The search is sometimes stopped before finding a game that meets all criteria to lessen the load on the database.</small>
+                        </Box>
+                    </Column>
+                    <Column>
+                        {this.doesUserHaveGames()}
+                    </Column>
+                </Columns>
+            </Container>
         )
     }
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Container, Input, Button, Pagination, PageControl, PageList, Page, PageLink, PageEllipsis, Image } from 'bloomer';
+import { Container, Input, Button, Pagination, PageControl, PageList, Page, PageLink, PageEllipsis, Image, Field } from 'bloomer';
 import $ from 'jquery'
 import APIManager from '../api/APIManager';
 import Result from './Result';
+import './SearchView.css'
+import ArrayManager from '../methods/ArrayManager'
 
 /* 
     module to display the search page for games
@@ -17,7 +19,34 @@ class SearchView extends Component {
         waitingMessage: "",
         currentPage: 1,
         totalPages: null,
-        waiting: false
+        waiting: false,
+        placeholderSearches: [
+            "Mario",
+            "Metroid",
+            "God of War",
+            "Uncharted",
+            "Star Wars",
+            "Warcraft",
+            "Starcraft",
+            "Doom",
+            "Sonic",
+            "Final Fantasy",
+            "Pokemon",
+            "Mass Effect",
+            "Skyrim",
+            "Fallout",
+            "Dark Souls",
+            "Dishonored",
+            "Prey",
+            "Zelda",
+            "Super Smash Bros",
+            "Street Fighter",
+            "Mortal Kombat",
+            "Red Dead Redemption",
+            "Overwatch",
+            "Assasin's Creed",
+            "Elder Scrolls"
+        ]
     }
 
     searchForGame = function () {
@@ -58,6 +87,7 @@ class SearchView extends Component {
             searchString: "",
             results: []
         })
+        $("#search__input").blur()
     }.bind(this)
 
     setPage = function (event) {
@@ -152,15 +182,21 @@ class SearchView extends Component {
         return (
             <Container>
                 <form onSubmit={this.handleSearchSubmit}>
-                    <Input id="search__input" onChange={this.handleSearchInputChanage} value={this.state.searchString} />
-                    <Button id="search__submit" isColor="primary" type="submit">Search</Button>
-                    {this.state.waiting ? <Image src="./Pacman-1s-200px.svg" isSize="128x128"/> : null}
+                    <Field>
+                        <Input id="search__input" placeholder={ArrayManager.getRandomItem(this.state.placeholderSearches)} onChange={this.handleSearchInputChanage} value={this.state.searchString} />
+                    </Field>
+                    <Field>
+                        <Button id="search__submit" isColor="primary" type="submit">Search</Button>
+                    </Field>
+                </form>
+                <div id="results">
+                    {this.state.waiting ? <Image src="./Pacman-1s-200px.svg" isSize="128x128" /> : null}
                     {this.state.results.map(result => (
                         <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame} />
                     ))}
-                    {this.paginationDisplay()}
-                </form>
-            </Container >
+                </div>
+                {this.paginationDisplay()}
+            </Container>
         )
     }
 }

@@ -6,4 +6,17 @@ body {
 
 .clickable {
   cursor: pointer;
+  user-select: none;
+}
+
+.unselectable {
+  user-select: none
+}
+
+button + button {
+  margin-left: .5em;
+}
+
+.container {
+  margin-top: 1em;
 }

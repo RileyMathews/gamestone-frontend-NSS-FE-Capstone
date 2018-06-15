@@ -52,10 +52,10 @@ class NavBar extends Component {
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
                 <NavbarMenu isActive={this.state.isActive}>
-                    <NavbarItem id="nav__profile" onClick={this.onClickNav}>My Profile</NavbarItem>
-                    <NavbarItem id="nav__search" onClick={this.onClickNav}>Add Games</NavbarItem>
-                    <NavbarItem id="nav__suggest" onClick={this.onClickNav}>Suggest Games</NavbarItem>
-                    <NavbarItem id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
+                    <NavbarItem className="clickable" id="nav__profile" onClick={this.onClickNav}>My Profile</NavbarItem>
+                    <NavbarItem className="clickable" id="nav__search" onClick={this.onClickNav}>Add Games</NavbarItem>
+                    <NavbarItem className="clickable" id="nav__suggest" onClick={this.onClickNav}>Suggest Games</NavbarItem>
+                    <NavbarItem className="clickable" id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
                 </NavbarMenu>
             </Navbar>
         )
