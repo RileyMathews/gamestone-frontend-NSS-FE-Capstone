@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Input, Button, Title, Pagination, PageControl, PageList, Page, PageLink, PageEllipsis } from 'bloomer';
+import { Container, Input, Button, Title, Pagination, PageControl, PageList, Page, PageLink, PageEllipsis, Image } from 'bloomer';
 import $ from 'jquery'
 import APIManager from '../api/APIManager';
 import Result from './Result';
@@ -16,7 +16,8 @@ class SearchView extends Component {
         results: [],
         waitingMessage: "",
         currentPage: 1,
-        totalPages: null
+        totalPages: null,
+        waiting: false
     }
 
     searchForGame = function () {
@@ -25,7 +26,8 @@ class SearchView extends Component {
                 this.setState({
                     totalPages: Math.ceil(response.number_of_total_results / 10),
                     results: response.results,
-                    waitingMessage: ""
+                    waitingMessage: "",
+                    waiting: false
                 })
             })
     }.bind(this)
@@ -34,7 +36,8 @@ class SearchView extends Component {
         APIManager.searchGbGames(this.state.currentSearch, page)
             .then(response => {
                 this.setState({
-                    results: response.results
+                    results: response.results,
+                    waiting: false
                 })
             })
     }.bind(this)
@@ -51,6 +54,7 @@ class SearchView extends Component {
         this.setState({
             currentSearch: this.state.searchString,
             waitingMessage: "Waiting...",
+            waiting: true,
             searchString: "",
             results: []
         })
@@ -150,7 +154,7 @@ class SearchView extends Component {
                 <form onSubmit={this.handleSearchSubmit}>
                     <Input id="search__input" onChange={this.handleSearchInputChanage} value={this.state.searchString} />
                     <Button id="search__submit" isColor="primary" type="submit">Search</Button>
-                    <Title>{this.state.waitingMessage}</Title>
+                    {this.state.waiting ? <Image src="./Pacman-1s-200px.svg" isSize="128x128"/> : null}
                     {this.state.results.map(result => (
                         <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame} />
                     ))}
