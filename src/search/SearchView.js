@@ -47,10 +47,13 @@ class SearchView extends Component {
 
     handleSearchSubmit = function (evt) {
         evt.preventDefault()
-        this.setState({ currentSearch: this.state.searchString })
-        this.setState({ waitingMessage: "Waiting..." })
         this.searchForGame()
-        this.setState({ searchString: "" })
+        this.setState({
+            currentSearch: this.state.searchString,
+            waitingMessage: "Waiting...",
+            searchString: "",
+            results: []
+        })
     }.bind(this)
 
     setPage = function (event) {
