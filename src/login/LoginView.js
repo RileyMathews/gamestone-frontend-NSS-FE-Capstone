@@ -25,7 +25,16 @@ class LoginView extends Component {
             "Luke",
             "Luffy",
             "Kratos",
-            "Harry"
+            "Harry",
+            "David",
+            "Donald",
+            "Revolver",
+            "Hal",
+            "Anakin",
+            "Samuel",
+            "Han",
+            "Jean-Luc",
+            "James"
         ],
         lastNames: [
             "Stark",
@@ -39,7 +48,16 @@ class LoginView extends Component {
             "Skywalker",
             "Monkey",
             "God of War",
-            "Potter"
+            "Potter",
+            "Oh",
+            "Anderson",
+            "Ocelot",
+            "Emmerich",
+            "Skywalker",
+            "Oak",
+            "Solo",
+            "Picard",
+            "Kirk"
         ],
         nameIndex: 0,
         gamerTags: [
@@ -54,7 +72,16 @@ class LoginView extends Component {
             "TheLastJedi",
             "PirateKing",
             "GhostOfSparta",
-            "BoyWhoLived"
+            "BoyWhoLived",
+            "Zero",
+            "Sigint",
+            "Shalashaska",
+            "Otacon",
+            "Vader",
+            "TheProf",
+            "IShotFirst",
+            "Locutus",
+            "Jim"
         ]
     }
 
