@@ -47,10 +47,13 @@ class SearchView extends Component {
 
     handleSearchSubmit = function (evt) {
         evt.preventDefault()
-        this.setState({ currentSearch: this.state.searchString })
-        this.setState({ waitingMessage: "Waiting..." })
         this.searchForGame()
-        this.setState({ searchString: "" })
+        this.setState({
+            currentSearch: this.state.searchString,
+            waitingMessage: "Waiting...",
+            searchString: "",
+            results: []
+        })
     }.bind(this)
 
     setPage = function (event) {
@@ -88,7 +91,6 @@ class SearchView extends Component {
                 </PageList>
             )
         } else if (this.state.currentPage > 3 && this.state.currentPage <= this.state.totalPages - 3) {
-            console.log("fired here")
             return (
                 <PageList>
                     {this.pageLinkDisplay(1)}
