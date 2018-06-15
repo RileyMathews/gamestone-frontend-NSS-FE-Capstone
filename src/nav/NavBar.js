@@ -37,14 +37,11 @@ class NavBar extends Component {
         this.setState({
             isActive: (!this.state.isActive)
         })
-        this.props.setView(e)
+        if (e.target.id !== "") {
+            this.props.setView(e)
+        }
     }.bind(this)
 
-    //on click of search button
-    onClickSearch = function (e) {
-        //fire function to close navbar
-        this.onClickNav(e)
-    }.bind(this)
 
 
     render() {
