@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, LevelRight, Select, Icon, MediaRight, Delete } from 'bloomer';
+import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, Select, Icon, MediaRight, Delete } from 'bloomer';
 import './Game.css'
 import GenreList from '../genres/GenreList';
-import $ from 'jquery'
 
 /* 
     module to display information about a game passed to it
@@ -15,14 +14,13 @@ class Game extends Component {
         userGameId: "",
         progress: "",
         isFavorited: false,
+        isEditing: false
     }
 
 
     editGame = function (event) {
-        const gameId = event.target.id.split("__")[3]
-        const editField = $(`#game__change__progress__container__${gameId}`)
-        editField.toggle()
-    }
+        this.setState({ isEditing: this.state.isEditing ? false : true })
+    }.bind(this)
 
 
     getGameProgress = function () {
@@ -69,12 +67,23 @@ class Game extends Component {
                 </MediaLeft>
                 <MediaContent>
                     <Content>
-                        <p>
+                        <p className="inline">
                             <strong>{this.props.game.name}</strong>
-                            {this.getGameFavorited() ? <Icon className="fas fa-star" id={"game__toggle__favorite__" + this.getGameUserId()} onClick={this.props.toggleGameFavorite} /> : <Icon className="far fa-star" id={"game__toggle__favorite__" + this.getGameUserId()} onClick={this.props.toggleGameFavorite} />}
-                            <Icon className="fas fa-edit" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame} />
-
-                            <br />
+                            {this.getGameFavorited() ? <Icon className="fas fa-star clickable" id={"game__toggle__favorite__" + this.getGameUserId()} onClick={this.props.toggleGameFavorite} /> : <Icon className="far fa-star clickable" id={"game__toggle__favorite__" + this.getGameUserId()} onClick={this.props.toggleGameFavorite} />}
+                            <Icon className="fas fa-edit clickable" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame} />
+                        </p>
+                        {this.state.isEditing ? 
+                        <Select id={"game__change__progress__" + this.getGameUserId()} className="inline" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
+                            <option disabled="true" value="default">Select a Status</option>
+                            <option value="Backlog">Backlog</option>
+                            <option value="To Be Played">To Be Played</option>
+                            <option value="Playing">Playing</option>
+                            <option value="Finished">Finished</option>
+                        </Select>
+                        :
+                        <span className="inline">{this.getGameProgress()}</span>
+                        }
+                        <p>
                             {this.props.game.deck}
                         </p>
                     </Content>
@@ -83,25 +92,12 @@ class Game extends Component {
                         <LevelLeft>
                             <GenreList genres={this.props.game.genres} />
                         </LevelLeft>
-                        <LevelRight>
-                            {this.getGameProgress()}
-                            <div id={"game__change__progress__container__" + this.getGameUserId()} style={{ display: 'none' }}>
-                                <Select id={"game__change__progress__" + this.getGameUserId()} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
-                                    <option disabled="true" value="default">Select a Status</option>
-                                    <option value="Backlog">Backlog</option>
-                                    <option value="To Be Played">To Be Played</option>
-                                    <option value="Playing">Playing</option>
-                                    <option value="Finished">Finished</option>
-                                </Select>
-                            </div>
-
-                        </LevelRight>
                     </Level>
-                </MediaContent>
+                </MediaContent >
                 <MediaRight>
                     <Delete onClick={this.removeGameById} />
                 </MediaRight>
-            </Media>
+            </Media >
         )
     }
 }
