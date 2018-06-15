@@ -25,6 +25,7 @@ class LoginView extends Component {
             "Luke",
             "Luffy",
             "Kratos",
+            "Harry"
         ],
         lastNames: [
             "Stark",
@@ -37,7 +38,8 @@ class LoginView extends Component {
             "Pliskin",
             "Skywalker",
             "Monkey",
-            "God of War"
+            "God of War",
+            "Potter"
         ],
         nameIndex: 0,
         gamerTags: [
@@ -51,7 +53,8 @@ class LoginView extends Component {
             "Snake",
             "TheLastJedi",
             "PirateKing",
-            "GhostOfSparta"
+            "GhostOfSparta",
+            "BoyWhoLived"
         ]
     }
 
@@ -69,62 +72,74 @@ class LoginView extends Component {
             login__password: ""
         })
 
-        APIManager.searchUsers(username)
-            .then(r => r.json())
-            .then(users => {
-                const user = users[0]
-                if (user === undefined || user.password !== password) {
-                    alert("Username or Password not found")
-
-                } else if (password === user.password) {
-
-
-                    sessionStorage.setItem("userId", user.id)
-
-                    this.props.setActiveUser(user.id)
-                    this.props.setView("home")
-                    this.props.getUserInformation()
-                    this.props.getPlatforms()
-                }
-            })
+        if (username === "" || password === "") {
+            alert("please fill in a username and password")
+        } else {
+            APIManager.searchUsers(username)
+                .then(r => r.json())
+                .then(users => {
+                    const user = users[0]
+                    if (user === undefined || user.password !== password) {
+                        alert("Username or Password not found")
+    
+                    } else if (password === user.password) {
+    
+    
+                        sessionStorage.setItem("userId", user.id)
+    
+                        this.props.setActiveUser(user.id)
+                        this.props.setView("home")
+                        this.props.getUserInformation()
+                        this.props.getPlatforms()
+                    }
+                })
+        }
     }.bind(this)
 
     register = function (evt) {
         evt.preventDefault()
-        if (this.state.register__password === this.state.register__passwordConfirm) {
-            APIManager.searchUsers(this.state.register__gamertag)
-                .then(r => r.json())
-                .then(response => {
-                    if (response.length === 0) {
-                        const userData = {
-                            name: {
-                                first: this.state.register__firstName,
-                                last: this.state.register__lastName
-                            },
-                            gamertag: this.state.register__gamertag,
-                            password: this.state.register__password
-                        }
-
-                        APIManager.post("users", userData)
-                            .then(r => r.json())
-                            .then(response => {
-                                sessionStorage.setItem("userId", response.id)
-                                this.props.setActiveUser(response.id)
-                                this.props.setView("home")
-                                this.props.getUserInformation()
-                                this.props.getPlatforms()
-                            })
-                    } else {
-                        alert("username already taken")
-                        this.setState({ register__gamertag: "" })
-                    }
-                })
+        const firstN = this.state.register__firstName
+        const lastN = this.state.register__lastName
+        const gamerT = this.state.register__gamertag
+        const password = this.state.register__password
+        if (firstN === "" || lastN === "" || gamerT === "" || password === "") {
+            alert("please make sure every field is filled out")
         } else {
-            alert("passwords do not match")
-            this.setState({
-                register__password: "",
-                register__passwordConfirm: ""
-            })
+            if (this.state.register__password === this.state.register__passwordConfirm) {
+                APIManager.searchUsers(this.state.register__gamertag)
+                    .then(r => r.json())
+                    .then(response => {
+                        if (response.length === 0) {
+                            const userData = {
+                                name: {
+                                    first: this.state.register__firstName,
+                                    last: this.state.register__lastName
+                                },
+                                gamertag: this.state.register__gamertag,
+                                password: this.state.register__password
+                            }
+    
+                            APIManager.post("users", userData)
+                                .then(r => r.json())
+                                .then(response => {
+                                    sessionStorage.setItem("userId", response.id)
+                                    this.props.setActiveUser(response.id)
+                                    this.props.setView("home")
+                                    this.props.getUserInformation()
+                                    this.props.getPlatforms()
+                                })
+                        } else {
+                            alert("username already taken")
+                            this.setState({ register__gamertag: "" })
+                        }
+                    })
+            } else {
+                alert("passwords do not match")
+                this.setState({
+                    register__password: "",
+                    register__passwordConfirm: ""
+                })
+            }
         }
     }.bind(this)
 
@@ -138,9 +153,9 @@ class LoginView extends Component {
                 <form id="login" onSubmit={this.login}>
                     <Title>Welcome to this app</Title>
                     <Field>
-                        <Label>Username</Label>
+                        <Label>Gamertag</Label>
                         <Control>
-                            <Input type="text" placeholder="username" onChange={this.updateState} id="login__username" value={this.state.login__username} />
+                            <Input type="text" placeholder="gamertag" onChange={this.updateState} id="login__username" value={this.state.login__username} />
                         </Control>
                     </Field>
                     <Field>
