@@ -70,8 +70,8 @@ class ProfileView extends Component {
         return (
 
             <Container>
-                <Button id="ProfileNav__games" onClick={this.setProfileView}>Games</Button>
-                <Button id="ProfileNav__platforms" onClick={this.setProfileView}>Platforms</Button>
+                <Button id="ProfileNav__games" isColor="primary" onClick={this.setProfileView}>Games</Button>
+                <Button id="ProfileNav__platforms" isColor="primary" onClick={this.setProfileView}>Platforms</Button>
                 <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA "{this.props.gamertag}"</Title>
                 {this.showProfileView()}
             </Container>

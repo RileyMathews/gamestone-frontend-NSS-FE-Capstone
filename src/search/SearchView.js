@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Input, Button, Title, Pagination, PageControl, PageList, Page, PageLink, PageEllipsis, Image } from 'bloomer';
+import { Container, Input, Button, Pagination, PageControl, PageList, Page, PageLink, PageEllipsis, Image } from 'bloomer';
 import $ from 'jquery'
 import APIManager from '../api/APIManager';
 import Result from './Result';

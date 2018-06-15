@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, LevelRight, Button, Select } from 'bloomer';
+import { Media, MediaLeft, Image, MediaContent, Level, LevelLeft, Content, LevelRight, Select, Icon, MediaRight, Delete } from 'bloomer';
 import './Game.css'
 import GenreList from '../genres/GenreList';
 import $ from 'jquery'
@@ -16,7 +16,7 @@ class Game extends Component {
         progress: "",
         isFavorited: false,
     }
-    
+
 
     editGame = function (event) {
         const gameId = event.target.id.split("__")[3]
@@ -71,6 +71,9 @@ class Game extends Component {
                     <Content>
                         <p>
                             <strong>{this.props.game.name}</strong>
+                            {this.getGameFavorited() ? <Icon className="fas fa-star" id={"game__toggle__favorite__" + this.getGameUserId()} onClick={this.props.toggleGameFavorite} /> : <Icon className="far fa-star" id={"game__toggle__favorite__" + this.getGameUserId()} onClick={this.props.toggleGameFavorite} />}
+                            <Icon className="fas fa-edit" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame} />
+
                             <br />
                             {this.props.game.deck}
                         </p>
@@ -78,12 +81,12 @@ class Game extends Component {
 
                     <Level>
                         <LevelLeft>
-                            <GenreList genres={this.props.game.genres}/>
+                            <GenreList genres={this.props.game.genres} />
                         </LevelLeft>
                         <LevelRight>
                             {this.getGameProgress()}
-                            <div id={"game__change__progress__container__" + this.getGameUserId()} style={{display: 'none'}}>
-                                <Select id={"game__change__progress__"+this.getGameUserId()} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
+                            <div id={"game__change__progress__container__" + this.getGameUserId()} style={{ display: 'none' }}>
+                                <Select id={"game__change__progress__" + this.getGameUserId()} className="game__change__progress" isSize="small" isColor="primary" onChange={this.props.changeGameProgress} defaultValue="default">
                                     <option disabled="true" value="default">Select a Status</option>
                                     <option value="Backlog">Backlog</option>
                                     <option value="To Be Played">To Be Played</option>
@@ -91,14 +94,13 @@ class Game extends Component {
                                     <option value="Finished">Finished</option>
                                 </Select>
                             </div>
-                            <i className="material-icons" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame}>edit</i>,
-                            <p>Favorite: {this.getGameFavorited() ? "Yes" : "No"}</p>
-                            <Button onClick={this.removeGameById}>Remove Game</Button>
-                            
-                            <Button onClick={this.props.toggleGameFavorite} id={"game__toggle__favorite__" + this.getGameUserId()}>{this.getGameFavorited() ? "Unfavorite Game" : "Favorite Game"}</Button>
+
                         </LevelRight>
                     </Level>
                 </MediaContent>
+                <MediaRight>
+                    <Delete onClick={this.removeGameById} />
+                </MediaRight>
             </Media>
         )
     }

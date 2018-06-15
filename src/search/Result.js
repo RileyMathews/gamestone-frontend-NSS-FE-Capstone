@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, } from 'bloomer';
+import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, Icon } from 'bloomer';
 
 /* 
     module to display the results of searching giant bombs api of games
@@ -17,7 +17,7 @@ class Result extends Component {
 
     isGameOwnedCheckMark = function () {
         if (this.isGameOwned()) {
-            return <i className="material-icons">check_circle</i>
+            return <Icon className="fas fa-check-circle" />
         }
     }.bind(this)
 
