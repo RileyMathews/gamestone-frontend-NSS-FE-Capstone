@@ -72,14 +72,14 @@ class SearchView extends Component {
 
     pageLinkDisplay = function (page) {
         if (page === this.state.currentPage) {
-            return <Page><PageLink isCurrent isColor="primary">{page}</PageLink></Page>
+            return <Page><PageLink isCurrent>{page}</PageLink></Page>
         } else {
             return <Page><PageLink onClick={this.setPage}>{page}</PageLink></Page>
         }
     }.bind(this)
 
     pageDisplay = function () {
-        if (this.state.currentPage <= 3) {
+        if (this.state.currentPage <= 3 && this.state.totalPages > 3) {
             return (
                 <PageList>
                     {this.pageLinkDisplay(1)}
@@ -90,6 +90,7 @@ class SearchView extends Component {
                 </PageList>
             )
         } else if (this.state.currentPage > 3 && this.state.currentPage <= this.state.totalPages - 3) {
+            console.log("fired here")
             return (
                 <PageList>
                     {this.pageLinkDisplay(1)}
@@ -101,7 +102,7 @@ class SearchView extends Component {
                     {this.pageLinkDisplay(this.state.totalPages)}
                 </PageList>
             )
-        } else if (this.state.currentPage >= this.state.totalPages - 3) {
+        } else if (this.state.currentPage >= this.state.totalPages - 3 && this.state.totalPages > 3) {
             return (
                 <PageList>
                     {this.pageLinkDisplay(1)}
@@ -111,11 +112,26 @@ class SearchView extends Component {
                     {this.pageLinkDisplay(this.state.totalPages)}
                 </PageList>
             )
+        } else if (this.state.totalPages === 3) {
+            return (
+                <PageList>
+                    {this.pageLinkDisplay(1)}
+                    {this.pageLinkDisplay(2)}
+                    {this.pageLinkDisplay(3)}
+                </PageList>
+            )
+        } else if (this.state.totalPages === 2) {
+            return (
+                <PageList>
+                    {this.pageLinkDisplay(1)}
+                    {this.pageLinkDisplay(2)}
+                </PageList>
+            )
         }
     }.bind(this)
 
     paginationDisplay = function () {
-        if (this.state.results.length === 0) {
+        if (this.state.results.length === 0 || this.state.totalPages <= 1) {
             return null
         } else {
             return (
