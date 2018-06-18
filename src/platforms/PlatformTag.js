@@ -6,7 +6,6 @@ import { Context } from '../Provider';
 class PlatformTag extends Component {
 
     tagPlatformCompany = function (context) {
-        debugger
         const platformId = this.props.platform.id
         const allPlatforms = context.state.allPlatforms
 

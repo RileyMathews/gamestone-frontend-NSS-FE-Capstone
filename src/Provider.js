@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import PlatformManager from "./methods/PlatformManager";
+import UserManager from "./methods/UserManager";
+import GameManager from "./methods/GameManager";
 
 /*
     This new function in React - createContext() - is what will
@@ -32,11 +34,31 @@ export class Provider extends Component {
         allPlatforms: [],
         userUnownedPlatforms: []
     }
-    
+
     /* 
         import methods
     */
+    /* 
+        platform manager
+    */
     getPlatforms = PlatformManager.getPlatforms.bind(this)
+    addPlatform = PlatformManager.addPlatform.bind(this)
+    removePlatform = PlatformManager.removePlatform.bind(this)
+
+    /* 
+        user manager
+    */
+    getUserInformation = UserManager.getUserInformation.bind(this)
+    setActiveUser = UserManager.setActiveUser.bind(this)
+    clearActiveUser = UserManager.clearActiveUser.bind(this)
+
+    /* 
+        game manager functions
+    */
+    changeGameProgress = GameManager.changeGameProgress.bind(this)
+    addGameToCollection = GameManager.addGameToCollection.bind(this)
+    removeGameFromCollection = GameManager.removeGameFromCollection.bind(this)
+    toggleGameFavorite = GameManager.toggleGameFavorite.bind(this)
 
     /*
         Since this is just an ordinary component that extends
@@ -44,6 +66,9 @@ export class Provider extends Component {
         hit your API and then update state.
     */
     componentDidMount() {
+        if (this.state.activeUser !== null) {
+            this.getUserInformation()
+        }
         this.getPlatforms()
     }
 
@@ -55,7 +80,19 @@ export class Provider extends Component {
     render() {
         return (
             <Context.Provider value={{
-                state: this.state
+                state: this.state,
+                // game manager methods
+                addGameToCollection: this.addGameToCollection,
+                changeGameProgress: this.changeGameProgress,
+                removeGameFromCollection: this.removeGameFromCollection,
+                toggleGameFavorite: this.toggleGameFavorite,
+                // platform manager
+                addPlatform: this.addPlatform,
+                removePlatform: this.removePlatform,
+                // user manager
+                getUserInformation: this.getUserInformation,
+                setActiveUser: this.setActiveUser,
+                clearActiveUser: this.clearActiveUser
             }}>
                 {this.props.children}
             </Context.Provider>
