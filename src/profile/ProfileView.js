@@ -17,6 +17,10 @@ class ProfileView extends Component {
         this.props.setView("search")
     }.bind(this)
 
+    goToInstructions = function () {
+        this.props.setView("instructions")
+    }.bind(this)
+
     setProfileView = function (e) {
         let view = null
 
@@ -54,6 +58,7 @@ class ProfileView extends Component {
                     userGamesStats={this.props.userGamesStats}
                     toggleGameFavorite={this.props.toggleGameFavorite}
                     goToAddGames={this.goToAddGames}
+                    goToInstructions={this.goToInstructions}
                 />
             case "platforms":
                 return <ProfilePlatformsView

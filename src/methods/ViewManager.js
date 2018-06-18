@@ -4,6 +4,7 @@ import SearchView from '../search/SearchView';
 import SuggestView from '../suggestGame/SuggestView';
 import { Title } from 'bloomer';
 import ProfileView from '../profile/ProfileView';
+import InstructionsView from '../instructions/InstructionsView';
 /* 
     module to handle view of main app page
     authors Riley Mathews
@@ -76,7 +77,9 @@ const ViewManager = Object.create(null, {
                             userPlatformsIds={this.state.userPlatformsIds}
                         />
                     case "dummy":
-                        return <Title>This is a dummy page to make sure I don't spam giant bomb's public api too much</Title>
+                        return <Title>This is a dummy page I can use to make sure I don't spam giant bomb's public api too much</Title>
+                    case "instructions":
+                        return <InstructionsView />
                     case "profile":
                     default:
                         return <ProfileView

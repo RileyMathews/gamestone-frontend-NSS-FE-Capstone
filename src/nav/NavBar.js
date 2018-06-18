@@ -46,9 +46,9 @@ class NavBar extends Component {
 
     render() {
         return (
-            <Navbar>
+            <Navbar className="is-fixed-top">
                 <NavbarBrand>
-                    <NavbarItem>GameApp</NavbarItem>
+                    <NavbarItem>Game Finder</NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
                 <NavbarMenu isActive={this.state.isActive}>

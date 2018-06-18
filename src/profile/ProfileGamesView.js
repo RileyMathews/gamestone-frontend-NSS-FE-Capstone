@@ -29,6 +29,8 @@ class ProfileGamesView extends Component {
                     <div>
                         <Title>You have no games! click the button below to get started!</Title>
                         <Button isColor="primary" onClick={this.props.goToAddGames}>Add Games</Button>
+                        <Title isSize={4}>or click below to view more information about using the app</Title>
+                        <Button isColor="primary" onClick={this.props.goToInstructions}>Get Started</Button>
                     </div>
                 }
             </div>
