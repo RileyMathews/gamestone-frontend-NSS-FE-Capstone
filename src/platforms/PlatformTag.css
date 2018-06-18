@@ -1,0 +1,19 @@
+.sony {
+    background-color: #003791;
+    color: white;
+    padding: .2em;
+    border-radius: 4px;
+}
+.microsoft {
+    background-color: #107c10;
+    color: white;
+    padding: .2em;
+    border-radius: 4px;
+}
+.nintendo {
+    background-color: #e60012;
+    color: white;
+    padding: .2em;
+    border-radius: 4px;
+}
+

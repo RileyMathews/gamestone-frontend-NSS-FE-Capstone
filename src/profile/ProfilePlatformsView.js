@@ -4,7 +4,7 @@
     authors: Riley Mathews
 */
 import React, { Component } from 'react'
-import { Title, Columns, Column } from 'bloomer'
+import { Title, Columns, Column, Box } from 'bloomer'
 import Platform from './Platform';
 
 
@@ -12,7 +12,7 @@ class ProfilePlatformsView extends Component {
 
 
     componentDidMount() {
-        
+
     }
 
     render() {
@@ -21,12 +21,16 @@ class ProfilePlatformsView extends Component {
                 <Title>Platforms</Title>
                 <Columns>
                     <Column isSize='1/2'>
-                        <Title>Owned</Title>
-                        {this.props.userPlatforms.map(platform => (<Platform key={platform.id} platform={platform} owned={true} removePlatform={this.props.removePlatform}/>))}
+                        <Box>
+                            <Title>Owned</Title>
+                            {this.props.userPlatforms.map(platform => (<Platform key={platform.id} platform={platform} owned={true} removePlatform={this.props.removePlatform} />))}
+                        </Box>
                     </Column>
                     <Column isSize='1/2'>
-                        <Title>Add</Title>
-                        {this.props.userUnownedPlatforms.map(platform => (<Platform key={platform.id} platform={platform} owned={false} addPlatform={this.props.addPlatform}/>))}
+                        <Box>
+                            <Title>Add</Title>
+                            {this.props.userUnownedPlatforms.map(platform => (<Platform key={platform.id} platform={platform} owned={false} addPlatform={this.props.addPlatform} />))}
+                        </Box>
                     </Column>
                 </Columns>
             </div>
