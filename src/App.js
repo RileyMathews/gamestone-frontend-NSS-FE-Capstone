@@ -5,6 +5,7 @@ import PlatformManager from './methods/PlatformManager';
 import ViewManager from './methods/ViewManager';
 import UserManager from './methods/UserManager';
 import GameManager from './methods/GameManager';
+import { Provider, Context } from './Provider';
 
 /* 
     module to handle top level data management and view displaying of the app
@@ -70,16 +71,18 @@ class App extends Component {
     render() {
         return (
             <div>
-                <NavBar setView={this.setView}
-                    setSearchType={this.setSearchType}
-                    setSearchValue={this.setSearchValue}
-                    searchDisplay={this.state.searchDisplay}
-                    deleteActiveUser={this.deleteActiveUser}
-                    activeUser={this.state.activeUser}
-                    setActiveUser={this.setActiveUser}
-                    gamertag={this.state.userGamertag}
-                />
-                {this.showView()}
+                <Provider>
+                        <NavBar setView={this.setView}
+                            setSearchType={this.setSearchType}
+                            setSearchValue={this.setSearchValue}
+                            searchDisplay={this.state.searchDisplay}
+                            deleteActiveUser={this.deleteActiveUser}
+                            activeUser={this.state.activeUser}
+                            setActiveUser={this.setActiveUser}
+                            gamertag={this.state.userGamertag}
+                        />
+                        {this.showView()}
+                </Provider>
             </div>
         )
     }
