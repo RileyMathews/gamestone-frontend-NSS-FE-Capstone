@@ -5,6 +5,7 @@ import SuggestView from '../suggestGame/SuggestView';
 import { Title } from 'bloomer';
 import ProfileView from '../profile/ProfileView';
 import InstructionsView from '../instructions/InstructionsView';
+import { Context } from '../Provider';
 /* 
     module to handle view of main app page
     authors Riley Mathews
@@ -62,15 +63,21 @@ const ViewManager = Object.create(null, {
                             allPlatforms={this.state.allPlatforms}
                         />
                     case "suggest":
-                        return <SuggestView
-                            userGamesIds={this.state.userGamesIds}
-                            addGameToCollection={this.addGameToCollection}
-                            removeGameFromCollection={this.removeGameFromCollection}
-                            userGames={this.state.userGames}
-                            userGamesStats={this.state.userGamesStats}
-                            userPlatformsIds={this.state.userPlatformsIds}
-                            allPlatforms={this.state.allPlatforms}
-                        />
+                        return (
+                            <Context.Consumer>
+                                {context => (
+                                <SuggestView
+                                    userGamesIds={context.state.userGamesIds}
+                                    addGameToCollection={context.addGameToCollection}
+                                    removeGameFromCollection={context.removeGameFromCollection}
+                                    userGames={context.state.userGames}
+                                    userGamesStats={context.state.userGamesStats}
+                                    userPlatformsIds={context.state.userPlatformsIds}
+                                    allPlatforms={context.state.allPlatforms}
+                                />
+                            )}
+                            </Context.Consumer>
+                        )
                     case "dummy":
                         return <Title>This is a dummy page I can use to make sure I don't spam giant bomb's public api too much</Title>
                     case "instructions":

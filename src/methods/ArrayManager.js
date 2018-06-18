@@ -19,16 +19,20 @@ const ArrayManager = Object.create(null, {
     // either a random unowned game, or false if they own all the games
     getRandomUnownedGame: {
         value: function (games, userGamesIds) {
-            const gamesForFunction = games.map(game => Object.assign({}, game))
-            while (gamesForFunction.length >= 0) {
-                const randomIndex = Math.floor(Math.random() * gamesForFunction.length)
-                const selectedGame = gamesForFunction.splice(randomIndex, 1)
-                if (!userGamesIds.includes(selectedGame[0].id)) {
-                    return selectedGame[0]
+            if (games !== null ) {
+                const gamesForFunction = games.map(game => Object.assign({}, game))
+                while (gamesForFunction.length >= 0) {
+                    const randomIndex = Math.floor(Math.random() * gamesForFunction.length)
+                    const selectedGame = gamesForFunction.splice(randomIndex, 1)
+                    if (!userGamesIds.includes(selectedGame[0].id)) {
+                        return selectedGame[0]
+                    }
+                    if (gamesForFunction.length === 0) {
+                        return false
+                    }
                 }
-                if (gamesForFunction.length === 0) {
-                    return false
-                }
+            } else {
+                return false
             }
         }
     },
