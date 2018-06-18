@@ -15,7 +15,7 @@ class GamesList extends Component {
         } else {
             return false
         }
-    }.bind(this)
+    }
 
 
     render() {

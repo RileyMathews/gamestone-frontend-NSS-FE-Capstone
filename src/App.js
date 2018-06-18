@@ -15,12 +15,12 @@ class App extends Component {
     // define initial state of application
     state = {
         // information to drive view and functionality of app
-        currentView: "profile",
-        activeUser: sessionStorage.getItem("userId"),
-        userId: null,
-        userFirstName: "",
-        userLastName: "",
-        userGamertag: "",
+        // currentView: "profile",
+        // activeUser: sessionStorage.getItem("userId"),
+        // userId: null,
+        // userFirstName: "",
+        // userLastName: "",
+        // userGamertag: "",
         // userGamesIds: [],
         // userGamesStats: [],
         // userGames: [],
@@ -67,16 +67,22 @@ class App extends Component {
         return (
             <div>
                 <Provider>
-                        <NavBar setView={this.setView}
-                            setSearchType={this.setSearchType}
-                            setSearchValue={this.setSearchValue}
-                            searchDisplay={this.state.searchDisplay}
-                            deleteActiveUser={this.deleteActiveUser}
-                            activeUser={this.state.activeUser}
-                            setActiveUser={this.setActiveUser}
-                            gamertag={this.state.userGamertag}
-                        />
-                        {this.showView()}
+                    <Context.Consumer>
+                        {context => (
+                            <div>
+                                <NavBar setView={context.setView}
+                                    setSearchType={context.setSearchType}
+                                    setSearchValue={context.setSearchValue}
+                                    searchDisplay={context.state.searchDisplay}
+                                    deleteActiveUser={context.deleteActiveUser}
+                                    activeUser={context.state.activeUser}
+                                    setActiveUser={context.setActiveUser}
+                                    gamertag={context.state.userGamertag}
+                                />
+                                {context.showView()}
+                            </div>
+                        )}
+                    </Context.Consumer>
                 </Provider>
             </div>
         )

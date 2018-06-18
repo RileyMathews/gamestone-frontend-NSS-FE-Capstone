@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PlatformManager from "./methods/PlatformManager";
 import UserManager from "./methods/UserManager";
 import GameManager from "./methods/GameManager";
+import ViewManager from "./methods/ViewManager";
 
 /*
     This new function in React - createContext() - is what will
@@ -23,6 +24,7 @@ export class Provider extends Component {
     state = {
         activeUser: sessionStorage.getItem("userId"),
         userId: null,
+        currentView: "profile",
         userFirstName: "",
         userLastName: "",
         userGamertag: "",
@@ -59,6 +61,11 @@ export class Provider extends Component {
     addGameToCollection = GameManager.addGameToCollection.bind(this)
     removeGameFromCollection = GameManager.removeGameFromCollection.bind(this)
     toggleGameFavorite = GameManager.toggleGameFavorite.bind(this)
+    /* 
+        View manager functions
+    */
+    setView = ViewManager.setView.bind(this)
+    showView = ViewManager.showView.bind(this)
 
     /*
         Since this is just an ordinary component that extends
@@ -92,7 +99,9 @@ export class Provider extends Component {
                 // user manager
                 getUserInformation: this.getUserInformation,
                 setActiveUser: this.setActiveUser,
-                clearActiveUser: this.clearActiveUser
+                clearActiveUser: this.clearActiveUser,
+                setView: this.setView,
+                showView: this.showView
             }}>
                 {this.props.children}
             </Context.Provider>
