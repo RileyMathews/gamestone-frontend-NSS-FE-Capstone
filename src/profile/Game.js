@@ -55,7 +55,7 @@ class Game extends Component {
     }
 
     removeGameById = function () {
-        this.props.removeGame(this.props.game.id)
+        this.props.removeGameFromCollection(this.props.game.id)
     }.bind(this)
 
 

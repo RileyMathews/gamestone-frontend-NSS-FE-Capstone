@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Game from './Game';
+import { Context } from '../Provider';
 
 /* 
     module to display information about a list of games passed to it
@@ -8,8 +9,8 @@ import Game from './Game';
 
 class GamesList extends Component {
 
-    userOwnsGame = function (game) {
-        if (this.props.userGamesIds.includes(game.id)) {
+    userOwnsGame = function (game, context) {
+        if (context.state.userGamesIds.includes(game.id)) {
             return true
         } else {
             return false
@@ -19,21 +20,25 @@ class GamesList extends Component {
 
     render() {
         return (
-            <div>
-                {this.props.games.map(game => (
-                    <Game
-                        removeGame={this.props.removeGame}
-                        gameInfo={game.game}
-                        userGamesStats={this.props.userGamesStats}
-                        game={game}
-                        key={game.id}
-                        changeGameProgress={this.props.changeGameProgress}
-                        userOwnsGame={this.userOwnsGame(game)}
-                        gbId={game.id}
-                        toggleGameFavorite={this.props.toggleGameFavorite}
-                    />
-                ))}
-            </div>
+            <Context.Consumer>
+                {context => (
+                    <div>
+                        {context.state.userGames.map(game => (
+                            <Game
+                                removeGameFromCollection={context.removeGameFromCollection}
+                                gameInfo={game.game}
+                                userGamesStats={context.state.userGamesStats}
+                                game={game}
+                                key={game.id}
+                                changeGameProgress={context.changeGameProgress}
+                                userOwnsGame={this.userOwnsGame(game, context)}
+                                gbId={game.id}
+                                toggleGameFavorite={context.toggleGameFavorite}
+                            />
+                        ))}
+                    </div>
+                )}
+            </Context.Consumer>
         )
     }
 }
