@@ -24,10 +24,10 @@ class App extends Component {
         userGamesIds: [],
         userGamesStats: [],
         userGames: [],
-        userPlatforms: [],
-        userPlatformsIds: [],
-        allPlatforms: [],
-        userUnownedPlatforms: []
+        // userPlatforms: [],
+        // userPlatformsIds: [],
+        // allPlatforms: [],
+        // userUnownedPlatforms: []
     }
 
     /* 
@@ -59,12 +59,7 @@ class App extends Component {
     toggleGameFavorite = GameManager.toggleGameFavorite.bind(this)
 
     componentDidMount() {
-        // get the users information if they are logged in already on page load
-        if (this.state.activeUser !== null) {
-            this.getUserInformation()
-        }
-        // get platforms information
-        this.getPlatforms()
+
     }
 
 
