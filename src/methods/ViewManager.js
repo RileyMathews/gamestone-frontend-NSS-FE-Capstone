@@ -58,7 +58,9 @@ const ViewManager = Object.create(null, {
                             activeUser={this.state.activeUser}
                             userGamesIds={this.state.userGamesIds}
                             addGameToCollection={this.addGameToCollection}
-                            removeGame={this.removeGameFromCollection} />
+                            removeGame={this.removeGameFromCollection}
+                            allPlatforms={this.state.allPlatforms}
+                        />
                     case "suggest":
                         return <SuggestView
                             userGamesIds={this.state.userGamesIds}
@@ -67,6 +69,7 @@ const ViewManager = Object.create(null, {
                             userGames={this.state.userGames}
                             userGamesStats={this.state.userGamesStats}
                             userPlatformsIds={this.state.userPlatformsIds}
+                            allPlatforms={this.state.allPlatforms}
                         />
                     case "dummy":
                         return <Title>This is a dummy page I can use to make sure I don't spam giant bomb's public api too much</Title>

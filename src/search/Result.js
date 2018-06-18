@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, Icon } from 'bloomer';
+import PlatformTag from '../platforms/PlatformTag';
 
 /* 
     module to display the results of searching giant bombs api of games
@@ -61,6 +62,7 @@ class Result extends Component {
 
                     <Level>
                         <LevelLeft>
+                            {this.props.info.platforms.map(platform => (<PlatformTag allPlatforms={this.props.allPlatforms} platform={platform} key={platform.id}/>))}
                         </LevelLeft>
                         <LevelRight>
                             {this.isGameOwnedButton()}

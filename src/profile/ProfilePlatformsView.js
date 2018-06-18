@@ -23,13 +23,13 @@ class ProfilePlatformsView extends Component {
                     <Column isSize='1/2'>
                         <Box>
                             <Title>Owned</Title>
-                            {this.props.userPlatforms.map(platform => (<Platform key={platform.id} platform={platform} owned={true} removePlatform={this.props.removePlatform} />))}
+                            {this.props.userPlatforms.map(platform => (<Platform key={platform.id} allPlatforms={this.props.allPlatforms} platform={platform} owned={true} removePlatform={this.props.removePlatform} />))}
                         </Box>
                     </Column>
                     <Column isSize='1/2'>
                         <Box>
                             <Title>Add</Title>
-                            {this.props.userUnownedPlatforms.map(platform => (<Platform key={platform.id} platform={platform} owned={false} addPlatform={this.props.addPlatform} />))}
+                            {this.props.userUnownedPlatforms.map(platform => (<Platform key={platform.id} allPlatforms={this.props.allPlatforms} platform={platform} owned={false} addPlatform={this.props.addPlatform} />))}
                         </Box>
                     </Column>
                 </Columns>

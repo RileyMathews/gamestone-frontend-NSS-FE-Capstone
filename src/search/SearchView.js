@@ -192,7 +192,7 @@ class SearchView extends Component {
                 <div id="results">
                     {this.state.waiting ? <Image src="./Pacman-1s-200px.svg" isSize="128x128" /> : null}
                     {this.state.results.map(result => (
-                        <Result info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame} />
+                        <Result allPlatforms={this.props.allPlatforms} info={result} key={result.id} userGamesIds={this.props.userGamesIds} addGameToCollection={this.props.addGameToCollection} removeGame={this.props.removeGame} />
                     ))}
                 </div>
                 {this.paginationDisplay()}

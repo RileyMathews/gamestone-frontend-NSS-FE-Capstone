@@ -13,7 +13,7 @@ class Platform extends Component {
     render() {
         return (
             <div className="platform">
-                <p><PlatformTag platform={this.props.platform}/> {this.props.owned ? <Icon isSize="small" className="fas fa-minus-circle" onClick={this.props.removePlatform} id={"remove__platform__"+this.props.platform.id} /> : <Icon className="fas fa-plus-circle" onClick={this.props.addPlatform} id={"add__platform__"+this.props.platform.id} />}</p>
+                <p><PlatformTag allPlatforms={this.props.allPlatforms} platform={this.props.platform}/> {this.props.owned ? <Icon isSize="small" className="fas fa-minus-circle" onClick={this.props.removePlatform} id={"remove__platform__"+this.props.platform.id} /> : <Icon className="fas fa-plus-circle" onClick={this.props.addPlatform} id={"add__platform__"+this.props.platform.id} />}</p>
             </div>
         )   
     }
