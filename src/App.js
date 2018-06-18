@@ -75,7 +75,9 @@ class App extends Component {
                     searchDisplay={this.state.searchDisplay}
                     deleteActiveUser={this.deleteActiveUser}
                     activeUser={this.state.activeUser}
-                    setActiveUser={this.setActiveUser} />
+                    setActiveUser={this.setActiveUser}
+                    gamertag={this.state.userGamertag}
+                />
                 {this.showView()}
             </div>
         )

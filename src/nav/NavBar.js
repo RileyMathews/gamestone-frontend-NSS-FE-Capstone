@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navbar, NavbarItem, NavbarBurger, NavbarBrand, NavbarMenu } from "bloomer";
+import { Navbar, NavbarItem, NavbarBurger, NavbarBrand, NavbarMenu, NavbarEnd } from "bloomer";
 import './NavBar.css'
 
 
@@ -48,7 +48,8 @@ class NavBar extends Component {
         return (
             <Navbar className="is-fixed-top">
                 <NavbarBrand>
-                    <NavbarItem>Game Finder</NavbarItem>
+                    <NavbarItem><strong className="unselectable">Game Finder</strong></NavbarItem>
+                    <NavbarItem isHidden="desktop">{this.props.gamertag}</NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
                 <NavbarMenu isActive={this.state.isActive}>
@@ -57,6 +58,9 @@ class NavBar extends Component {
                     <NavbarItem className="clickable" id="nav__suggest" onClick={this.onClickNav}>Suggest Games</NavbarItem>
                     <NavbarItem className="clickable" id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
                 </NavbarMenu>
+                <NavbarEnd>
+                    <NavbarItem isHidden="touch">{this.props.gamertag}</NavbarItem>
+                </NavbarEnd>
             </Navbar>
         )
 
