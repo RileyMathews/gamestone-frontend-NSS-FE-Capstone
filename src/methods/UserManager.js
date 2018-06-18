@@ -53,6 +53,23 @@ const UserManager = Object.create(null, {
         value: function (userId) {
             this.setState({ activeUser: userId })
         }
+    },
+    clearActiveUser: {
+        value: function () {
+            this.setState({
+                activeUser: null,
+                userFirstName: "",
+                userLastName: "",
+                userGamertag: "",
+                userGamesIds: [],
+                userGamesStats: [],
+                userGames: [],
+                userPlatforms: [],
+                userPlatformsIds: [],
+                allPlatforms: [],
+                userUnownedPlatforms: []
+            })
+        }
     }
 })
 

@@ -40,6 +40,7 @@ class App extends Component {
     */
     getUserInformation = UserManager.getUserInformation.bind(this)
     setActiveUser = UserManager.setActiveUser.bind(this)
+    clearActiveUser = UserManager.clearActiveUser.bind(this)
 
     /* 
         platform manager functions
