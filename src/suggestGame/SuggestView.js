@@ -3,6 +3,7 @@ import { Title, Container, Button, Columns, Column} from 'bloomer'
 import Result from '../search/Result';
 import SuggestionManager from '../methods/SuggestionManager'
 import SuggestionFilterView from './SuggestionFilterView';
+import NoGamesDisplay from '../noGames/NoGamesDisplay';
 
 /* 
     module to handle displaying and calling logic for suggesting games to the user
@@ -72,7 +73,7 @@ class SuggestView extends Component {
             return <Title>You have no favorite games to filter by</Title>
         } else {
             if (this.state.userGamesLength === 0) {
-                return <Title>You have no games</Title>
+                return <NoGamesDisplay />
             } else {
                 if (this.state.filterByConsoles === true && this.state.userHasPlatforms === false) {
                     return <Title>You have no consoles to filter by</Title>

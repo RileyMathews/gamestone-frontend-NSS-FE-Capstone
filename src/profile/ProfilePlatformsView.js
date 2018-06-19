@@ -22,7 +22,7 @@ class ProfilePlatformsView extends Component {
             <Context.Consumer>
                 {context => (
                     <div>
-                        <Title>Platforms</Title>
+                        <Title isSize={4}>Platforms</Title>
                         <Columns>
                             <Column isSize='1/2'>
                                 <Box>
