@@ -11,4 +11,4 @@ Welcome to the repository for my NSS front end capstone project.
 ## live version
 
 You can view a live version of this site at http://rm-midstone.s3-website-us-east-1.amazonaws.com/
-The live version was last updated friday June 15, 2018.
+The live version was last updated Tuesday June 19, 2018 at around 3:50PM.
