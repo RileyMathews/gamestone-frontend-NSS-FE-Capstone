@@ -55,7 +55,7 @@ const GameManager = Object.create(null, {
                 "userId": this.state.activeUser,
                 "gbId": game.id,
                 "isFavorited": favorite,
-                "progress": "To Be Played"
+                "progress": "toBePlayed"
             }
 
             // add game id to users collection of games ids
