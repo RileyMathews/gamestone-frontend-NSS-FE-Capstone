@@ -78,7 +78,7 @@ class Game extends Component {
                             <Icon className="fas fa-edit clickable" id={"game__edit__progress__" + this.getGameUserId()} onClick={this.editGame} />
                         </p>
                         {this.state.isEditing ? 
-                        <Select id={"game__change__progress__" + this.getGameUserId()} className="inline" isSize="small" isColor="primary" onChange={this.chooseSelect} defaultValue="default">
+                        <Select onMouseOut={this.editGame} id={"game__change__progress__" + this.getGameUserId()} className="inline" isSize="small" isColor="primary" onChange={this.chooseSelect} defaultValue="default">
                             <option disabled="true" value="default">Select a Status</option>
                             <option value="backlog">Backlog</option>
                             <option value="to be played">To Be Played</option>
@@ -86,7 +86,7 @@ class Game extends Component {
                             <option value="finished">Finished</option>
                         </Select>
                         :
-                        <span className="inline">{this.getGameProgress()}</span>
+                        <span onMouseOver={this.editGame} className="inline">{this.getGameProgress()}</span>
                         }
                         <p>
                             {this.props.game.deck}
