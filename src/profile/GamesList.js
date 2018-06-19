@@ -12,7 +12,8 @@ import { Columns, Column } from 'bloomer';
 class GamesList extends Component {
 
     state = {
-        filters: []
+        filters: [],
+        searchString: "",
     }
 
     updateFilter = function (event) {
@@ -29,11 +30,12 @@ class GamesList extends Component {
     }.bind(this)
 
     clearFilters = function () {
-        this.setState({ filters: [] })
+        this.setState({ filters: [], searchString: "" })
         document.querySelector("#filter__backlog").checked = false
         document.querySelector("#filter__toBePlayed").checked = false
         document.querySelector("#filter__playing").checked = false
         document.querySelector("#filter__finished").checked = false
+        document.querySelector("#filter__search").value = ""
     }.bind(this)
 
     userOwnsGame = function (game, context) {
@@ -44,16 +46,27 @@ class GamesList extends Component {
         }
     }
 
+    updateSearchString = function (event) {
+        this.setState({ searchString: event.target.value })
+    }.bind(this)
+
     filteredGames = function (context) {
+        let games
+        // checks for filters by game status
         if (this.state.filters.length !== 0) {
             const userGamesStats = context.state.userGamesStats
             const userGames = context.state.userGames
             const filteredGamesStatsIds = userGamesStats.filter(game => this.state.filters.includes(game.progress)).map(game => game.gbId)
             const filteredGames = userGames.filter(game => filteredGamesStatsIds.includes(game.id))
-            return filteredGames.sort(this.compare)
+            games = filteredGames
         } else {
-            return context.state.userGames.sort(this.compare)
+            games = context.state.userGames
         }
+        // checks for filtering by search
+        if (this.state.searchString !== "") {
+            games = games.filter(game => game.name.toLowerCase().includes(this.state.searchString.toLowerCase()))
+        } 
+        return games.sort(this.compare)
     }.bind(this)
 
     compare = function (a, b) {
@@ -76,7 +89,11 @@ class GamesList extends Component {
                 {context => (
                     <Columns>
                         <Column isSize={2}>
-                            <GamesFilters updateFilter={this.updateFilter} clearFilters={this.clearFilters} />
+                            <GamesFilters
+                                updateFilter={this.updateFilter}
+                                clearFilters={this.clearFilters}
+                                updateSearchString={this.updateSearchString}
+                            />
                         </Column>
                         <Column>
                             {this.filteredGames(context).map(game => (

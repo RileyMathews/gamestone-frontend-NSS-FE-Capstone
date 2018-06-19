@@ -10,7 +10,7 @@ class GamesFilters extends Component {
                 <PanelHeading>Games</PanelHeading>
                 <PanelBlock>
                     <Control hasIcons='left'>
-                        <Input isSize='small' placeholder='Search' disabled="true"/>
+                        <Input isSize='small' id="filter__search" placeholder='Search' onChange={this.props.updateSearchString}/>
                         <Icon isSize='small' isAlign='left'>
                             <span className='fa fa-search' aria-hidden='true' />
                         </Icon>
