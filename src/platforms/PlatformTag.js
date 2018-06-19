@@ -13,7 +13,7 @@ class PlatformTag extends Component {
         if (platform !== undefined) {
             return platform.company
         } else {
-            return ""
+            return "generic"
         }
     }.bind(this)
 

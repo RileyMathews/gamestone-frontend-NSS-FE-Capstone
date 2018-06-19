@@ -17,6 +17,13 @@
     border-radius: 4px;
 }
 
+.generic {
+    background-color: #252525;
+    color: white;
+    padding: .2em;
+    border-radius: 4px;
+}
+
 .platform {
     margin-bottom: .2em;
     margin-right: .2em;
