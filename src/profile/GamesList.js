@@ -16,6 +16,7 @@ class GamesList extends Component {
         searchString: "",
     }
 
+    // function to update filter whenever a filter is changed
     updateFilter = function (event) {
         const filter = event.target.value
         let newFilters = this.state.filters
@@ -29,6 +30,7 @@ class GamesList extends Component {
         }
     }.bind(this)
 
+    // function to clear filters and corresponding dom elements
     clearFilters = function () {
         this.setState({ filters: [], searchString: "" })
         document.querySelector("#filter__backlog").checked = false
@@ -46,6 +48,7 @@ class GamesList extends Component {
         }
     }
 
+    
     updateSearchString = function (event) {
         this.setState({ searchString: event.target.value })
     }.bind(this)
