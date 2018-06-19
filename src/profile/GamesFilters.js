@@ -28,6 +28,9 @@ class GamesFilters extends Component {
                 <PanelBlock tag='label'>
                     <Checkbox id="filter__finished" value="finished" onChange={this.props.updateFilter} > Finished</Checkbox>
                 </PanelBlock>
+                <PanelBlock tag='label'>
+                    <Checkbox id="filter__favorite" value="favorite" onChange={this.props.toggleFavoriteFilter} > Favorite</Checkbox>
+                </PanelBlock>
                 <PanelBlock>
                     <Button isOutlined isFullWidth isColor='primary' onClick={this.props.clearFilters}> Reset all filters</Button>
                 </PanelBlock>

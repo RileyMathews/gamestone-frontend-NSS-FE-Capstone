@@ -14,6 +14,7 @@ class GamesList extends Component {
     state = {
         filters: [],
         searchString: "",
+        filterByFavorite: false
     }
 
     // function to update filter whenever a filter is changed
@@ -48,30 +49,53 @@ class GamesList extends Component {
         }
     }
 
-    
+    toggleFavoriteFilter = function () {
+        this.setState({ filterByFavorite: this.state.filterByFavorite ? false : true })
+    }.bind(this)
+
     updateSearchString = function (event) {
         this.setState({ searchString: event.target.value })
     }.bind(this)
 
     filteredGames = function (context) {
         let games
+        let filteredGamesStatsIds
+
+        // get users games stats
+        const userGamesStats = context.state.userGamesStats
+
+        // assign that to a new array in memory to avoid deleting user games stats
+        let filteredGamesStats = userGamesStats.map(item => Object.assign({}, item))
+
+        // get users games
+        const userGames = context.state.userGames
+
         // checks for filters by game status
         if (this.state.filters.length !== 0) {
-            const userGamesStats = context.state.userGamesStats
-            const userGames = context.state.userGames
-            const filteredGamesStatsIds = userGamesStats.filter(game => this.state.filters.includes(game.progress)).map(game => game.gbId)
-            const filteredGames = userGames.filter(game => filteredGamesStatsIds.includes(game.id))
-            games = filteredGames
-        } else {
-            games = context.state.userGames
+            filteredGamesStats = userGamesStats.filter(game => this.state.filters.includes(game.progress))
         }
-        // checks for filtering by search
+
+        // check for filter by game favorite
+        if (this.state.filterByFavorite === true) {
+            filteredGamesStats = filteredGamesStats.filter(game => game.isFavorited === true)
+        }
+
+        // map the games stats that match filters to gb game info
+        filteredGamesStatsIds = filteredGamesStats.map(game => game.gbId)
+        const filteredGames = userGames.filter(game => filteredGamesStatsIds.includes(game.id))
+        games = filteredGames
+
+        // checks for filtering by search and if there is a search string, filters games by name
         if (this.state.searchString !== "") {
             games = games.filter(game => game.name.toLowerCase().includes(this.state.searchString.toLowerCase()))
-        } 
+        }
+
+        // finally returns filtered game information sorted alphebetaically 
         return games.sort(this.compare)
     }.bind(this)
 
+
+    
     compare = function (a, b) {
         // Use toUpperCase() to ignore character casing
         const nameA = a.name.toUpperCase();
@@ -96,6 +120,7 @@ class GamesList extends Component {
                                 updateFilter={this.updateFilter}
                                 clearFilters={this.clearFilters}
                                 updateSearchString={this.updateSearchString}
+                                toggleFavoriteFilter={this.toggleFavoriteFilter}
                             />
                         </Column>
                         <Column>
