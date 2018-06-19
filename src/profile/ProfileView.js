@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Title, Container, Button } from 'bloomer'
+import { Title, Container } from 'bloomer'
 import ProfileGamesView from './ProfileGamesView';
 import ProfilePlatformsView from './ProfilePlatformsView';
+import ProfileNav from './ProfileNav';
 
 /* 
     module to handle displaying the users profile
@@ -24,21 +25,7 @@ class ProfileView extends Component {
     setProfileView = function (e) {
         let view = null
 
-        // Click event triggered switching view
-        if (e.hasOwnProperty("target")) {
-            view = e.target.id.split("__")[1]
-
-            // View switch manually triggered by passing in string
-        } else {
-            view = e
-        }
-
-        // If user clicked logout in nav, empty local storage and update activeUser state
-        if (view === "logout") {
-            this.setActiveUser(null)
-            localStorage.clear()
-            sessionStorage.clear()
-        }
+        view = e.currentTarget.id.split("__")[1]
 
         // Update state to correct view will be rendered
         this.setState({
@@ -75,9 +62,8 @@ class ProfileView extends Component {
         return (
 
             <Container>
-                <Button id="ProfileNav__games" isColor="primary" onClick={this.setProfileView}>Games</Button>
-                <Button id="ProfileNav__platforms" isColor="primary" onClick={this.setProfileView}>Platforms</Button>
                 <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA "{this.props.gamertag}"</Title>
+                <ProfileNav setProfileView={this.setProfileView} currentView={this.state.currentView}/>
                 {this.showProfileView()}
             </Container>
         )
@@ -85,3 +71,6 @@ class ProfileView extends Component {
 }
 
 export default ProfileView
+
+
+
