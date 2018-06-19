@@ -7,6 +7,7 @@ import React, { Component } from 'react'
 import { Title, Columns, Column, Box } from 'bloomer'
 import Platform from './Platform';
 import { Context } from '../Provider';
+import './ProfilePlatformsView.css'
 
 
 class ProfilePlatformsView extends Component {
@@ -26,13 +27,13 @@ class ProfilePlatformsView extends Component {
                             <Column isSize='1/2'>
                                 <Box>
                                     <Title>Owned</Title>
-                                    {context.state.userPlatforms.map(platform => (<Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={true} removePlatform={context.removePlatform} />))}
+                                    {context.state.userPlatforms.map(platform => (<div class="platform__list__item"><Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={true} removePlatform={context.removePlatform} /> </div>))}
                                 </Box>
                             </Column>
                             <Column isSize='1/2'>
                                 <Box>
                                     <Title>Add</Title>
-                                    {context.state.userUnownedPlatforms.map(platform => (<Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={false} addPlatform={context.addPlatform} />))}
+                                    {context.state.userUnownedPlatforms.map(platform => (<div class="platform__list__item"><Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={false} addPlatform={context.addPlatform} /> </div>))}
                                 </Box>
                             </Column>
                         </Columns>
