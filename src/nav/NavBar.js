@@ -42,7 +42,13 @@ class NavBar extends Component {
         }
     }.bind(this)
 
-
+    getCurrentView = function (item) {
+        if (this.props.activeUser === null) {
+            return false
+        } else {
+            return this.props.currentView === item
+        }
+    }.bind(this)
 
     render() {
         return (
@@ -53,10 +59,10 @@ class NavBar extends Component {
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
                 <NavbarMenu isActive={this.state.isActive}>
-                    <NavbarItem className="clickable" id="nav__profile" onClick={this.onClickNav}>My Profile</NavbarItem>
-                    <NavbarItem className="clickable" id="nav__search" onClick={this.onClickNav}>Add Games</NavbarItem>
-                    <NavbarItem className="clickable" id="nav__suggest" onClick={this.onClickNav}>Suggest Games</NavbarItem>
-                    <NavbarItem className="clickable" id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
+                    <NavbarItem isActive={this.getCurrentView("profile")} className="clickable" id="nav__profile" onClick={this.onClickNav}>My Profile</NavbarItem>
+                    <NavbarItem isActive={this.getCurrentView("search")} className="clickable" id="nav__search" onClick={this.onClickNav}>Add Games</NavbarItem>
+                    <NavbarItem isActive={this.getCurrentView("suggest")} className="clickable" id="nav__suggest" onClick={this.onClickNav}>Suggest Games</NavbarItem>
+                    <NavbarItem isActive={this.getCurrentView("logout")} className="clickable" id="nav__logout" onClick={this.onClickNav}>Logout</NavbarItem>
                 </NavbarMenu>
                 <NavbarEnd>
                     <NavbarItem isHidden="touch">{this.props.gamertag}</NavbarItem>

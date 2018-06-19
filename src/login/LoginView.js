@@ -122,7 +122,7 @@ class LoginView extends Component {
                         sessionStorage.setItem("userId", user.id)
     
                         this.props.setActiveUser(user.id)
-                        this.props.setView("home")
+                        this.props.setView("profile")
                         this.props.getUserInformation()
                         this.props.getPlatforms()
                     }

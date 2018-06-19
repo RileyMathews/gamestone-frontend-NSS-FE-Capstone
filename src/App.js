@@ -78,6 +78,7 @@ class App extends Component {
                                     activeUser={context.state.activeUser}
                                     setActiveUser={context.setActiveUser}
                                     gamertag={context.state.userGamertag}
+                                    currentView={context.state.currentView}
                                 />
                                 {context.showView()}
                             </div>
