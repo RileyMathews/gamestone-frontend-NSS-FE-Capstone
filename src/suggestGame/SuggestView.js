@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Title, Container, Button, Checkbox, Columns, Column, Field, Box } from 'bloomer'
+import { Title, Container, Button, Columns, Column} from 'bloomer'
 import Result from '../search/Result';
 import SuggestionManager from '../methods/SuggestionManager'
+import SuggestionFilterView from './SuggestionFilterView';
 
 /* 
     module to handle displaying and calling logic for suggesting games to the user
@@ -34,6 +35,15 @@ class SuggestView extends Component {
             filterByFavorites: favoriteValue,
             filterByConsoles: consoleValue
         })
+    }.bind(this)
+
+    clearFilters = function () {
+        this.setState({
+            filterByConsoles: false,
+            filterByFavorites: false
+        })
+        document.querySelector("#favoriteFilter").checked = false
+        document.querySelector("#consoleFilter").checked = false
     }.bind(this)
 
     getGameBySimilarity = function () {
@@ -88,16 +98,7 @@ class SuggestView extends Component {
             <Container>
                 <Columns>
                     <Column isSize={3}>
-                        <Box>
-                            <Title tag="h4" isSize={3}>Filters</Title>
-                            <Field>
-                                <Checkbox onChange={this.setFilters} id="favoriteFilter">  Favorites </Checkbox>
-                            </Field>
-                            <Field>
-                                <Checkbox onChange={this.setFilters} id="consoleFilter">  Platforms </Checkbox>
-                            </Field>
-                            <small>note, depending on the games and platforms you own, checking too many filters may make finding games more difficult. If no game is found, try again after a second. The search is sometimes stopped before finding a game that meets all criteria to lessen the load on the database.</small>
-                        </Box>
+                        <SuggestionFilterView setFilters={this.setFilters} clearFilters={this.clearFilters}/>
                     </Column>
                     <Column>
                         {this.doesUserHaveGames()}
