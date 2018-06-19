@@ -46,6 +46,7 @@ export class Provider extends Component {
     getPlatforms = PlatformManager.getPlatforms.bind(this)
     addPlatform = PlatformManager.addPlatform.bind(this)
     removePlatform = PlatformManager.removePlatform.bind(this)
+    isPlatformOwned = PlatformManager.isPlatformOwned.bind(this)
 
     /* 
         user manager
@@ -96,6 +97,7 @@ export class Provider extends Component {
                 // platform manager
                 addPlatform: this.addPlatform,
                 removePlatform: this.removePlatform,
+                isPlatformOwned: this.isPlatformOwned,
                 // user manager
                 getUserInformation: this.getUserInformation,
                 setActiveUser: this.setActiveUser,

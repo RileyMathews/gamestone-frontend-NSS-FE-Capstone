@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './PlatformTag.css'
 import { Context } from '../Provider';
+import {Icon} from 'bloomer'
 
 
 class PlatformTag extends Component {
@@ -22,10 +23,17 @@ class PlatformTag extends Component {
             <Context.Consumer>
                 {
                     context => (
-                        <span className={this.tagPlatformCompany(context) + " platform"}>{this.props.platform.name}</span>
+                        <span className={this.tagPlatformCompany(context) + " platform"}>
+                            {this.props.platform.name}
+                            {context.isPlatformOwned(this.props.platform.id) ?
+                                <Icon className="fas fa-check" />
+                                :
+                                null
+                            }
+                        </span>
                     )
                 }
-                
+
             </Context.Consumer>
         )
     }

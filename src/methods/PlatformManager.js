@@ -36,6 +36,11 @@ const PlatformManager = Object.create(null, {
                 })
         }
     },
+    isPlatformOwned: {
+        value: function (platformId) {
+            return this.state.userPlatformsIds.includes(platformId)
+        }
+    },
     // function to add a platform to users owned platforms
     addPlatform: {
         value: function (evt) {
