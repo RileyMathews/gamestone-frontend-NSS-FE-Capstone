@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Media, MediaLeft, Image, MediaContent, Content, Level, LevelLeft, LevelRight, Button, Icon } from 'bloomer';
 import PlatformTag from '../platforms/PlatformTag';
 import { Context } from '../Provider';
+import './Result.css'
 
 /* 
     module to display the results of searching giant bombs api of games *context
@@ -31,7 +32,7 @@ class Result extends Component {
         }
     }.bind(this)
 
-    
+
 
     addGameFavorite = function () {
         this.props.addGameToCollection(this.props.info, true)
@@ -50,32 +51,34 @@ class Result extends Component {
         return (
             <Context.Consumer>
                 {context => (
-                <Media>
-                    <MediaLeft>
-                        <Image src={this.props.info.image.icon_url} />
-                    </MediaLeft>
-                    <MediaContent>
-                        <Content>
-                            <p>
-                                <strong>{this.props.info.name}</strong>
-                                {this.isGameOwnedCheckMark(context)}
-                                <br />
-                                {this.props.info.deck}
-                                <a href={this.props.info.site_detail_url} target="_blank">  learn more</a>
-                            </p>
-                        </Content>
+                    <Media>
+                        <MediaLeft>
+                            <Image src={this.props.info.image.icon_url} />
+                        </MediaLeft>
+                        <MediaContent>
+                            <Content>
+                                <p>
+                                    <strong>{this.props.info.name}</strong>
+                                    {this.isGameOwnedCheckMark(context)}
+                                    <br />
+                                    {this.props.info.deck}
+                                    <a href={this.props.info.site_detail_url} target="_blank">  learn more</a>
+                                </p>
+                            </Content>
 
-                        <Level>
-                            <LevelLeft>
-                                {this.props.info.platforms.map(platform => (<PlatformTag allPlatforms={this.props.allPlatforms} platform={platform} key={platform.id} />))}
-                            </LevelLeft>
-                            <LevelRight>
-                                {this.isGameOwnedButton(context)}
-                                {this.isGameOwned(context) ? null : <Button isColor="primary" onClick={this.addGameFavorite}>Add Game as Favorite</Button>}
-                            </LevelRight>
-                        </Level>
-                    </MediaContent>
-                </Media>
+                            <Level>
+                                <LevelLeft>
+                                    <div>
+                                        {this.props.info.platforms.map(platform => (<PlatformTag allPlatforms={this.props.allPlatforms} platform={platform} key={platform.id} />))}
+                                    </div>
+                                </LevelLeft>
+                                <LevelRight>
+                                    {this.isGameOwnedButton(context)}
+                                    {this.isGameOwned(context) ? null : <Button isColor="primary" onClick={this.addGameFavorite}>Add Game as Favorite</Button>}
+                                </LevelRight>
+                            </Level>
+                        </MediaContent>
+                    </Media>
                 )}
             </Context.Consumer>
         )

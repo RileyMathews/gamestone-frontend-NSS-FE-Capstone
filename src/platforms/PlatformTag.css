@@ -27,6 +27,6 @@
 .platform {
     margin-bottom: .2em;
     margin-right: .2em;
-    display: inline;
+    display: inline-block;
 }
 

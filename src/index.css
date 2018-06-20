@@ -13,8 +13,9 @@ body {
   user-select: none
 }
 
-button + button {
-  margin-left: .5em;
+button {
+  margin-right: .5em;
+  margin-bottom: .5em;
 }
 
 .container {
