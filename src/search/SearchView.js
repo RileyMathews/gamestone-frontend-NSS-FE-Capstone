@@ -45,7 +45,21 @@ class SearchView extends Component {
             "Red Dead Redemption",
             "Overwatch",
             "Assasin's Creed",
-            "Elder Scrolls"
+            "Elder Scrolls", 
+            "Forza",
+            "Halo",
+            "Gears of War",
+            "Dragon Quest",
+            "Diablo",
+            "Battlefield",
+            "Super Smash Bros.",
+            "XCOM",
+            "Command and Conquer",
+            "Sims",
+            "Zelda like a fox",
+            "Minecraft",
+            "The Witcher",
+            "Cyberpunk"
         ]
     }
 

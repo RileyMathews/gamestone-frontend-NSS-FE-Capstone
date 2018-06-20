@@ -68,9 +68,13 @@ class Result extends Component {
 
                             <Level>
                                 <LevelLeft>
+                                    {this.props.info.platforms !== null ? 
                                     <div>
                                         {this.props.info.platforms.map(platform => (<PlatformTag allPlatforms={this.props.allPlatforms} platform={platform} key={platform.id} />))}
                                     </div>
+                                    :
+                                    null
+                                    }
                                 </LevelLeft>
                                 <LevelRight>
                                     {this.isGameOwnedButton(context)}
