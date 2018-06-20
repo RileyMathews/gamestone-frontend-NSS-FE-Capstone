@@ -87,9 +87,9 @@ const ArrayManager = Object.create(null, {
     getRandomUserGame: {
         value: function (games, gamesStats, filters) {
             let selectedGame
-            if (filters.isFavorited) {
+            if (filters.favorite) {
                 const gameStats = this.getRandomFavoriteGame(gamesStats)
-                selectedGame = games.find(game => game.id === gameStats.id)
+                selectedGame = games.find(game => game.id === gameStats.gbId)
             } else {
                 selectedGame = this.getRandomItem(games)
             }
