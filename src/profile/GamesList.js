@@ -20,12 +20,12 @@ class GamesList extends Component {
     // function to update filter whenever a filter is changed
     updateFilter = function (event) {
         const filter = event.target.value
-        let newFilters = this.state.filters
+        let newFilters = Object.assign([], this.state.filters)
         if (event.target.checked) {
             newFilters.push(filter)
             this.setState({ filters: newFilters })
         } else {
-            const index = newFilters.find(item => item === filter)
+            const index = newFilters.findIndex(item => item === filter)
             newFilters.splice(index, 1)
             this.setState({ filters: newFilters })
         }
@@ -33,11 +33,12 @@ class GamesList extends Component {
 
     // function to clear filters and corresponding dom elements
     clearFilters = function () {
-        this.setState({ filters: [], searchString: "" })
+        this.setState({ filters: [], searchString: "", filterByFavorite: false })
         document.querySelector("#filter__backlog").checked = false
         document.querySelector("#filter__toBePlayed").checked = false
         document.querySelector("#filter__playing").checked = false
         document.querySelector("#filter__finished").checked = false
+        document.querySelector("#filter__favorite").checked = false
         document.querySelector("#filter__search").value = ""
     }.bind(this)
 

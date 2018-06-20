@@ -47,7 +47,7 @@ class InstructionsView extends Component {
                         <Image src='./images/instructions-navbar-myprofile.png' />
                     </div>
                     <p>
-                        The star icon next to a games title indicates whether or not it has been tagged as a favorite. If the star is hollow, the game is not currently a favorite. click the star to fill it in. The game should now be marked as a favorite.
+                        The star icon next to a game's title indicates whether or not it has been tagged as a favorite. If the star is hollow, the game is not currently a favorite. click the star to fill it in. The game should now be marked as a favorite.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-favorite.png' />
