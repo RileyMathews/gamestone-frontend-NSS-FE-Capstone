@@ -22,3 +22,6 @@ yarn-error.log*
 
 # api
 /api
+
+# sass generated css files
+index.css

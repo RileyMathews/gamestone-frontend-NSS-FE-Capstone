@@ -1,0 +1,27 @@
+$primary: blue;
+
+@import 'bulma/bulma';
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif; 
+}
+
+.clickable {
+    cursor: pointer;
+    user-select: none; 
+}
+
+.unselectable {
+    user-select: none
+}
+
+button {
+    margin-right: .5em;
+    margin-bottom: .5em;
+}
+
+.container {
+    margin-top: 1em;
+}
