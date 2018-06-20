@@ -66,7 +66,7 @@ class InstructionsView extends Component {
                     </div>
                     <Title isSize={4}>Managing your platforms</Title>
                     <p>
-                        From your profile page, click on the button at the top marked “platforms.” This should take you to a new page where you can manage your platforms.
+                        From your profile page, click on the button at the top marked “platforms,” This should take you to a new page where you can manage your platforms.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-gotoplatforms.png' />
@@ -85,13 +85,13 @@ class InstructionsView extends Component {
                         <Image src='./images/instructions-navbar-suggestgames.png' />
                     </div>
                     <p>
-                        To filter the games we suggest to you, click on the check boxes in the left hand column. But please note. Due to the fact we do not have direct control over the database we are using, we are trying to not demand too much data from them at once. If you check too many filters we may not immediately find a game matching games you have. Try again after a few seconds, and please don't spam click the buttons here.
+                        To filter the games we suggest to you, click on the check boxes in the left hand column. Please note, Due to the fact we do not have direct control over the database we are using, we are trying to not demand too much data from them at once. If you check too many filters we may not immediately find a game matching games you have. Try again after a few seconds, and please don't spam click the buttons here.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-suggestgame-filters.png' />
                     </div>
                     <p>
-                        To find games that other gamers have marked similar to games in your library, click the button marked 'by similar games', or if you would like to discover games made by the same people as other games you own, click 'by developer'.
+                        To find games that other gamers have marked similar to games in your library, click the button marked 'by similar games,' or if you would like to discover games made by the same people as other games you own, click 'by developer.'
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-suggestgame-buttons.png' />
