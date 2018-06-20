@@ -11,7 +11,7 @@ class Platform extends Component {
 
     render() {
         return (
-            <div className="platform" onClick={this.props.togglePlatform} id={"toggle__platform__"+this.props.platform.id}>
+            <div className="platform clickable" onClick={this.props.togglePlatform} id={"toggle__platform__"+this.props.platform.id}>
                 <p><PlatformTag isOwned={this.props.owned} allPlatforms={this.props.allPlatforms} platform={this.props.platform}/></p>
             </div>
         )   
