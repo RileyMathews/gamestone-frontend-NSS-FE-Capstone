@@ -28,7 +28,7 @@ class InstructionsView extends Component {
                         <Image src='./images/instructions-addgames-search.png' />
                     </div>
                     <p>
-                        A list of games matching your search should populate on the page. Find the game matching the one you want to add and click either the 'add game' button, or the 'add game as favorite' button if you want the game to be saved as a favorite. Any games you already have that show up in this search should have a remove game button in case you want to remove it from your collection.
+                        A list of games matching your search should populate on the page. Find the game matching the one you want to add and click either the 'add game' button, or the 'add game as favorite' button if you want the game to be saved as a favorite.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-addgames-buttons.png' />
@@ -47,39 +47,39 @@ class InstructionsView extends Component {
                         <Image src='./images/instructions-navbar-myprofile.png' />
                     </div>
                     <p>
-                        The star icon next to a games title indicates weather or not it has been tagged as a favorite. If the star is hollow, the game is not currently a favorite. Click the star to make it filled in. The game should now be marked as a favorite.
+                        The star icon next to a games title indicates whether or not it has been tagged as a favorite. If the star is hollow, the game is not currently a favorite. click the star to fill it in. The game should now be marked as a favorite.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-favorite.png' />
                     </div>
                     <p>
-                        The pencil icon next to the star will let you toggle editing the games status. Which is normally found next to this icon. If you would like to change the status of a game. Click the pencil icon and the status text should be replaced with a dropdown menu. Click the menu and select the appropiate option.
+                        The pencil icon next to the star will allow you to to change the status of a game, which is normally found next to the icon. If you would like to change the game’s status, click the pencil icon and a drop down menu should appear. Select the appropriate option from the menu.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-status.png' />
                     </div>
                     <p>
-                        If you want to remove a game from your collection. Click on the X that appears in the top right hand corner of a games listing.
+                        If you want to remove a game from your collection, click on the “X” in the top right hand corner of a game’s listing.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-remove.png' />
                     </div>
                     <Title isSize={4}>Managing your platforms</Title>
                     <p>
-                        From your profile page. Click on the button at the top marked 'platforms'. This should take you to a new page were you can manage your platforms.
+                        From your profile page, click on the button at the top marked “platforms.” This should take you to a new page where you can manage your platforms.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-gotoplatforms.png' />
                     </div>
                     <p>
-                        To add and remove platforms from your profile. Click on the plus sign next to a platform you don't own to add one. Or to remove a platform, click on the minus sign next to it.
+                        To add and remove platforms from your profile, click on the “plus” sign next to a platform you don’t already own to add a new one. Or, to remove a platform, click on the “minus” sign.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-profile-platforms.png' />
                     </div>
                     <Title isSize={4}>Discovering new games</Title>
                     <p>
-                        To find new games related to ones you already own. Start by clicking 'suggest games' at the top of the page.
+                        To find new games related to ones you already own, start by clicking “suggest games” at the top of the page.
                     </p>
                     <div className="info">
                         <Image src='./images/instructions-navbar-suggestgames.png' />

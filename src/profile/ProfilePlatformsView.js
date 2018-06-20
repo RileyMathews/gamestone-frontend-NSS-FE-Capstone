@@ -27,13 +27,13 @@ class ProfilePlatformsView extends Component {
                             <Column isSize='1/2'>
                                 <Box>
                                     <Title>Owned</Title>
-                                    {context.state.userPlatforms.map(platform => (<div key={platform.id} className="platform__list__item"><Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={true} removePlatform={context.removePlatform} /> </div>))}
+                                    {context.state.userPlatforms.map(platform => (<div key={platform.id} className="platform__list__item"><Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={true} removePlatform={context.removePlatform} togglePlatform={context.removePlatform}/> </div>))}
                                 </Box>
                             </Column>
                             <Column isSize='1/2'>
                                 <Box>
                                     <Title>Add</Title>
-                                    {context.state.userUnownedPlatforms.map(platform => (<div key={platform.id} className="platform__list__item"><Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={false} addPlatform={context.addPlatform} /> </div>))}
+                                    {context.state.userUnownedPlatforms.map(platform => (<div key={platform.id} className="platform__list__item"><Platform key={platform.id} allPlatforms={context.state.allPlatforms} platform={platform} owned={false} addPlatform={context.addPlatform} togglePlatform={context.addPlatform}/> </div>))}
                                 </Box>
                             </Column>
                         </Columns>

@@ -202,3 +202,4 @@ class SearchView extends Component {
 }
 
 export default SearchView
+

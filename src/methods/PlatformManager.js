@@ -45,7 +45,7 @@ const PlatformManager = Object.create(null, {
     addPlatform: {
         value: function (evt) {
             // get id of event
-            const platformId = parseInt(evt.target.id.split("__")[2], 10)
+            const platformId = parseInt(evt.currentTarget.id.split("__")[2], 10)
             // split the item out of unowned platforms
             const splitItem = ArrayManager.removeItemByProperty(this.state.userUnownedPlatforms, "id", platformId)
             // seperate the response as needed
@@ -68,7 +68,7 @@ const PlatformManager = Object.create(null, {
     removePlatform: {
         value: function (evt) {
             // get id of event
-            const platformId = parseInt(evt.target.id.split("__")[2], 10)
+            const platformId = parseInt(evt.currentTarget.id.split("__")[2], 10)
             // split the item out of owned platforms
             const splitItem = ArrayManager.removeItemByProperty(this.state.userPlatforms, "id", platformId)
             // seperate response as needed

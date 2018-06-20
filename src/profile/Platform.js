@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Icon} from 'bloomer'
 import PlatformTag from '../platforms/PlatformTag'
 import './Platform.css'
 
@@ -12,8 +11,8 @@ class Platform extends Component {
 
     render() {
         return (
-            <div className="platform">
-                <p><PlatformTag allPlatforms={this.props.allPlatforms} platform={this.props.platform}/> {this.props.owned ? <Icon isSize="small" className="fas fa-minus-circle" onClick={this.props.removePlatform} id={"remove__platform__"+this.props.platform.id} /> : <Icon className="fas fa-plus-circle" onClick={this.props.addPlatform} id={"add__platform__"+this.props.platform.id} />}</p>
+            <div className="platform" onClick={this.props.togglePlatform} id={"toggle__platform__"+this.props.platform.id}>
+                <p><PlatformTag isOwned={this.props.owned} allPlatforms={this.props.allPlatforms} platform={this.props.platform}/></p>
             </div>
         )   
     }

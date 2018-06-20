@@ -25,7 +25,7 @@ class PlatformTag extends Component {
                     context => (
                         <span className={this.tagPlatformCompany(context) + " platform"}>
                             {this.props.platform.name}
-                            {context.isPlatformOwned(this.props.platform.id) ?
+                            {context.isPlatformOwned(this.props.platform.id) || this.props.isOwned === true ?
                                 <Icon className="fas fa-check" />
                                 :
                                 null
