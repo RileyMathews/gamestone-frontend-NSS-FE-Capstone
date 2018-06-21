@@ -62,7 +62,7 @@ class ProfileView extends Component {
         return (
 
             <Container>
-                <Title isSize={3}>{this.props.firstName} {this.props.lastName} AKA "{this.props.gamertag}"</Title>
+                <Title isSize={3}>{this.props.firstName} {this.props.lastName} <br/> AKA "{this.props.gamertag}"</Title>
                 <ProfileNav setProfileView={this.setProfileView} currentView={this.state.currentView}/>
                 {this.showProfileView()}
             </Container>
