@@ -185,7 +185,7 @@ class LoginView extends Component {
         return (
             <Container>
                 <form id="login" onSubmit={this.login}>
-                    <Title>Welcome to this app</Title>
+                    <Title>Welcome to gameStone</Title>
                     <Field>
                         <Label>Gamertag</Label>
                         <Control>

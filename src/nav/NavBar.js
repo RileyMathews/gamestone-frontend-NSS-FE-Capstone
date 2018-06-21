@@ -54,7 +54,7 @@ class NavBar extends Component {
         return (
             <Navbar className="is-fixed-top">
                 <NavbarBrand>
-                    <NavbarItem><strong className="unselectable">Game Finder</strong></NavbarItem>
+                    <NavbarItem><strong className="unselectable">gameStone</strong></NavbarItem>
                     <NavbarItem isHidden="desktop">{this.props.gamertag}</NavbarItem>
                     <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
                 </NavbarBrand>
