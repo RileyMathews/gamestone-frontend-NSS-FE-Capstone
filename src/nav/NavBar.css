@@ -9,3 +9,9 @@
     margin-top: .2em;
     border-radius: 4px 4px 0px 0px;
 }
+
+.logo {
+    height: 50px;
+    width: 50px;
+    margin: 1px
+}
