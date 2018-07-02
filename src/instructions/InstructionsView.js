@@ -19,13 +19,13 @@ class InstructionsView extends Component {
                         To add a new game, start by clicking on 'add games' at the top of the page.
                     </p>
                     <div className="info">
-                        <Image src='./images/instructions-navbar-addgames.png' />
+                        <Image src='./images/instructions-navbar-addgame.png' />
                     </div>
                     <p>
                         This will take you to a search bar. Type in the name of a game you have played, and click search.
                     </p>
                     <div className="info">
-                        <Image src='./images/instructions-addgames-search.png' />
+                        <Image src='./images/instructions-addgame-search.png' />
                     </div>
                     <p>
                         A list of games matching your search should populate on the page. Find the game matching the one you want to add and click either the 'add game' button, or the 'add game as favorite' button if you want the game to be saved as a favorite.
@@ -88,7 +88,7 @@ class InstructionsView extends Component {
                         To filter the games we suggest to you, click on the check boxes in the left hand column. Please note, Due to the fact we do not have direct control over the database we are using, we are trying to not demand too much data from them at once. If you check too many filters we may not immediately find a game matching games you have. Try again after a few seconds, and please don't spam click the buttons here.
                     </p>
                     <div className="info">
-                        <Image src='./images/instructions-suggestgame-filters.png' />
+                        <Image src='./images/instructions-suggestgame.png' />
                     </div>
                     <p>
                         To find games that other gamers have marked similar to games in your library, click the button marked 'by similar games,' or if you would like to discover games made by the same people as other games you own, click 'by developer.'
