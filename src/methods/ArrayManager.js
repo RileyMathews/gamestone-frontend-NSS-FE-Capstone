@@ -76,7 +76,7 @@ const ArrayManager = Object.create(null, {
     // takes an array and an item to be removed, and returns the array without that item
     removeItem: {
         value: function (array, item) {
-            const newArray = array.map(item => Object.assign({}, item))
+            const newArray = Object.assign([], array)
             const index = newArray.findIndex(itemInArray => itemInArray === item)
             newArray.splice(index, 1)
             return newArray
