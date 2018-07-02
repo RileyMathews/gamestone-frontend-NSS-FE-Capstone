@@ -82,7 +82,7 @@ class InstructionsView extends Component {
                         To find new games related to ones you already own, start by clicking “suggest games” at the top of the page.
                     </p>
                     <div className="info">
-                        <Image src='./images/instructions-navbar-suggestgames.png' />
+                        <Image src='./images/instructions-navbar-suggestgame.png' />
                     </div>
                     <p>
                         To filter the games we suggest to you, click on the check boxes in the left hand column. Please note, Due to the fact we do not have direct control over the database we are using, we are trying to not demand too much data from them at once. If you check too many filters we may not immediately find a game matching games you have. Try again after a few seconds, and please don't spam click the buttons here.

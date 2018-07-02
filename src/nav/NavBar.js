@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Navbar, NavbarItem, NavbarBurger, NavbarBrand, NavbarMenu, NavbarEnd } from "bloomer";
 import './NavBar.css'
+import url from '../api/APISettings';
 
 
 /* 
@@ -20,7 +21,7 @@ class NavBar extends Component {
     componentDidMount() {
         const currentUser = sessionStorage.getItem('userId')
         if (currentUser !== null) {
-            fetch(`http://127.0.0.1:8088/users/${currentUser}`)
+            fetch(`${url}users/${currentUser}`)
                 .then(r => r.json())
                 .then(response => {
                     this.setState({
