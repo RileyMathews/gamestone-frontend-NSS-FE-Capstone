@@ -16,8 +16,8 @@ const UserManager = Object.create(null, {
                     const user = response
                     this.setState({
                         userId: user.id,
-                        userFirstName: user.name.first,
-                        userLastName: user.name.last,
+                        userFirstName: user.first_name,
+                        userLastName: user.last_name,
                         userGamertag: user.gamertag
                     })
                 })

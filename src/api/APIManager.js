@@ -39,13 +39,13 @@ const APIManager = Object.create(null, {
     // get single user information
     getUser: {
         value: function (id) {
-            return fetch (`${url}users/${id}`)
+            return fetch (`${url}user/${id}`)
         }
     },
     // search users in api
     searchUsers: {
         value: function (userName) {
-            return fetch(`${url}users?gamertag=${userName}`)
+            return fetch(`${url}user/?gamertag=${userName}`)
         }
     },
     // post information to a collection

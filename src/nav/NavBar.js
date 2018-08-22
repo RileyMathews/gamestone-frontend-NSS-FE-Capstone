@@ -21,11 +21,11 @@ class NavBar extends Component {
     componentDidMount() {
         const currentUser = sessionStorage.getItem('userId')
         if (currentUser !== null) {
-            fetch(`${url}users/${currentUser}`)
+            fetch(`${url}user/${currentUser}`)
                 .then(r => r.json())
                 .then(response => {
                     this.setState({
-                        firstName: response.name.first,
+                        firstName: response.first_name,
                         image: response.image
                     })
                 })
