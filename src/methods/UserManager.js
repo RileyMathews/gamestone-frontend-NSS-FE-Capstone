@@ -14,6 +14,16 @@ const UserManager = Object.create(null, {
                 .then(r => r.json())
                 .then(response => {
                     const user = response
+                    console.log(user)
+                    // get users game information 
+
+                    // push ids into promise array for getting giantbombs info
+
+                    // get platforms out of nested array
+
+
+
+                    // set information we have access to now. our users game info, and users owned platforms and ids for owned games and platforms
                     this.setState({
                         userId: user.id,
                         userFirstName: user.first_name,
@@ -21,30 +31,34 @@ const UserManager = Object.create(null, {
                         userGamertag: user.gamertag
                     })
                 })
-            // fetches the users games collection
-            APIManager.getUsersGames(this.state.activeUser)
-                .then(r => r.json())
-                .then(response => {
-                    // map the giant bomb ids of each of those games into a seperate array
-                    const arrayOfIds = response.map(game => game.gbId)
-                    this.setState({
-                        userGamesStats: response,
-                        userGamesIds: arrayOfIds,
-                    })
-                    // use that array to build an array of fetch requests for each game
-                    let promises = []
-                    arrayOfIds.forEach(id => {
-                        promises.push(APIManager.getGbGame(id))
-                    })
+                // then fire the call for giantbomb promises
 
-                    // fire that array in a promise.all 
-                    Promise.all(promises)
-                        .then(response => {
-                            // with the response of that array, setstate of app
-                            const userGamesState = response.map(response => response.results)
-                            this.setState({ userGames: userGamesState })
-                        })
-                })
+                // and simulataneously fire the call to get all platforms and use logic to set all platforms array, and unowned platforms array
+
+            // fetches the users games collection
+            // APIManager.getUsersGames(this.state.activeUser)
+            //     .then(r => r.json())
+            //     .then(response => {
+            //         // map the giant bomb ids of each of those games into a seperate array
+            //         const arrayOfIds = response.map(game => game.gbId)
+            //         this.setState({
+            //             userGamesStats: response,
+            //             userGamesIds: arrayOfIds,
+            //         })
+            //         // use that array to build an array of fetch requests for each game
+            //         let promises = []
+            //         arrayOfIds.forEach(id => {
+            //             promises.push(APIManager.getGbGame(id))
+            //         })
+
+            //         // fire that array in a promise.all 
+            //         Promise.all(promises)
+            //             .then(response => {
+            //                 // with the response of that array, setstate of app
+            //                 const userGamesState = response.map(response => response.results)
+            //                 this.setState({ userGames: userGamesState })
+            //             })
+            //     })
 
         }
     },
