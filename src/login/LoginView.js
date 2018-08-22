@@ -124,7 +124,6 @@ class LoginView extends Component {
                         this.props.setActiveUser(user.id)
                         this.props.setView("profile")
                         this.props.getUserInformation()
-                        this.props.getPlatforms()
                     }
                 })
         }

@@ -43,7 +43,7 @@ export class Provider extends Component {
     /* 
         platform manager
     */
-    getPlatforms = PlatformManager.getPlatforms.bind(this)
+    // getPlatforms = PlatformManager.getPlatforms.bind(this)
     addPlatform = PlatformManager.addPlatform.bind(this)
     removePlatform = PlatformManager.removePlatform.bind(this)
     isPlatformOwned = PlatformManager.isPlatformOwned.bind(this)
@@ -77,7 +77,6 @@ export class Provider extends Component {
         if (this.state.activeUser !== null) {
             this.getUserInformation()
         }
-        this.getPlatforms()
     }
 
     /*

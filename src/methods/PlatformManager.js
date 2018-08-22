@@ -8,34 +8,6 @@ import ArrayManager from "./ArrayManager";
 
 
 const PlatformManager = Object.create(null, {
-    // get all platforms from the database,
-    // and update owned and unowned platforms accordingly
-    getPlatforms: {
-        value: function () {
-            // get all platforms
-            APIManager.getAllOfCollection("platform")
-                .then(r => r.json())
-                // set state of corresponding array
-                .then(response => {
-                    this.setState({ allPlatforms: response })
-                    // get all the current users platforms
-                    return APIManager.getUsersPlatforms(this.state.activeUser)
-                })
-                .then(r => r.json())
-                .then(response => {
-                    const userPlatforms = response.map(platform => platform.platform)
-                    const platformsIds = userPlatforms.map(platform => platform.id)
-                    this.setState({
-                        userPlatforms: userPlatforms,
-                        userPlatformsIds: platformsIds
-                    })
-                })
-                .then(() => {
-                    const unownedPlatforms = this.state.allPlatforms.filter(platform => !this.state.userPlatformsIds.includes(platform.id))
-                    this.setState({ userUnownedPlatforms: unownedPlatforms })
-                })
-        }
-    },
     isPlatformOwned: {
         value: function (platformId) {
             return this.state.userPlatformsIds.includes(platformId)
