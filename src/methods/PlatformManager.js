@@ -13,7 +13,7 @@ const PlatformManager = Object.create(null, {
     getPlatforms: {
         value: function () {
             // get all platforms
-            APIManager.getAllOfCollection("platforms")
+            APIManager.getAllOfCollection("platform")
                 .then(r => r.json())
                 // set state of corresponding array
                 .then(response => {

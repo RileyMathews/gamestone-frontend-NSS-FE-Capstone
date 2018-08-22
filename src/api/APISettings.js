@@ -4,6 +4,6 @@
 */
 
 // const url = "https://rm-midstone.herokuapp.com/"
-const url = "http://localhost:8088/"
+const url = "http://localhost:8000/api/"
 // const url = "http://ec2-54-144-250-201.compute-1.amazonaws.com/"
 export default url
