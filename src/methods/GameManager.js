@@ -123,7 +123,7 @@ const GameManager = Object.create(null, {
             })
 
 
-            APIManager.delete("usersGames", userGameId)
+            APIManager.delete("usergame", userGameId)
 
         }
     },
@@ -144,7 +144,7 @@ const GameManager = Object.create(null, {
                 }
             })
             this.setState({ userGamesStats: newState })
-            APIManager.put("usersGames", dataToChange, userGameId)
+            APIManager.put("usergame", dataToChange, userGameId)
         }
     }
 })
