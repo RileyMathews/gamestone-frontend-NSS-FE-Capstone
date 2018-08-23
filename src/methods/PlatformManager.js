@@ -56,14 +56,22 @@ const PlatformManager = Object.create(null, {
                 userUnownedPlatforms: newUnownedPlatforms,
                 userPlatformsIds: newPlatformsIds
             })
-            // find intersection item to remove
-            APIManager.getUsersPlatforms(this.state.activeUser)
+            APIManager.getAllOfCollection('userplatform')
                 .then(r => r.json())
-                .then(response => {
-                    const intersectionToRemove = response.find(intersection => intersection.platformId === platformId)
-                    const idToRemove = intersectionToRemove.id
-                    APIManager.delete("usersPlatforms", idToRemove)
+                .then(usersplatforms => {
+                    console.log(usersplatforms)
+                    const intersectionToDelete = usersplatforms.find(platform => platform.user === parseInt(sessionStorage.getItem('userId'), 10) && platform.platform === platformId)
+                    console.log(intersectionToDelete)
+                    APIManager.delete('userplatform', intersectionToDelete.id)
                 })
+            // find intersection item to remove
+            // APIManager.getUsersPlatforms(this.state.activeUser)
+            //     .then(r => r.json())
+            //     .then(response => {
+            //         const intersectionToRemove = response.find(intersection => intersection.platformId === platformId)
+            //         const idToRemove = intersectionToRemove.id
+            //         APIManager.delete("usersPlatforms", idToRemove)
+            //     })
         }
     }, 
     // function to check and make sure the user has a console
