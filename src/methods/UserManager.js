@@ -18,12 +18,10 @@ const UserManager = Object.create(null, {
                         .then(platformResponse => {
                             const user = userResponse
                             const platforms = platformResponse
-                            console.log(user)
                             // get users game information 
                             const usersGames = userResponse.games
                             // get users games giant bomb ids into seperate array
                             const arrayOfGbIds = usersGames.map(game => game.gbId)
-                            console.log(arrayOfGbIds)
                             // push ids into promise array for getting giantbombs info
                             let promises = []
                             arrayOfGbIds.forEach(id => {

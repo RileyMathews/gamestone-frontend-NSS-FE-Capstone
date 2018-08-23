@@ -51,7 +51,7 @@ const APIManager = Object.create(null, {
     // post information to a collection
     post: {
         value: function (collection, data) {
-            return fetch(`${url}${collection}`, {
+            return fetch(`${url}${collection}/`, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -63,7 +63,7 @@ const APIManager = Object.create(null, {
     // update information in a certain collection by id
     put: {
         value: function (collection, data, id) {
-            return fetch(`${url}${collection}/${id}`, {
+            return fetch(`${url}${collection}/${id}/`, {
                 method: "put",
                 headers: {
                     "Accept": "application/json",

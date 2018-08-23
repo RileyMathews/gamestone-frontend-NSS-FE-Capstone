@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import APIManager from '../api/APIManager';
+import url from '../api/APISettings'
 
 /* 
     module to manage users game collection
@@ -44,7 +45,7 @@ const GameManager = Object.create(null, {
                 "progress": dataToChange.progress
             }
 
-            APIManager.put("usersGames", dataToSend, gameId)
+            APIManager.put("usergame", dataToSend, gameId)
         }
     },
     // function to add a game to users collection
@@ -52,7 +53,7 @@ const GameManager = Object.create(null, {
         value: function (game, favorite) {
             // build up data to post to database
             const dataToPost = {
-                "userId": this.state.activeUser,
+                "userId": `${url}user/${this.state.activeUser}/`,
                 "gbId": game.id,
                 "isFavorited": favorite,
                 "progress": "to be played"
@@ -74,7 +75,7 @@ const GameManager = Object.create(null, {
                 })
             // add game data to userGames state
             // post that data to database
-            APIManager.post("usersGames", dataToPost)
+            APIManager.post("usergame", dataToPost)
                 .then(r => r.json())
                 .then(response => {
                     // build up object representing full data needed for state
