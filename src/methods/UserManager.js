@@ -12,24 +12,54 @@ const UserManager = Object.create(null, {
             // fetches the users account information
             APIManager.getUser(this.state.activeUser)
                 .then(r => r.json())
-                .then(response => {
-                    const user = response
-                    console.log(user)
-                    // get users game information 
+                .then(userResponse => {
+                    APIManager.getAllOfCollection("platform")
+                        .then(r => r.json())
+                        .then(platformResponse => {
+                            const user = userResponse
+                            const platforms = platformResponse
+                            console.log(user)
+                            // get users game information 
+                            const usersGames = userResponse.games
+                            // get users games giant bomb ids into seperate array
+                            const arrayOfGbIds = usersGames.map(game => game.gbId)
+                            console.log(arrayOfGbIds)
+                            // push ids into promise array for getting giantbombs info
+                            let promises = []
+                            arrayOfGbIds.forEach(id => {
+                                promises.push(APIManager.getGbGame(id))
+                            })
+                            // get platforms out of nested array
+                            const usersPlatforms = userResponse.platforms
+                            const usersPlatformsIds = userResponse.platforms.map(platform => platform.gbId)
 
-                    // push ids into promise array for getting giantbombs info
-
-                    // get platforms out of nested array
-
-
-
-                    // set information we have access to now. our users game info, and users owned platforms and ids for owned games and platforms
-                    this.setState({
-                        userId: user.id,
-                        userFirstName: user.first_name,
-                        userLastName: user.last_name,
-                        userGamertag: user.gamertag
-                    })
+                            // get unowned platforms
+                            const usersUnownedPlatforms = []
+                            platforms.forEach(platform => {
+                                if (!usersPlatformsIds.includes(platform.gbId)) {
+                                    usersUnownedPlatforms.push(platform)
+                                }
+                            })
+                            // set information we have access to now. our users game info, and users owned platforms and ids for owned games and platforms
+                            this.setState({
+                                userUnownedPlatforms: usersUnownedPlatforms,
+                                allPlatforms: platforms,
+                                userGamesStats: usersGames,
+                                userGamesIds: arrayOfGbIds,
+                                userPlatforms: usersPlatforms,
+                                userPlatformsIds: usersPlatformsIds,
+                                userId: user.id,
+                                userFirstName: user.first_name,
+                                userLastName: user.last_name,
+                                userGamertag: user.gamertag
+                            })
+                            Promise.all(promises)
+                                .then(response => {
+                                    // with the response of that array, setstate of app
+                                    const userGamesState = response.map(response => response.results)
+                                    this.setState({ userGames: userGamesState })
+                                })
+                        })
                 })
                 // then fire the call for giantbomb promises
 
