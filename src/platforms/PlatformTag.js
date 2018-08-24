@@ -7,7 +7,7 @@ import {Icon} from 'bloomer'
 class PlatformTag extends Component {
 
     tagPlatformCompany = function (context) {
-        const platformId = this.props.platform.id
+        const platformId = this.props.platform.gbId
         const allPlatforms = context.state.allPlatforms
 
         const platform = allPlatforms.find(platform => platform.gbId === platformId)
