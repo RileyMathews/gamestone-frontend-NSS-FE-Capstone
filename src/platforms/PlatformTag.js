@@ -7,9 +7,8 @@ import {Icon} from 'bloomer'
 class PlatformTag extends Component {
 
     tagPlatformCompany = function (context) {
-        const platformId = this.props.platform.gbId
+        const platformId = this.props.platformGbId
         const allPlatforms = context.state.allPlatforms
-
         const platform = allPlatforms.find(platform => platform.gbId === platformId)
         if (platform !== undefined) {
             return platform.company
@@ -33,7 +32,6 @@ class PlatformTag extends Component {
                         </span>
                     )
                 }
-
             </Context.Consumer>
         )
     }
