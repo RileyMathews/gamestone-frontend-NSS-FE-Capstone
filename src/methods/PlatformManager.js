@@ -59,7 +59,7 @@ const PlatformManager = Object.create(null, {
             APIManager.getAllOfCollection('userplatform')
                 .then(r => r.json())
                 .then(usersplatforms => {
-                    const intersectionToDelete = usersplatforms.find(platform => platform.user === parseInt(sessionStorage.getItem('userId'), 10) && platform.platform === platformId)
+                    const intersectionToDelete = usersplatforms.find(platform => platform.user === parseInt(this.state.activeUser, 10) && platform.platform === platformId)
                     APIManager.delete('userplatform', intersectionToDelete.id)
                 })
             // find intersection item to remove

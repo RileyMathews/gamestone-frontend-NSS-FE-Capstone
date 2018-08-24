@@ -74,7 +74,7 @@ export class Provider extends Component {
         hit your API and then update state.
     */
     componentDidMount() {
-        if (this.state.activeUser !== null) {
+        if (localStorage.getItem('user_token')) {
             this.getUserInformation()
         }
     }

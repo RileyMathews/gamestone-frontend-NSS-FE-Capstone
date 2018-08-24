@@ -39,12 +39,11 @@ const GameManager = Object.create(null, {
             // remove data that was embeded in original state
             const dataToSend = {
                 "id": dataToChange.id,
-                "userId": dataToChange.userId,
+                "user": this.state.activeUser,
                 "gbId": dataToChange.gbId,
                 "isFavorited": dataToChange.isFavorited,
                 "progress": dataToChange.progress
             }
-
             APIManager.put("usergame", dataToSend, gameId)
         }
     },
@@ -53,7 +52,7 @@ const GameManager = Object.create(null, {
         value: function (game, favorite) {
             // build up data to post to database
             const dataToPost = {
-                "userId": `${url}user/${this.state.activeUser}/`,
+                "user": `${url}user/${this.state.activeUser}/`,
                 "gbId": game.id,
                 "isFavorited": favorite,
                 "progress": "to be played"
@@ -80,7 +79,7 @@ const GameManager = Object.create(null, {
                 .then(response => {
                     // build up object representing full data needed for state
                     const gameToAddToState = {
-                        "userId": response.userId,
+                        "user": response.userId,
                         "id": response.id,
                         "gbId": response.gbId,
                         "isFavorited": response.isFavorited,

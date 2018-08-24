@@ -47,6 +47,7 @@ const UserManager = Object.create(null, {
                                 userPlatforms: usersPlatforms,
                                 userPlatformsIds: usersPlatformsIds,
                                 userId: user.id,
+                                activeUser: user.id,
                                 userFirstName: user.first_name,
                                 userLastName: user.last_name,
                                 userGamertag: user.username

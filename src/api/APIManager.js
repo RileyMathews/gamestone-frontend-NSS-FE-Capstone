@@ -110,9 +110,12 @@ const APIManager = Object.create(null, {
     // delete information in a collection by id
     delete: {
         value: function (collection, id) {
-            return $.ajax({
-                url: `${url}${collection}/${id}`,
-                method: "DELETE"
+            return fetch(`${url}${collection}/${id}/`, {
+                method: 'delete',
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`,
+                    "Content-Type": "application/json"
+                }
             })
         }
     },
