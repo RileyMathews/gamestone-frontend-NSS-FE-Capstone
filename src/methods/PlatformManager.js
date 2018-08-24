@@ -33,7 +33,7 @@ const PlatformManager = Object.create(null, {
                 userUnownedPlatforms: newUnownedPlatforms,
                 userPlatformsIds: newPlatformsIds
             })
-            APIManager.post("userplatform", { userId: parseInt(this.state.activeUser, 10), platformId: platformToMove.id })
+            APIManager.post("userplatform", { user: parseInt(this.state.activeUser, 10), platform: platformToMove.id })
         }
     },
     // function to remove a platform from users owned platforms
