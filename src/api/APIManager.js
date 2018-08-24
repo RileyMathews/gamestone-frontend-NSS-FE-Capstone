@@ -74,6 +74,18 @@ const APIManager = Object.create(null, {
             })
         }
     },
+    // login user
+    loginUser: {
+        value: function (data) {
+            return fetch(`${url}user-auth/login/`, {
+                method: 'post',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }) 
+        }
+    },
     // search users in api
     searchUsers: {
         value: function (userName) {

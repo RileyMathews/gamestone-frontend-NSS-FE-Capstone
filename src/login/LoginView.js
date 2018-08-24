@@ -12,6 +12,7 @@ class LoginView extends Component {
     state = {
         login__username: "",
         login__password: "",
+        login__email: "",
         register__firstName: "",
         register__lastName: "",
         register__gamertag: "",
@@ -102,26 +103,50 @@ class LoginView extends Component {
         evt.preventDefault()
         const username = this.state.login__username
         const password = this.state.login__password
+        const email = this.state.login__email
         this.setState({
             login__username: "",
-            login__password: ""
+            login__password: "",
+            login__email: "",
         })
 
-        if (username === "" || password === "") {
-            alert("please fill in a username and password")
+        if (username === "" || password === "" || email === "") {
+            alert("please fill in required fields")
         } else {
-            APIManager.searchUsers(username)
-                .then(r => r.json())
-                .then(users => {
-                    const user = users[0]
-                    if (user === undefined || user.password !== password) {
-                        alert("Username or Password not found")
+            // APIManager.searchUsers(username)
+            //     .then(r => r.json())
+            //     .then(users => {
+            //         const user = users[0]
+            //         if (user === undefined || user.password !== password) {
+            //             alert("Username or Password not found")
     
-                    } else if (password === user.password) {
-                        sessionStorage.setItem("userId", user.id)
-                        this.props.setActiveUser(user.id)
-                        this.props.setView("profile")
-                        this.props.getUserInformation()
+            //         } else if (password === user.password) {
+            //             sessionStorage.setItem("userId", user.id)
+            //             this.props.setActiveUser(user.id)
+            //             this.props.setView("profile")
+            //             this.props.getUserInformation()
+            //         }
+            //     })
+            const userData = {
+                'username': username,
+                'password': password,
+                'email': email
+            }
+            APIManager.loginUser(userData)
+                .then(r => r.json())
+                .then(response => {
+                    if (!response.key) {
+                        alert("could not log in with that information")
+                    } else {
+                        localStorage.setItem('user_token', response.key)
+                        sessionStorage.setItem('user_token', response.key)
+                        APIManager.getUser()
+                            .then(r => r.json())
+                            .then(response => {
+                                this.props.setActiveUser(response[0])
+                                this.props.setView('profile')
+                                this.props.getUserInformation()
+                            })
                     }
                 })
         }
@@ -194,6 +219,12 @@ class LoginView extends Component {
                         <Label>Gamertag</Label>
                         <Control>
                             <Input type="text" placeholder="gamertag" onChange={this.updateState} id="login__username" value={this.state.login__username} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Label>Email</Label>
+                        <Control>
+                            <Input type="text" placeholder="email@email.com" onChange={this.updateState} id="login__email" value={this.state.login__email} />
                         </Control>
                     </Field>
                     <Field>
