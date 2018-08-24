@@ -17,6 +17,7 @@ class LoginView extends Component {
         register__gamertag: "",
         register__password: "",
         register__passwordConfirm: "",
+        register__email: "",
         firstNames: [
             "Tony",
             "Thor",
@@ -117,10 +118,7 @@ class LoginView extends Component {
                         alert("Username or Password not found")
     
                     } else if (password === user.password) {
-    
-    
                         sessionStorage.setItem("userId", user.id)
-    
                         this.props.setActiveUser(user.id)
                         this.props.setView("profile")
                         this.props.getUserInformation()
@@ -135,41 +133,51 @@ class LoginView extends Component {
         const lastN = this.state.register__lastName
         const gamerT = this.state.register__gamertag
         const password = this.state.register__password
-        if (firstN === "" || lastN === "" || gamerT === "" || password === "") {
+        const email = this.state.register__email
+        if (firstN === "" || lastN === "" || gamerT === "" || password === "" || email === "") {
             alert("please make sure every field is filled out")
         } else {
             if (this.state.register__password === this.state.register__passwordConfirm) {
-                APIManager.searchUsers(this.state.register__gamertag)
+
+                const userObject = {
+                    "username": gamerT,
+                    "email": email,
+                    "password1": password,
+                    "password2": this.state.register__passwordConfirm,
+                    "first_name": firstN,
+                    "last_name": lastN
+                }
+
+                APIManager.registerUser(userObject)
                     .then(r => r.json())
                     .then(response => {
-                        if (response.length === 0) {
-                            const userData = {
-                                first_name: this.state.register__firstName,
-                                last_name: this.state.register__lastName,
-                                gamertag: this.state.register__gamertag,
-                                password: this.state.register__password
+                        if (!response.key) {
+                            for (var key in response) {
+                                alert(response[key])
                             }
-    
-                            APIManager.post("user", userData)
+                        } else if (response.key) {
+                            localStorage.setItem('user_token', response.key)
+                            sessionStorage.setItem('user_token', response.key)
+                            APIManager.getUser()
                                 .then(r => r.json())
                                 .then(response => {
-                                    sessionStorage.setItem("userId", response.id)
-                                    this.props.setActiveUser(response.id)
-                                    this.props.setView("home")
+                                    this.props.setActiveUser(response[0].id)
+                                    this.props.setView("profile")
                                     this.props.getUserInformation()
                                 })
-                        } else {
-                            alert("username already taken")
-                            this.setState({ register__gamertag: "" })
                         }
                     })
+
             } else {
+
                 alert("passwords do not match")
                 this.setState({
                     register__password: "",
                     register__passwordConfirm: ""
                 })
+
             }
+
         }
     }.bind(this)
 
@@ -216,6 +224,12 @@ class LoginView extends Component {
                         <Label>Gamertag</Label>
                         <Control>
                             <Input type="text" placeholder={this.state.gamerTags[this.state.nameIndex]} onChange={this.updateState} id="register__gamertag" value={this.state.register__gamertag} />
+                        </Control>
+                    </Field>
+                    <Field>
+                        <Label>Email</Label>
+                        <Control>
+                            <Input type="text" placeholder='email@email.com' onChange={this.updateState} id="register__email" value={this.state.register__email} />
                         </Control>
                     </Field>
                     <Field>

@@ -16,10 +16,10 @@ const UserManager = Object.create(null, {
                     APIManager.getAllOfCollection("platform")
                         .then(r => r.json())
                         .then(platformResponse => {
-                            const user = userResponse
+                            const user = userResponse[0]
                             const platforms = platformResponse
                             // get users game information 
-                            const usersGames = userResponse.games
+                            const usersGames = user.games
                             // get users games giant bomb ids into seperate array
                             const arrayOfGbIds = usersGames.map(game => game.gbId)
                             // push ids into promise array for getting giantbombs info
@@ -28,8 +28,8 @@ const UserManager = Object.create(null, {
                                 promises.push(APIManager.getGbGame(id))
                             })
                             // get platforms out of nested array
-                            const usersPlatforms = userResponse.platforms
-                            const usersPlatformsIds = userResponse.platforms.map(platform => platform.gbId)
+                            const usersPlatforms = user.platforms
+                            const usersPlatformsIds = user.platforms.map(platform => platform.gbId)
 
                             // get unowned platforms
                             const usersUnownedPlatforms = []
@@ -49,7 +49,7 @@ const UserManager = Object.create(null, {
                                 userId: user.id,
                                 userFirstName: user.first_name,
                                 userLastName: user.last_name,
-                                userGamertag: user.gamertag
+                                userGamertag: user.username
                             })
                             Promise.all(promises)
                                 .then(response => {

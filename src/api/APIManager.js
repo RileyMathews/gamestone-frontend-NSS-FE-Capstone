@@ -9,7 +9,12 @@ const APIManager = Object.create(null, {
     // get an entire collection of items from apps api
     getAllOfCollection: {
         value: function (collection) {
-            return fetch(`${url}${collection}`)
+            return fetch(`${url}${collection}`, {
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`, 
+                    'Content-Type': 'application/json'
+                }
+            })
         }
     },
     // get a single game from apps api
@@ -21,13 +26,23 @@ const APIManager = Object.create(null, {
     // get all games from the intersection table with user id
     getUsersGames: {
         value: function (user) {
-            return fetch(`${url}usersGames?userId=${user}`)
+            return fetch(`${url}usersGames?userId=${user}`, {
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`, 
+                    'Content-Type': 'application/json'
+                }
+            })
         }
     },
     // get all platforms from one user and expand platform information
     getUsersPlatforms: {
         value: function (user) {
-            return fetch(`${url}usersPlatforms?userId=${user}&_expand=platform`)
+            return fetch(`${url}usersPlatforms?userId=${user}&_expand=platform`, {
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`, 
+                    'Content-Type': 'application/json'
+                }
+            })
         }
     },
     // search own api for games
@@ -38,8 +53,25 @@ const APIManager = Object.create(null, {
     },
     // get single user information
     getUser: {
-        value: function (id) {
-            return fetch (`${url}user/${id}`)
+        value: function () {
+            return fetch (`${url}user`, {
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`, 
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+    },
+    // register new user
+    registerUser: {
+        value: function (data) {
+            return fetch (`${url}user-auth/registration/`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
         }
     },
     // search users in api
@@ -55,7 +87,8 @@ const APIManager = Object.create(null, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`
                 }
             })
         }
@@ -66,6 +99,7 @@ const APIManager = Object.create(null, {
             return fetch(`${url}${collection}/${id}/`, {
                 method: "put",
                 headers: {
+                    'Authorization': `Token ${localStorage.getItem('user_token')}`,
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 },

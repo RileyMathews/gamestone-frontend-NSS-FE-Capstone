@@ -46,7 +46,7 @@ const ViewManager = Object.create(null, {
     // property in state
     showView: {
         value: function () {
-            if (sessionStorage.getItem("userId") === null) {
+            if (sessionStorage.getItem("user_token") === null) {
                 return <LoginView
                     setActiveUser={this.setActiveUser}
                     setView={this.setView}
