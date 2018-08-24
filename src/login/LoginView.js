@@ -144,22 +144,19 @@ class LoginView extends Component {
                     .then(response => {
                         if (response.length === 0) {
                             const userData = {
-                                name: {
-                                    first: this.state.register__firstName,
-                                    last: this.state.register__lastName
-                                },
+                                first_name: this.state.register__firstName,
+                                last_name: this.state.register__lastName,
                                 gamertag: this.state.register__gamertag,
                                 password: this.state.register__password
                             }
     
-                            APIManager.post("users", userData)
+                            APIManager.post("user", userData)
                                 .then(r => r.json())
                                 .then(response => {
                                     sessionStorage.setItem("userId", response.id)
                                     this.props.setActiveUser(response.id)
                                     this.props.setView("home")
                                     this.props.getUserInformation()
-                                    this.props.getPlatforms()
                                 })
                         } else {
                             alert("username already taken")
