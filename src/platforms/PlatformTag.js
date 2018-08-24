@@ -10,7 +10,7 @@ class PlatformTag extends Component {
         const platformId = this.props.platform.id
         const allPlatforms = context.state.allPlatforms
 
-        const platform = allPlatforms.find(platform => platform.id === platformId)
+        const platform = allPlatforms.find(platform => platform.gbId === platformId)
         if (platform !== undefined) {
             return platform.company
         } else {
