@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Title, Container, Field, Label, Control, Input, Button } from 'bloomer'
 import APIManager from '../api/APIManager';
+import './LoginView.css';
 
 /* 
     module to handle login and registering of users
@@ -214,7 +215,8 @@ class LoginView extends Component {
         return (
             <Container>
                 <form id="login" onSubmit={this.login}>
-                    <Title>Welcome to gameStone</Title>
+                    <Title>Welcome to Game Stone</Title>
+                    <Title>Login</Title>
                     <Field>
                         <Label>Gamertag</Label>
                         <Control>
@@ -239,8 +241,8 @@ class LoginView extends Component {
                         </Control>
                     </Field>
                 </form>
-                <Title>Or create a new account</Title>
                 <form id="register" onSubmit={this.register}>
+                <Title>Or create a new account</Title>
                     <Field>
                         <Label>First Name</Label>
                         <Control>
