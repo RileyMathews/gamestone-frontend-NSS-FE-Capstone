@@ -6,9 +6,5 @@ services:
     stdin_open: true
     volumes:
       - .:/code
-      - node_modules:/code/node_modules
     ports:
       - 3000:3000
-
-volumes:
-  node_modules:
